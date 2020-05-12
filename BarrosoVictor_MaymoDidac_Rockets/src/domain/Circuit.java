@@ -20,7 +20,13 @@ public class Circuit {
 	public void updateRocketInfo() {
 		
 	}
-public void getActualSpeed() {
+	public void getActualSpeed() {
+		
+	}
+	public void getFuelConsumption() {
+		
+	}
+	public void getMetersTravelled() {
 		
 	}
 }
