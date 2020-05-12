@@ -7,7 +7,7 @@ public class Cirucit {
 	int distance;
 	
 	public void decideAction() {
-		System.out.println();
+		System.out.println("sadfadsfasdfdsafasdfasdfasdfasfasfasdfasfasf");
 	}
 
 	public Double getLimitTime() {
