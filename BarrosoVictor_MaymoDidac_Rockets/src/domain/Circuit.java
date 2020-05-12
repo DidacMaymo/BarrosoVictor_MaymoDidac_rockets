@@ -1,17 +1,17 @@
 package domain;
 
-public class Cirucit {
-
+public class Circuit {
 	String id;
 	double limitTime;
 	int distance;
 	
 	public void decideAction() {
-		System.out.println();
+		System.out.println("sadfadsfasdfdsafasdfasdfasdfasfasfasdfasfasf");
 	}
 
 	public Double getLimitTime() {
 		return limitTime;
+		
 	}
 
 	public Integer getDistance() {
@@ -23,6 +23,4 @@ public class Cirucit {
 public void getActualSpeed() {
 		
 	}
-	
-	
 }
