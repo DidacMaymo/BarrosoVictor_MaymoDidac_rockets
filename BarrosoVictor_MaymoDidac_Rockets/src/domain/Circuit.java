@@ -1,13 +1,11 @@
 package domain;
 
 public class Circuit {
+	
 	String id;
 	double limitTime;
 	int distance;
-
-	public void decideAction() {
-
-	}
+	Rocket rocket;
 
 	public Circuit(String id, double limitTime, int distance) throws Exception {
 		if (validAtributes(id, limitTime, distance)) {
@@ -30,21 +28,20 @@ public class Circuit {
 		return true;
 	}
 
-	public Double getLimitTime() {
-		return limitTime;
-
-	}
 
 	public Integer getDistance() {
 		return distance;
 	}
+	public Double getLimitTime() {
+		return limitTime;
 
+	}
 	public void updateRocketInfo() {
-
+		
 	}
 
 	public void getActualSpeed() {
-
+		
 	}
 
 	public void getFuelConsumption() {
