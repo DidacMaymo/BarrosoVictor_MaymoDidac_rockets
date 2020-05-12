@@ -6,6 +6,7 @@ public class Rocket {
 	double speed;
 	double acceleration;
 	int metersTravelled;
+	Score score;
 	
 	
 	public int getMetersTravelled() {
