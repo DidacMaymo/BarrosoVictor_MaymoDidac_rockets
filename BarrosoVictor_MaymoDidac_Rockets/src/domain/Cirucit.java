@@ -7,7 +7,7 @@ public class Cirucit {
 	int distance;
 	
 	public void decideAction() {
-		
+		System.out.println();
 	}
 
 	public Double getLimitTime() {
@@ -20,5 +20,9 @@ public class Cirucit {
 	public void updateRocketInfo() {
 		
 	}
+public void getActualSpeed() {
+		
+	}
+	
 	
 }
