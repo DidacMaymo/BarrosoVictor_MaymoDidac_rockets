@@ -13,7 +13,7 @@ public class Circuit {
 		this.limitTime = limitTime;
 		this.distance = distance;
 	}
-
+//hoaosajdof
 	
 	
 	public double getLimitTime() {
