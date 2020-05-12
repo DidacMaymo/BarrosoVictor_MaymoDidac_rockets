@@ -1,7 +1,6 @@
 package domain;
 
-public class Cirucit {
-
+public class Circuit {
 	String id;
 	double limitTime;
 	int distance;
@@ -24,6 +23,4 @@ public class Cirucit {
 public void getActualSpeed() {
 		
 	}
-	
-	
 }
