@@ -1,7 +1,7 @@
 package domain;
 
 public class Propellant {
-<<<<<<< HEAD
+	
 	private double maxAcceleration, actualAcceleration=0;
 	private String id;
 	public Propellant(double maxAcceleration, String id) {
@@ -28,17 +28,3 @@ public class Propellant {
 	
 }
 
-
-
-=======
-
-	double maxAcceleration;
-	String id;
-	double actualAcceleration;
-	
-	public Double getMaxAcceleration() {
-		return maxAcceleration;
-	}
-
-}
->>>>>>> refs/heads/master

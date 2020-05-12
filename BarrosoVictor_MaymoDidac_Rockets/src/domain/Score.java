@@ -1,9 +1,6 @@
 package domain;
 
-<<<<<<< HEAD
-public class Score {
 
-=======
 import javax.xml.crypto.Data;
 
 public class Score {
@@ -16,5 +13,4 @@ public class Score {
 	public void registerScore() {
 		
 	}
->>>>>>> refs/heads/master
 }
