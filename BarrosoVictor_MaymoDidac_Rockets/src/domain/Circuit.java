@@ -6,7 +6,7 @@ public class Circuit {
 	int distance;
 	
 	public void decideAction() {
-		System.out.println("sadfadsfasdfdsafasdfasdfasdfasfasfasdfasfasf");
+		System.out.println("");
 	}
 
 	public Double getLimitTime() {

@@ -8,9 +8,14 @@ public class Score {
 	String id;
 	Data Date;
 	double time;
-	Rocket winner;
 	
-	public void registerScore() {
-		
+	
+	public Score(String id, Data date, double time) {
+		super();
+		this.id = id;
+		Date = date;
+		this.time = time;
 	}
+
+	
 }

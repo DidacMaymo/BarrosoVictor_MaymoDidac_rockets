@@ -12,17 +12,13 @@ public class Propellant {
 	public double getMaxAcceleration() {
 		return maxAcceleration;
 	}
-	public double getActualAcceleration() {
-		return actualAcceleration;
-	}
 	public void setActualAcceleration(double actualAcceleration) throws Exception {
-		
-		if(actualAcceleration<=maxAcceleration && actualAcceleration>=0)
+		if (actualAcceleration<0)
+			throw new Exception  ("You can't use a negative acceleration.");
+		else if (actualAcceleration>maxAcceleration)
+			actualAcceleration = maxAcceleration;
 		this.actualAcceleration = actualAcceleration;
 		
-		else if (actualAcceleration<0){
-			throw new Exception  ("You can't use a negative acceleration.");
-		}
 	}
 
 	

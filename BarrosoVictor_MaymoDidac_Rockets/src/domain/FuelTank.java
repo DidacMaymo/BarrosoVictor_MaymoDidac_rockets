@@ -6,8 +6,18 @@ public class FuelTank {
 	String id;
 	double fuel;
 	
-	public void updateFuel() {
+	
+	
+	public FuelTank(double capacity, String id) {
+		super();
+		this.capacity = capacity;
+		this.id = id;
+		this.fuel = capacity;
+	}
+
+	public void updateFuel(double speed) {
 		
+		fuel -=  0.02 * Math.pow(speed, 2);
 	}
 
 	public double getCapacity() {
