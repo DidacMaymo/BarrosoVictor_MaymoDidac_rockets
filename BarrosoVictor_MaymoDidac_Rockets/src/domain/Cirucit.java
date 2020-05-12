@@ -7,7 +7,7 @@ public class Cirucit {
 	int distance;
 	
 	public void decideAction() {
-		System.out.println("aviam si es fa cnavis ara");
+		System.out.println();
 	}
 
 	public Double getLimitTime() {
