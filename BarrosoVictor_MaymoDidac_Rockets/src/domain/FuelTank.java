@@ -17,7 +17,7 @@ public class FuelTank {
 
 	public void updateFuel(double speed) {
 		
-		fuel -=  0.02 * Math.pow(speed, 2);
+		fuel -=  0.02 * Math.pow(Math.abs(speed), 2);
 	}
 
 	public double getCapacity() {
