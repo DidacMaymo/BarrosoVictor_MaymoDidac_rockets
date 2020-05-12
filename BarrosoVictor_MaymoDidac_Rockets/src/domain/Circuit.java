@@ -6,7 +6,7 @@ public class Circuit {
 	int distance;
 	
 	public void decideAction() {
-		System.out.println("sadfadsfasdfdsafasdfasdfasdfasfasfasdfasfasf");
+		
 	}
 
 	public Double getLimitTime() {
@@ -20,7 +20,13 @@ public class Circuit {
 	public void updateRocketInfo() {
 		
 	}
-public void getActualSpeed() {
+	public void getActualSpeed() {
+		
+	}
+	public void getFuelConsumption() {
+		
+	}
+	public void getMetersTravelled() {
 		
 	}
 }
