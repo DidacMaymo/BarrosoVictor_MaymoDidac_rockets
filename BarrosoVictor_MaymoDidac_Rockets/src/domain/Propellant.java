@@ -19,7 +19,8 @@ public class Propellant {
 		return maxAcceleration;
 	}
 
-	public void setActualAcceleration(double newAcceleration) {
+	public void setActualAcceleration(double newAcceleration) throws Exception {
+		if(newAcceleration <0) throw new Exception ("Acceleration below 0 not valid");
 		if (actualAcceleration > maxAcceleration)
 			actualAcceleration = maxAcceleration;
 		this.actualAcceleration = newAcceleration;
