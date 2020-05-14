@@ -11,30 +11,33 @@ import utilities.ConstantUtilities;
 
 public class Main {
 	public static Circuit circuit;
+	public static List<Rocket> rockets = new ArrayList<Rocket>();
 
 	public static void main(String[] args) throws Exception {
 		initialise();
 	}
 
 	public static void initialise() throws Exception { //iniciem les dades del circuit amb les dels cohets etc
-		List<Rocket> rockets= initialiseRockets();
 		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rockets);
+		List<Rocket> rockets= initialiseRockets(1);
 	}
 
-	private static List<Rocket> initialiseRockets() { //iniciem tots els rockets que faran la cursa
-		List<Rocket> rockets = new ArrayList<Rocket>();
-		List<Propellant> propellantsRocketOne = initialisePropellants(); 
-		rockets.add(new Rocket(ConstantUtilities.nameRocket1, propellantsRocketOne,new FuelTank(500), circuit));
+	private static List<Rocket> initialiseRockets(int howManyRockets) { //iniciem tots els rockets que faran la cursa 
+		rockets.add(new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),new FuelTank(500), circuit));
 		return rockets;
 	}
 	
-	private static List<Propellant> initialisePropellants() {
+	private static List<Propellant> initialisePropellants() { //same configuration of propellants for all rockets.
 		List<Propellant> propellants= new ArrayList<Propellant>();
 		propellants.add(new Propellant(100, "first"));
 		return propellants;
 	}
 
 	public void displayRockets() {
-		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
+		for (Rocket rocket : rockets) {
+			System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
+			
+		}
+		
 	}
 }

@@ -9,9 +9,9 @@ public class Circuit {
 	private static final int slowDonw = 2;
 	private static final int sameAcceleration = 3;
 
-	private String id; 
-	public  double maxTime, currentTime = 0; //time limit of race, and current time
-	private int length; 					 //circuit distance
+	public String id; 
+	public double maxTime, currentTime = 0; //time limit of race, and current time
+	public int length; 					 //circuit distance
 	private List<Rocket> rockets = new ArrayList<Rocket>(); //Rockets that participate in race
 	Rocket winner;
 	

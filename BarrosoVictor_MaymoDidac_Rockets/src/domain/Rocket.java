@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Rocket {
 
-	private String idRocket;
+	public String idRocket;
 	private double speed = 0; //here counts as v0
-	private double acceleration = 0;
-	private int metersTravelled = 0;
+	public double acceleration = 0;
+	public int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
 	Score score;
@@ -28,7 +28,6 @@ public class Rocket {
 		}
 		return acc;
 	}
-
 	public int getMetersTravelled() { //x = xo + v*t + ½ a * t^2
 		metersTravelled += speed + speed*circuit.currentTime+(acceleration/2)*Math.pow(circuit.currentTime, 2);
 		return metersTravelled;
@@ -45,17 +44,20 @@ public class Rocket {
 		}
 		return maxAcc;
 	}
+	
 	public void accelerateRocket(double whenAccelerate) {
-		// TODO Auto-generated method stub
-		
+		//and how much does it have to accelerate each time it wants to?
 	}
 	public void changePropellantAccelertion(int i, double newAcceleration) throws Exception {
 		propellants.get(i).setActualAcceleration(newAcceleration);
 	}
+	public void slowDown() {
+		// how much?
+		
+	}
 	
-
 	/*
-	 * public void getFuelConsumption() {
+	 * public void getFuelConsumption() { still dont know if need this here
 	 * 
 	 * }
 	 */
