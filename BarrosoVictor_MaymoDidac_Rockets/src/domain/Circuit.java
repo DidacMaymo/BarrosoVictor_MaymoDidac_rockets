@@ -6,6 +6,7 @@ public class Circuit {
 	private static double maxTime;
 	private static int length; 
 	private static Rocket rocket;
+	
 
 	public Circuit(String id, double limitTime, int distance) throws Exception {
 		if (validAtributes(id, limitTime, distance)) {
@@ -30,10 +31,6 @@ public class Circuit {
 
 	public void decideAction() {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
-		boolean end = false;
-		while (!end) {
-
-		}
 	}
 
 	public Integer getLength() {
