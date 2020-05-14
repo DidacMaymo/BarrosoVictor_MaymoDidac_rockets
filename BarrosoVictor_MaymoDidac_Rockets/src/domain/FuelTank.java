@@ -2,9 +2,9 @@ package domain;
 
 public class FuelTank {
 
-	double capacity;
+	private double capacity, fuel;
 	String id;
-	double fuel;
+	
 	
 	public FuelTank(double capacity, String id, double fuel) {
 		this.capacity = capacity;
