@@ -12,8 +12,8 @@ public class FuelTank {
 		this.fuel = fuel;
 	}
 
-	public void updateFuel(double fuel) {
-		this.fuel=fuel;
+	public void updateFuel(double speed) {
+		this.fuel -= 0.02*Math.pow(speed, 2); //is math abs necessary?
 	}
 
 	public double getCapacity() {
