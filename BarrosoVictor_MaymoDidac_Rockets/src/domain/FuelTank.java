@@ -6,8 +6,14 @@ public class FuelTank {
 	String id;
 	double fuel;
 	
-	public void updateFuel() {
-		
+	public FuelTank(double capacity, String id, double fuel) {
+		this.capacity = capacity;
+		this.id = id;
+		this.fuel = fuel;
+	}
+
+	public void updateFuel(double fuel) {
+		this.fuel=fuel;
 	}
 
 	public double getCapacity() {
