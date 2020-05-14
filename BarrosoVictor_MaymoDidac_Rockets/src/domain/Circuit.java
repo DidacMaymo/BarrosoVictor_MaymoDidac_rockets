@@ -1,16 +1,16 @@
 package domain;
 
 public class Circuit {
-	
-	String id;
-	double maxTtime;
-	int length;
-	Rocket rocket;
+
+	private static String id;  //son necessaris els static?
+	private static double maxTime;
+	private static int length; 
+	private static Rocket rocket;
 
 	public Circuit(String id, double limitTime, int distance) throws Exception {
 		if (validAtributes(id, limitTime, distance)) {
 			this.id = id;
-			this.maxTtime = limitTime;
+			this.maxTime = limitTime;
 			this.length = distance;
 		}
 	}
@@ -28,20 +28,29 @@ public class Circuit {
 		return true;
 	}
 
+	public void decideAction() {
+		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
+		boolean end = false;
+		while (!end) {
+
+		}
+	}
 
 	public Integer getLength() {
 		return length;
 	}
-	public Double getMaxLnegth() {
-		return maxTtime;
+
+	public Double getMaxTime() {
+		return maxTime;
 
 	}
+
 	public void updateRocketInfo() {
-		
+
 	}
 
 	public void getActualSpeed() {
-		
+
 	}
 
 	public void getFuelConsumption() {
@@ -51,4 +60,5 @@ public class Circuit {
 	public void getMetersTravelled() {
 
 	}
+
 }
