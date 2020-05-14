@@ -51,10 +51,10 @@ public class Circuit {
 		return length;
 	}
 
-	public void updateRocketInfo(int i) {
+	public void updateRocketInfo(int i) { //aixo farà cambiar la velocitat, acceleracio i metres per tant del rocket
 		rockets.get(i).getActualSpeed();
 		rockets.get(i).getAcceleration();
-		
+		rockets.get(i).getMetersTravelled();
 	}
 
 	public void setCurrentTime(double time) {
