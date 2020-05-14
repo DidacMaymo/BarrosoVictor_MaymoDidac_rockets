@@ -2,11 +2,10 @@ package domain;
 
 public class Circuit {
 
-	private static String id;  //son necessaris els static?
-	private static double maxTime;
-	private static int length; 
+	private static String id; // son necessaris els static?
+	public static double maxTime, currentTime = 0; // time limit of race, and current time
+	private static int length;
 	private static Rocket rocket;
-	
 
 	public Circuit(String id, double limitTime, int distance) throws Exception {
 		if (validAtributes(id, limitTime, distance)) {
@@ -37,13 +36,12 @@ public class Circuit {
 		return length;
 	}
 
-	public Double getMaxTime() {
-		return maxTime;
+	public void updateRocketInfo() {
 
 	}
 
-	public void updateRocketInfo() {
-
+	public void setCurrentTime(double time) {
+		this.currentTime=time;
 	}
 
 	public void getActualSpeed() {
