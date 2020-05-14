@@ -4,8 +4,7 @@ public class FuelTank {
 
 	private double capacity, fuel;
 	String id;
-	
-	
+		
 	public FuelTank(double capacity, String id, double fuel) {
 		this.capacity = capacity;
 		this.id = id;
