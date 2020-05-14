@@ -11,11 +11,12 @@ public class Circuit {
 	private List<Rocket> rockets = new ArrayList<Rocket>(); //Rockets that participate in race
 	Rocket winner;
 	
-	public Circuit(String id, double maxTime, int length) throws Exception {
+	public Circuit(String id, double maxTime, int length, List<Rocket> rockets) throws Exception {
 		if (validAtributes(id, maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
 			this.length = length;
+			this.rockets =  rockets;
 		}
 	}
 

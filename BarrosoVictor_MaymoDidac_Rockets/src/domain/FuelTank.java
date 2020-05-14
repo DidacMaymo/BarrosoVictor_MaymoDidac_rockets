@@ -2,25 +2,24 @@ package domain;
 
 public class FuelTank {
 
-	private double capacity, fuel;
-	String id;
+	private double Fuelcapacity, Actualfuel;
+	//String id;
 		
-	public FuelTank(double capacity, String id, double fuel) {
-		this.capacity = capacity;
-		this.id = id;
-		this.fuel = fuel;
+	public FuelTank(double capacity) {
+		this.Fuelcapacity = capacity;
+		Actualfuel = Fuelcapacity;
 	}
 
 	public void updateFuel(double speed) {
-		this.fuel -= 0.02*Math.pow(speed, 2); //is math abs necessary?
+		this.Actualfuel -= 0.02*Math.pow(speed, 2); //is math abs necessary?
 	}
 
-	public double getCapacity() {
-		return capacity;
+	public double getFuelCapacity() {
+		return Fuelcapacity;
 	}
 
-	public double getFuel() {
-		return fuel;
+	public double getActualFuel() {
+		return Actualfuel;
 	}
 	
 }

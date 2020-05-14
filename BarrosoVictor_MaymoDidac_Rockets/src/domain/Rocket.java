@@ -6,24 +6,20 @@ import java.util.List;
 public class Rocket {
 
 	private String idRocket;
-	private double speed = 0;
+	private double speed = 0; //here counts as v0
 	private double acceleration = 0;
-	private int metersTravelled;
+	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
 	Score score;
 	Circuit circuit;
 
-	public Rocket(String id, double speed, double acceleration, int metersTravelled, List<Propellant> propellants,
-			FuelTank fueltank, Score score) {
-
+	public Rocket(String id,List<Propellant> propellants,
+			FuelTank fueltank, Circuit circuit) {
 		this.idRocket = id;
-		this.speed = speed;
-		this.acceleration = acceleration;
-		this.metersTravelled = metersTravelled;
-		this.score = score;
 		this.propellants = propellants;
 		this.fueltank = fueltank;
+		this.circuit= circuit;
 	}
 
 	public int getMetersTravelled() {
@@ -34,14 +30,10 @@ public class Rocket {
 		return this.speed;
 	}
 
-	public void setSpeed(double speed) { // speed of rocket right now.
+	public void speedAtMoment() { // speed of rocket right now.
 		this.speed += acceleration * circuit.currentTime;
 	}
-
-	public void decideAction() {
-
-	}
-
+	
 	public double getMaxAcceleration() { // acceleration right now
 		double maxAcc = 0;
 		for (Propellant p : propellants) {
