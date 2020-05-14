@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Circuit {
+	
+	private static final int accelerate = 1;
+	private static final int slowDonw = 2;
+	private static final int sameAcceleration = 3;
 
 	private String id; 
 	public  double maxTime, currentTime = 0; //time limit of race, and current time
@@ -33,17 +37,24 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction() { //each second of race this method is executed.
-		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
+	public void decideAction(int i,double whenAccelerate, int NnumRocket) { //each second of race this method is executed.
 		//Does rocket want to accelerate (and when), same speed or slow down.
+		if(i == accelerate) {
+			rockets.get(NnumRocket).accelerateRocket(whenAccelerate);
+		}else if(i == slowDonw) {
+			rockets.get(NnumRocket).slowDown();
+		}
+		//else it is same acceleration
 	}
 
 	public Integer getLength() {
 		return length;
 	}
 
-	public void updateRocketInfo() {
-
+	public void updateRocketInfo(int i) {
+		rockets.get(i).getActualSpeed();
+		rockets.get(i).getAcceleration();
+		
 	}
 
 	public void setCurrentTime(double time) {

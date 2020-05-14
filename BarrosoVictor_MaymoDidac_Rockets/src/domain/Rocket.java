@@ -21,16 +21,20 @@ public class Rocket {
 		this.fueltank = fueltank;
 		this.circuit= circuit;
 	}
+	public double getAcceleration() {
+		double acc = 0;
+		for (Propellant p : propellants) {
+			acc += p.getActualAcceleration();
+		}
+		return acc;
+	}
 
-	public int getMetersTravelled() {
+	public int getMetersTravelled() { //x = xo + v*t + ½ a * t^2
+		metersTravelled += speed + speed*circuit.currentTime+(acceleration/2)*Math.pow(circuit.currentTime, 2);
 		return metersTravelled;
 	}
 
-	public double getActualSpeed() {
-		return this.speed;
-	}
-
-	public void speedAtMoment() { // speed of rocket right now.
+	public void getActualSpeed() { // speed of rocket right now.
 		this.speed += acceleration * circuit.currentTime;
 	}
 	
@@ -41,6 +45,14 @@ public class Rocket {
 		}
 		return maxAcc;
 	}
+	public void accelerateRocket(double whenAccelerate) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void changePropellantAccelertion(int i, double newAcceleration) throws Exception {
+		propellants.get(i).setActualAcceleration(newAcceleration);
+	}
+	
 
 	/*
 	 * public void getFuelConsumption() {

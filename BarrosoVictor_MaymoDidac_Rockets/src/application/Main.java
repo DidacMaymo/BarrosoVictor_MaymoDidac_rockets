@@ -35,6 +35,6 @@ public class Main {
 	}
 
 	public void displayRockets() {
-				
+		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
 	}
 }
