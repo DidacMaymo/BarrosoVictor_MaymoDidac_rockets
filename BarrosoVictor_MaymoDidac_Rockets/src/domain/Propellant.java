@@ -9,5 +9,8 @@ public class Propellant {
 	public Double getMaxAcceleration() {
 		return maxAcceleration;
 	}
+	public Double getActualAcceleration() {
+		return maxAcceleration;
+	}
 
 }

@@ -3,15 +3,15 @@ package domain;
 public class Circuit {
 	
 	String id;
-	double limitTime;
-	int distance;
+	double maxTtime;
+	int length;
 	Rocket rocket;
 
 	public Circuit(String id, double limitTime, int distance) throws Exception {
 		if (validAtributes(id, limitTime, distance)) {
 			this.id = id;
-			this.limitTime = limitTime;
-			this.distance = distance;
+			this.maxTtime = limitTime;
+			this.length = distance;
 		}
 	}
 
@@ -29,11 +29,11 @@ public class Circuit {
 	}
 
 
-	public Integer getDistance() {
-		return distance;
+	public Integer getLength() {
+		return length;
 	}
-	public Double getLimitTime() {
-		return limitTime;
+	public Double getMaxLnegth() {
+		return maxTtime;
 
 	}
 	public void updateRocketInfo() {
