@@ -77,7 +77,7 @@ public class Rocket {
 	
 	public void decideAction(double time, int x) {
 		if(x-this.metersTravelled < 100) {
-			this.accelerateRocket(whenAccelerate);
+			//this.accelerateRocket(whenAccelerate);
 		}
 	}
 

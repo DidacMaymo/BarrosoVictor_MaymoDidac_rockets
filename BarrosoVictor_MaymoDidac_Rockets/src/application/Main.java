@@ -44,7 +44,7 @@ public class Main {
 	}
 	public static void race() throws InterruptedException {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
-		while(circuit.getMaxTime()<circuit.getCurrentTime()) { 	//per ara que vagi fent mentres tinguis temps es igual lo demes
+		while(circuit.getMaxTime()>=circuit.getCurrentTime()) { 	//per ara que vagi fent mentres tinguis temps es igual lo demes
 			start = Instant.now();       					//Comença contador del timing
 			TimeUnit.SECONDS.sleep(1);
 			//circuito pregunta cada segundo
@@ -57,11 +57,6 @@ public class Main {
 	private static void updatingCirucitInfo() {
 		System.out.println("Current Time: "+ circuit.currentTime+" Acceleration: "+ rocket.getAcceleration()+ " Speed: "+ rocket.getSpeed()+
 				" Distance: "+ rocket.getMetersTravelled()+ "Circuit "+ circuit.length+ " Fuel: "+ rocket.getFuelConsumption() + "/"+ rocket.fueltank.getFuelCapacity());
-	}
-
-
-	
-
-		
+	}	
 }
 
