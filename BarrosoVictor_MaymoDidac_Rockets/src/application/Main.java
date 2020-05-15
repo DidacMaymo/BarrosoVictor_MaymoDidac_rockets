@@ -38,10 +38,13 @@ public class Main {
 	}
 	
 	private static List<Propellant> initialisePropellants() { //same configuration of propellants for rocket.
-		List<Propellant> propellants= new ArrayList<Propellant>();
-		propellants.add(new Propellant(ConstantUtilities.maxAccProplellant, "first"));
-		return propellants;
-	}
+        List<Propellant> propellants= new ArrayList<Propellant>();
+        for(double d: ConstantUtilities.maxAccProplellant) {
+            propellants.add(new Propellant(d, "first"));
+        }
+
+        return propellants;
+    }
 	public static void race() throws InterruptedException {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
 		while(circuit.getMaxTime()>=circuit.getCurrentTime()) { 	//per ara que vagi fent mentres tinguis temps es igual lo demes
