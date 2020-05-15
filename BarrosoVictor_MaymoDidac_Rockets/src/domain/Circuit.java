@@ -19,21 +19,19 @@ public class Circuit {
 		this.rocket = rocket;
 	}
 
-	public void decideAction() {
+	public void race() {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
 		double end = 1;
 		int currentTime = 0;
 		while (end >= 0) {
-			end = race(currentTime);
+			end = decideAction(currentTime);
 			circuitInfo(currentTime);
 			currentTime++;
-
 		}
 	}
 
 	public Double getLimitTime() {
 		return maxTime;
-
 	}
 
 	public Integer getDistance() {
@@ -44,7 +42,7 @@ public class Circuit {
 		rocket.setAcceleration(acceleration);
 	}
 
-	public double race(int currentTime) {
+	public double decideAction(int currentTime) {
 		double acceleration = -1;
 		if (currentTime < maxTime) {
 			acceleration = askAcceleration();
