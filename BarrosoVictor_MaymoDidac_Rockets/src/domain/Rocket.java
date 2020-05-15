@@ -14,11 +14,10 @@ public class Rocket {
 	Score score;
 	Circuit circuit;
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank, Circuit circuit) {
+	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) {
 		this.idRocket = id;
 		this.propellants = propellants;
 		this.fueltank = fueltank;
-		this.circuit = circuit;
 	}
 
 	

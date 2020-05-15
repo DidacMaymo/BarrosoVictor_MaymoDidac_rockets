@@ -33,7 +33,7 @@ public class Main {
 	}
 
 	private static Rocket initialiseRocket() { //iniciem el rocket que fara la cursa 
-		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),new FuelTank(ConstantUtilities.fuelTankCapacity), circuit);
+		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),new FuelTank(ConstantUtilities.fuelTankCapacity));
 		return rocket;
 	}
 	
