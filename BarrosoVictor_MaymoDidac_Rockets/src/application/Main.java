@@ -15,11 +15,13 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		initialise();
+		circuitInfo();
 	}
 
 	public static void initialise() throws Exception { //iniciem les dades del circuit amb les del cohet etc
 		rocket= initialiseRocket();
 		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rocket);
+		//circuit.addRocket(rocket);
 	}
 
 	private static Rocket initialiseRocket() { //iniciem el rocket que fara la cursa 
@@ -33,7 +35,7 @@ public class Main {
 		return propellants;
 	}
 
-	public void displayRocket() {
+	public static void circuitInfo() {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
 		while(rocket.getAcceleration()!=0) {
 			System.out.println("Current Time: "+ circuit.currentTime+" Acceleration: "+ rocket.getAcceleration()+ " Speed: "+ rocket.getSpeed()+

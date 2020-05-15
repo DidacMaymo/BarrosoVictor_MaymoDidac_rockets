@@ -14,15 +14,16 @@ public class Circuit {
 	public int length; // circuit distance
 	private Rocket rocket;
 
-	public Circuit(String id, double maxTime, int length) throws Exception {
+	public Circuit(String id, double maxTime, int length, Rocket rocket) throws Exception {
 		if (validAtributes(id, maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
 			this.length = length;
+			this.rocket = rocket;
 		}
 	}
 	public void addRocket(Rocket rocket) {
-		this.rocket = rocket;
+		
 	}
 	public boolean validAtributes(String id, double maxTime, int length) throws Exception {
 		if (id != null && id != "") {
@@ -54,8 +55,7 @@ public class Circuit {
 		return this.maxTime;
 	}
 
-	public void updateRocketInfo(int i, double acceleration) throws Exception { // aixo farà cambiar la velocitat,
-																				// acceleracio i metres per tant de																// rocket
+	public void updateRocketInfo(int i, double acceleration) throws Exception { // aixo farà cambiar la velocitat,																		// acceleracio i metres per tant de																// rocket
 		//acceleration = newAcceleration();
 		//rocket.setActualSpeed();
 		rocket.setAcceleration(acceleration);

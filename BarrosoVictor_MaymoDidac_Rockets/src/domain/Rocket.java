@@ -21,30 +21,30 @@ public class Rocket {
 		this.circuit = circuit;
 	}
 
-	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed + speed * circuit.currentTime + (acceleration / 2) * Math.pow(circuit.currentTime, 2);
-	}
-
-	public void setActualSpeed() { // speed of rocket right now.
-		this.speed += acceleration * circuit.currentTime;
-		fueltank.updateFuel(speed);
-	}
-
-	public double setAcceleration(double acceleration) throws Exception {
+	
+	public void setAcceleration(double acceleration) throws Exception {
 		double acc = 0;
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 			acc += p.getActualAcceleration();
 		}
-		return acc;
+		setSpeed();
 	}
+	public void setSpeed() { // speed of rocket right now.
+		this.speed += acceleration * circuit.currentTime;
+		fueltank.updateFuel(speed);
+		setMetersTravelled();
+	}
+	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
+		metersTravelled += speed + speed * circuit.currentTime + (acceleration / 2) * Math.pow(circuit.currentTime, 2);
+	}
+
+	
 	public double getSpeed() {
-		setActualSpeed();
 		return speed;
 	}
 	
 	public int getMetersTravelled() {
-		setMetersTravelled();
 		return metersTravelled;
 	}
 	
