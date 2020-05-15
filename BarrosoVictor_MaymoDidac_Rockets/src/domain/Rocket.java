@@ -21,9 +21,10 @@ public class Rocket {
 		this.fueltank = fueltank;
 		this.circuit= circuit;
 	}
-	public double setAcceleration() {
+	public double setAcceleration(double acceleration) throws Exception {
 		double acc = 0;
 		for (Propellant p : propellants) {
+			p.setActualAcceleration(acceleration);
 			acc += p.getActualAcceleration();
 		}
 		return acc;

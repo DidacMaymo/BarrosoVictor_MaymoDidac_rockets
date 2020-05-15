@@ -37,12 +37,12 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction(int i,double whenAccelerate, int NnumRocket) { //each second of race this method is executed.
+	public void decideAction(int i,double whenAccelerate) { //each second of race this method is executed.
 		//Does rocket want to accelerate (and when), same speed or slow down.
 		if(i == accelerate) {
-			rockets.get(NnumRocket).accelerateRocket(whenAccelerate);
+			rockets.accelerateRocket(whenAccelerate);
 		}else if(i == slowDonw) {
-			rockets.get(NnumRocket).slowDown();
+			rockets.slowDown();
 		}
 		//else it is same acceleration
 	}
@@ -51,10 +51,16 @@ public class Circuit {
 		return length;
 	}
 
-	public void updateRocketInfo(int i) { //aixo farà cambiar la velocitat, acceleracio i metres per tant del rocket
-		rockets.get(i).setActualSpeed();
-		rockets.get(i).setAcceleration();
-		rockets.get(i).setMetersTravelled();
+	public void updateRocketInfo(int i, double acceleration) throws Exception { //aixo farà cambiar la velocitat, acceleracio i metres per tant del rocket
+		acceleration = newAcceleration();
+		rockets.setActualSpeed();
+		rockets.setAcceleration(acceleration);
+		rockets.setMetersTravelled();
+	}
+
+	private double newAcceleration() {
+		
+		return 0;
 	}
 
 	public void setCurrentTime(double time) {
