@@ -18,8 +18,8 @@ public class Main {
 	}
 
 	public static void initialise() throws Exception { //iniciem les dades del circuit amb les dels cohets etc
-		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rockets);
 		List<Rocket> rockets= initialiseRockets(1);
+		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rockets);
 	}
 
 	private static List<Rocket> initialiseRockets(int howManyRockets) { //iniciem tots els rockets que faran la cursa 

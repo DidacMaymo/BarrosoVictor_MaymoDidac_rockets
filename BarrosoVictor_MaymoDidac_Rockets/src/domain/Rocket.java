@@ -21,19 +21,19 @@ public class Rocket {
 		this.fueltank = fueltank;
 		this.circuit= circuit;
 	}
-	public double getAcceleration() {
+	public double setAcceleration() {
 		double acc = 0;
 		for (Propellant p : propellants) {
 			acc += p.getActualAcceleration();
 		}
 		return acc;
 	}
-	public int getMetersTravelled() { //x = xo + v*t + ½ a * t^2
+	public int setMetersTravelled() { //x = xo + v*t + ½ a * t^2
 		metersTravelled += speed + speed*circuit.currentTime+(acceleration/2)*Math.pow(circuit.currentTime, 2);
 		return metersTravelled;
 	}
 
-	public void getActualSpeed() { // speed of rocket right now.
+	public void setActualSpeed(){ // speed of rocket right now.
 		this.speed += acceleration * circuit.currentTime;
 	}
 	
