@@ -12,10 +12,10 @@ public class Circuit {
 	public String id; 
 	public double maxTime, currentTime = 0; //time limit of race, and current time
 	public int length; 					 //circuit distance
-	private List<Rocket> rockets = new ArrayList<Rocket>(); //Rockets that participate in race
+	private Rocket rockets; 
 	Rocket winner;
 	
-	public Circuit(String id, double maxTime, int length, List<Rocket> rockets) throws Exception {
+	public Circuit(String id, double maxTime, int length, Rocket rockets) throws Exception {
 		if (validAtributes(id, maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;

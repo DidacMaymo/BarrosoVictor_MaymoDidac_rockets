@@ -18,13 +18,13 @@ public class Main {
 	}
 
 	public static void initialise() throws Exception { //iniciem les dades del circuit amb les dels cohets etc
-		List<Rocket> rockets= initialiseRockets(1);
+		Rocket rockets= initialiseRockets();
 		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rockets);
 	}
 
-	private static List<Rocket> initialiseRockets(int howManyRockets) { //iniciem tots els rockets que faran la cursa 
-		rockets.add(new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),new FuelTank(500), circuit));
-		return rockets;
+	private static Rocket initialiseRockets() { //iniciem tots els rockets que faran la cursa 
+		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),new FuelTank(500), circuit));
+		return rocket;
 	}
 	
 	private static List<Propellant> initialisePropellants() { //same configuration of propellants for all rockets.
