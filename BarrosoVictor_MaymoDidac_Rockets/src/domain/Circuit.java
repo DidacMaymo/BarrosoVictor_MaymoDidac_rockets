@@ -6,12 +6,11 @@ import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalTime;
-import Keyboard.*;
 
 public class Circuit {
 	private String id;
-	private double maxTime;
-	private int length;
+	private int maxTime;
+	private double length;
 	private Rocket rocket;
 	private int currentTime=0;
 	public static Instant start;
@@ -19,7 +18,7 @@ public class Circuit {
 	public static Duration Interval;
 	
 	
-	public Circuit(String id, double maxtime, int length, Rocket rocket) {
+	public Circuit(String id, int maxtime, double length, Rocket rocket) {
 		super();
 		this.id = id;
 		this.maxTime = maxtime;
@@ -37,14 +36,14 @@ public class Circuit {
 		}
 	}
 
-	public Double getLimitTime() {
+	public Integer getLimitTime() {
 		return maxTime;
 	}
 
-	public Integer getDistance() {
+	public double getDistance() {
 		return length;
 	}
-
+	
 	public void updateRocketInfo(double acceleration) {
 		rocket.setAcceleration(acceleration);
 	}
