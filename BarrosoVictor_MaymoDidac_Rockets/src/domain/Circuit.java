@@ -4,23 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Circuit {
-	
+
 	private static final int accelerate = 1;
 	private static final int slowDonw = 2;
 	private static final int sameAcceleration = 3;
 
-	public String id; 
-	public double maxTime, currentTime = 0; //time limit of race, and current time
-	public int length; 					 //circuit distance
-	private Rocket rockets; 
-	Rocket winner;
-	
+	public String id;
+	public double maxTime, currentTime = 0; // time limit of race, and current time
+	public int length; // circuit distance
+	private Rocket rocket;
+
 	public Circuit(String id, double maxTime, int length, Rocket rockets) throws Exception {
 		if (validAtributes(id, maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
 			this.length = length;
-			this.rockets =  rockets;
+			this.rocket = rockets;
 		}
 	}
 
@@ -37,34 +36,36 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction(int i,double whenAccelerate) { //each second of race this method is executed.
-		//Does rocket want to accelerate (and when), same speed or slow down.
-		if(i == accelerate) {
-			rockets.accelerateRocket(whenAccelerate);
-		}else if(i == slowDonw) {
-			rockets.slowDown();
+	public void decideAction(int i, double whenAccelerate) { // each second of race this method is executed.
+		// Does rocket want to accelerate (and when), same speed or slow down.
+		if (i == accelerate) {
+			rocket.accelerateRocket(whenAccelerate);
+		} else if (i == slowDonw) {
+			rocket.slowDown();
 		}
-		//else it is same acceleration
+		// else it is same acceleration
 	}
 
 	public Integer getLength() {
 		return length;
 	}
 
-	public void updateRocketInfo(int i, double acceleration) throws Exception { //aixo farà cambiar la velocitat, acceleracio i metres per tant del rocket
+	public void updateRocketInfo(int i, double acceleration) throws Exception { // aixo farà cambiar la velocitat,
+																				// acceleracio i metres per tant del
+																				// rocket
 		acceleration = newAcceleration();
-		rockets.setActualSpeed();
-		rockets.setAcceleration(acceleration);
-		rockets.setMetersTravelled();
+		rocket.setActualSpeed();
+		rocket.setAcceleration(acceleration);
+		rocket.setMetersTravelled();
 	}
 
 	private double newAcceleration() {
-		
+
 		return 0;
 	}
 
 	public void setCurrentTime(double time) {
-		this.currentTime=time;
+		this.currentTime = time;
 	}
 
 }
