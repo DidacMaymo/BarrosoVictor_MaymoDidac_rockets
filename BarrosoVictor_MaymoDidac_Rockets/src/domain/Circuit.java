@@ -51,8 +51,7 @@ public class Circuit {
 	}
 
 	public void updateRocketInfo(int i, double acceleration) throws Exception { // aixo farà cambiar la velocitat,
-																				// acceleracio i metres per tant del
-																				// rocket
+																				// acceleracio i metres per tant de																// rocket
 		acceleration = newAcceleration();
 		rocket.setActualSpeed();
 		rocket.setAcceleration(acceleration);
