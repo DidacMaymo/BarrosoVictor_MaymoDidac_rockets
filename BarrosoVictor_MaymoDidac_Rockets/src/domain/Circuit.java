@@ -14,11 +14,11 @@ public class Circuit {
 	private static final int sameAcceleration = 3;
 
 	public String id;
-	public double maxTime, currentTime = 0; // time limit of race, and current time
+	public int maxTime, currentTime = 0; // time limit of race, and current time
 	public int length; // circuit distance
 	private Rocket rocket;
 
-	public Circuit(String id, double maxTime, int length, Rocket rocket) throws Exception {
+	public Circuit(String id, int maxTime, int length, Rocket rocket) throws Exception {
 		if (validAtributes(maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
