@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalTime;
 
 public class Circuit {
 
@@ -55,20 +56,16 @@ public class Circuit {
 		return this.maxTime;
 	}
 
-	public void updateRocketInfo(int i, double acceleration) throws Exception { // aixo farà cambiar la velocitat,																		// acceleracio i metres per tant de																// rocket
-		//acceleration = newAcceleration();
-		//rocket.setActualSpeed();
+	public void updateRocketInfo(int i, double acceleration) throws Exception { 
 		rocket.setAcceleration(acceleration);
-		//rocket.setMetersTravelled();
 	}
 
-	private double newAcceleration() {
-
+	private double newAcceleration() { //NOT YET
 		return 0;
 	}
 
 	public void setCurrentTime(double time) {
-		this.currentTime = time;
+		this.currentTime += time;
 	}
 
 }
