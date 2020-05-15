@@ -12,10 +12,9 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fuelTank;
 
-	public Rocket(String id, double speed, List<Propellant> propellants, FuelTank fuelTank) {
+	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) {
 		super();
 		this.id = id;
-		this.speed = speed;
 		this.propellants = propellants;
 		this.fuelTank = fuelTank;
 	}

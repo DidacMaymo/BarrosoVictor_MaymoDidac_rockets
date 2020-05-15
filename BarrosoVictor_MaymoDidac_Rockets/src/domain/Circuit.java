@@ -8,17 +8,14 @@ public class Circuit {
 	private int length;
 	private Rocket rocket;
 
-	public Circuit(String id, double maxtime, int length) {
+	public Circuit(String id, double maxtime, int length, Rocket rocket) {
 		super();
 		this.id = id;
 		this.maxTime = maxtime;
 		this.length = length;
-	}
-
-	public void addRocket(Rocket rocket) {
 		this.rocket = rocket;
 	}
-
+	
 	public void race() {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
 		double end = 1;
