@@ -50,10 +50,17 @@ public class Rocket {
 		metersTravelled += speed;
 	}
 	
-	
+	public double getAcceleration() {
+		return acceleration;
+	}
 
-	
-	
+	public double getSpeed() {
+		return speed;
+	}
+		
+	public FuelTank getFuelTank() {
+		return fuelTank;
+	}
 	
 	
 
