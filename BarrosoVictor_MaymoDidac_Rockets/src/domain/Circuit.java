@@ -2,6 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalTime;
 
 public class Circuit {
@@ -16,7 +19,7 @@ public class Circuit {
 	private Rocket rocket;
 
 	public Circuit(String id, double maxTime, int length, Rocket rocket) throws Exception {
-		if (validAtributes(id, maxTime, length)) {
+		if (validAtributes(maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
 			this.length = length;
@@ -26,10 +29,7 @@ public class Circuit {
 	public void addRocket(Rocket rocket) {
 		
 	}
-	public boolean validAtributes(String id, double maxTime, int length) throws Exception {
-		if (id != null && id != "") {
-			throw new Exception("id of circuit not valid");
-		}
+	public boolean validAtributes(double maxTime, int length) throws Exception {
 		if (maxTime <= 0) {
 			throw new Exception("maxTime of circuit not valid");
 		}
@@ -55,6 +55,9 @@ public class Circuit {
 	public double getMaxTime() {
 		return this.maxTime;
 	}
+	public double getCurrentTime() {
+		return this.currentTime;
+	}
 
 	public void updateRocketInfo(int i, double acceleration) throws Exception { 
 		rocket.setAcceleration(acceleration);
@@ -67,5 +70,5 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
-
+	
 }
