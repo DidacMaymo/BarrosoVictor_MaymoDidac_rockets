@@ -3,21 +3,19 @@ package domain;
 public class FuelTank {
 
 	double capacity;
-	String id;
-	double fuel;
+	double actualFuel;
 	
 	
 	
-	public FuelTank(double capacity, String id) {
+	public FuelTank(double capacity) {
 		super();
 		this.capacity = capacity;
-		this.id = id;
-		this.fuel = capacity;
+		this.actualFuel = capacity;
 	}
 
 	public void updateFuel(double speed) {
 		
-		fuel -=  0.02 * Math.pow(Math.abs(speed), 2);
+		actualFuel -=  0.02 * Math.pow(Math.abs(speed), 2);
 	}
 
 	public double getCapacity() {
@@ -25,7 +23,7 @@ public class FuelTank {
 	}
 
 	public double getFuel() {
-		return fuel;
+		return actualFuel;
 	}
 	
 }
