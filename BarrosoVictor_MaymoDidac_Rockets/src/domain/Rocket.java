@@ -22,12 +22,9 @@ public class Rocket {
 		this.fueltank = fueltank;
 	}
 
-	
 	public void setAcceleration(double acceleration) throws Exception {
-		double acc = 0;
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
-			acc += p.getActualAcceleration();
 		}
 		setSpeed();
 	}
