@@ -2,10 +2,6 @@ package domain;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.concurrent.TimeUnit;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalTime;
 
 public class Circuit {
 	private String id;
@@ -40,8 +36,8 @@ public class Circuit {
 		return maxTime;
 	}
 
-	public double getDistance() {
-		return length;
+	public Double getLenght() {
+		return  length;
 	}
 	
 	public void updateRocketInfo(double acceleration) {

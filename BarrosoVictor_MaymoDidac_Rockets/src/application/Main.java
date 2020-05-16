@@ -13,7 +13,6 @@ import utilities.ConstantUtilities;
 public class Main {
 	public static Circuit circuit;
 	public static Rocket rocket;
-	
 
 	public static void main(String[] args) throws Exception {
 		initialise();
