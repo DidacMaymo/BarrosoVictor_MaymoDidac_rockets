@@ -3,6 +3,8 @@ package domain;
 import java.time.Duration;
 import java.time.Instant;
 
+import utilities.ConstantUtilities;
+
 public class Circuit {
 	private String id;
 	private int maxTime;
@@ -27,9 +29,9 @@ public class Circuit {
 		double end = 1;
 		while (end >= 0) {
 			end = decideAction();
-			circuitInfo();
 			currentTime++;
 		}
+		
 	}
 
 	public Integer getLimitTime() {
@@ -50,21 +52,27 @@ public class Circuit {
 			// acceleration = askAcceleration();
 			updateRocketInfo(acceleration);
 		}
+		circuitInfo();
+		result();
 		return acceleration;
 
 	}
 
-	private double askAcceleration() {
-		double acceleration = -1;
-		while (acceleration < 0) {
-			
-		}
-		return acceleration;
-	}
+
 
 	private void circuitInfo() {
 		System.out.println("Current time: " + currentTime + " Acceleration: " + rocket.getAcceleration() + " Speed: "
 				+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length + " Fuel: "
 				+ rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
+	}
+	
+	private void result(){
+		if (currentTime == maxTime)
+			System.out.println("There is no winner");
+		else if(rocket.getMetersTravelled()>= length) {
+			System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
+		}
+		else if (rocket.getFuelTank().getActualFuel() <= 0)
+			System.out.println("");
 	}
 }
