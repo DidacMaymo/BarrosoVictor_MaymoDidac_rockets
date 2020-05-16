@@ -26,7 +26,7 @@ public class Circuit {
 			this.rocket = rocket;
 		}
 	}
-	
+
 	public boolean validAtributes(double maxTime, int length) throws Exception {
 		if (maxTime <= 0) {
 			throw new Exception("maxTime of circuit not valid");
@@ -37,31 +37,32 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction() { //also need to decide when to accelerate when he decides that
-		
+	public void decideAction() { // also need to decide when to accelerate when he decides that
 		rocket.decideAction(currentTime);
 	}
-
-	public Integer getLength() {
+	
+	public void updateRocketInfo(double acceleration) throws Exception {
+		rocket.setAcceleration(acceleration);
+	}
+	
+	public int getLength() {
 		return length;
 	}
+
 	public double getMaxTime() {
 		return this.maxTime;
 	}
+
 	public double getCurrentTime() {
 		return this.currentTime;
 	}
-
-	public void updateRocketInfo(double acceleration) throws Exception { 
-		rocket.setAcceleration(acceleration);
-	}
-
-	private double newAcceleration() { //NOT YET
-		return 0;
-	}
-
+	
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
+
 	
+
+	
+
 }
