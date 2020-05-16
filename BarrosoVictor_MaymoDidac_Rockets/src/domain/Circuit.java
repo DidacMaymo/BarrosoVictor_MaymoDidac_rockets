@@ -26,9 +26,7 @@ public class Circuit {
 			this.rocket = rocket;
 		}
 	}
-	public void addRocket(Rocket rocket) {
-		
-	}
+	
 	public boolean validAtributes(double maxTime, int length) throws Exception {
 		if (maxTime <= 0) {
 			throw new Exception("maxTime of circuit not valid");
@@ -39,14 +37,9 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction(int i, double whenAccelerate) { // each second of race this method is executed.
-		// Does rocket want to accelerate (and when), same speed or slow down.
-		if (i == accelerate) {
-			rocket.accelerateRocket(whenAccelerate);
-		} else if (i == slowDonw) {
-			rocket.slowDown();
-		}
-		// else it is same acceleration
+	public void decideAction() { //also need to decide when to accelerate when he decides that
+		
+		rocket.decideAction(currentTime);
 	}
 
 	public Integer getLength() {
@@ -59,7 +52,7 @@ public class Circuit {
 		return this.currentTime;
 	}
 
-	public void updateRocketInfo(int i, double acceleration) throws Exception { 
+	public void updateRocketInfo(double acceleration) throws Exception { 
 		rocket.setAcceleration(acceleration);
 	}
 

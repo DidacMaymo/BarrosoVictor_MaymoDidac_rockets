@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import utilities.ConstantUtilities;
+
 public class Rocket {
 
 	public String idRocket;
@@ -68,16 +70,18 @@ public class Rocket {
 	}
 
 	public void accelerateRocket(double whenAccelerate) {
-		// and how much does it have to accelerate each time it wants to?
+		if(circuit.currentTime == whenAccelerate) {
+			
+		}
 	}
 
 	public void slowDown() {
 		// how much?
 	}
 	
-	public void decideAction(double time, int x) {
-		if(x-this.metersTravelled < 100) {
-			//this.accelerateRocket(whenAccelerate);
+	public void decideAction(double time) {
+		if(ConstantUtilities.length-this.metersTravelled < 100) {
+			this.accelerateRocket(ConstantUtilities.maxTime-time+1);
 		}
 	}
 
