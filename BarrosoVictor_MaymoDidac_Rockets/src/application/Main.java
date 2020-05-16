@@ -48,7 +48,7 @@ public class Main {
 	
 	public static void race() throws InterruptedException {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
-		while(circuit.getMaxTime()>circuit.getCurrentTime()) { 
+		while(circuit.getMaxTime()>circuit.getCurrentTime() && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel()!=0) { 
 			raceActions();					
 			circuit.setCurrentTime(Interval.getSeconds());		
 		}

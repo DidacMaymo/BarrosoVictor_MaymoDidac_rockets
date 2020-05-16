@@ -28,24 +28,7 @@ public class Rocket {
 		}
 		setSpeed();
 	}
-	public void setSpeed() { // speed of rocket right now.
-		this.speed += acceleration * circuit.currentTime;
-		fueltank.updateFuel(speed);
-		setMetersTravelled();
-	}
-	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed + speed * circuit.currentTime + (acceleration / 2) * Math.pow(circuit.currentTime, 2);
-	}
 
-	
-	public double getSpeed() {
-		return speed;
-	}
-	
-	public int getMetersTravelled() {
-		return metersTravelled;
-	}
-	
 	public double getAcceleration() { // acceleration right now
 		double acc = 0;
 		for (Propellant p : propellants) {
@@ -53,7 +36,7 @@ public class Rocket {
 		}
 		return acc;
 	}
-
+	
 	public double getMaxAcceleration() { // acceleration right now
 		double maxAcc = 0;
 		for (Propellant p : propellants) {
@@ -61,25 +44,37 @@ public class Rocket {
 		}
 		return maxAcc;
 	}
+	
+	public void setSpeed() { // speed of rocket right now.
+		this.speed += acceleration * circuit.currentTime;
+		fueltank.updateFuel(speed);
+		setMetersTravelled();
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
+		metersTravelled += speed + speed * circuit.currentTime + (acceleration / 2) * Math.pow(circuit.currentTime, 2);
+	}
+
+	public int getMetersTravelled() {
+		return metersTravelled;
+	}
 
 	public double getFuelConsumption() {
 		return fueltank.getFuelConsumption(speed);
 	}
 
-	public void accelerateRocket(double whenAccelerate) {
-		if(circuit.currentTime == whenAccelerate) {
-			
-		}
-	}
-
-	public void slowDown() {
-		// how much?
-	}
-	
 	public void decideAction(double time) {
-		if(ConstantUtilities.length-this.metersTravelled < 100) {
-			this.accelerateRocket(ConstantUtilities.maxTime-time+1);
-		}
+		if(time < ConstantUtilities.maxTime) {
+			if(fueltank.getActualFuel() > 0) {
+				if(metersTravelled < ConstantUtilities.length) {
+					
+				}//else ja has arribat a la meta
+			}//else ja no pot correr més
+		}//else no tens més temps
 	}
 
 }
