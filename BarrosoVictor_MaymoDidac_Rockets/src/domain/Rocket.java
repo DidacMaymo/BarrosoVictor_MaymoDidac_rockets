@@ -13,8 +13,6 @@ public class Rocket {
 	public int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	public FuelTank fueltank;
-	Score score;
-	Circuit circuit;
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) {
 		this.idRocket = id;
@@ -22,11 +20,11 @@ public class Rocket {
 		this.fueltank = fueltank;
 	}
 
-	public void setAcceleration(double acceleration) throws Exception {
+	public void setAcceleration(double acceleration, int currentTime) throws Exception {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
-		setSpeed();
+		setSpeed(currentTime);
 	}
 
 	public double getAcceleration() { // acceleration right now
@@ -45,18 +43,18 @@ public class Rocket {
 		return maxAcc;
 	}
 	
-	public void setSpeed() { // speed of rocket right now.
-		this.speed += acceleration * circuit.currentTime;
+	public void setSpeed(int currentTime) { // speed of rocket right now.
+		this.speed += acceleration * currentTime;
 		fueltank.updateFuel(speed);
-		setMetersTravelled();
+		setMetersTravelled(currentTime);
 	}
 
 	public double getSpeed() {
 		return speed;
 	}
 
-	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed + speed * circuit.currentTime + (acceleration / 2) * Math.pow(circuit.currentTime, 2);
+	public void setMetersTravelled(int currentTime) { // x = xo + v*t + ½ a * t^2
+		metersTravelled += speed + speed * currentTime + (acceleration / 2) * Math.pow(currentTime, 2);
 	}
 
 	public int getMetersTravelled() {

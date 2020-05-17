@@ -41,8 +41,8 @@ public class Circuit {
 		rocket.decideAction(currentTime);
 	}
 	
-	public void updateRocket(double acceleration) throws Exception {
-		rocket.setAcceleration(acceleration);
+	public void updateRocket(double acceleration ) throws Exception {
+		rocket.setAcceleration(acceleration,currentTime);
 	}
 	
 
