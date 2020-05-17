@@ -23,5 +23,9 @@ public class Propellant {
 		return this.actualAcceleration = actualAcceleration;
 
 	}
+	
+	public double getActualAcceleration() {
+		return actualAcceleration;
+	}
 
 }

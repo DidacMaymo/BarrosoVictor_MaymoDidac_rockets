@@ -42,12 +42,13 @@ public class Circuit {
 	}
 
 	public void updateRocketInfo() {
-		rocket.accelerate(rocket.getAcceleration());
+		rocket.acceleratePropellants(rocket.getAcceleration());
 	}
 
 	public void decideAction() {
-		Strategy.decideAction(currentTime, rocket, maxTime, length);
-		circuitInfo();
+		double acceleration = rocket.decideAction(currentTime);
+		rocket.accelerate(acceleration);
+		// ara actualitzem les variables del rocket
 	}
 
 	private void circuitInfo() {
@@ -57,7 +58,7 @@ public class Circuit {
 	}
 
 	private void result() {
-		if (currentTime == maxTime)
+		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
 			System.out.println("There is no winner");
 		else if (rocket.getMetersTravelled() >= length) {
 			System.out

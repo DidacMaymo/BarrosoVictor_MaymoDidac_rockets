@@ -4,9 +4,7 @@ public class FuelTank {
 
 	double capacity;
 	double actualFuel;
-	
-	
-	
+
 	public FuelTank(double capacity) {
 		super();
 		this.capacity = capacity;
@@ -14,7 +12,12 @@ public class FuelTank {
 	}
 
 	public void updateFuel(double speed) {
-		actualFuel -=  0.02 * Math.pow(Math.abs(speed), 2);
+		actualFuel -= getFuelConsumption(speed);
+	}
+
+	public double getFuelConsumption(double speed) {
+		return 0.02 * Math.pow(speed, 2);
+
 	}
 
 	public double getCapacity() {
@@ -24,5 +27,5 @@ public class FuelTank {
 	public double getActualFuel() {
 		return actualFuel;
 	}
-	
+
 }
