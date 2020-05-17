@@ -6,24 +6,24 @@ public class Strategy {
 		
 	}
 	
-	public void decideAction(int actualTime, Rocket rocket, int limitTime, double length ) {
-		if(actualTime==0) {
-			speedToAcceleration(rocket, length/limitTime);
+	public static void decideAction(int actualTime, Rocket rocket, int limitTime, double length ) {
+		if(actualTime==1) {
+			speedToAcceleration(rocket, 160);
 		}
-		else if(true) {
-			
+		else if(actualTime==2) {
+			speedToAcceleration(rocket, 14);
 		}
-	}
-	
-	
-	public void speedToAcceleration (Rocket rocket, double speed) {
-		while(rocket.getAcceleration()<speed) {
-			rocket.accelerate(rocket.getAcceleration()+1);
-		}
+		else
+			speedToAcceleration(rocket, 0);
 		rocket.updateSpeed();
 	}
 	
-	public boolean isViable() {
+	
+	public static void speedToAcceleration (Rocket rocket, double speed) {
+		rocket.accelerate(0);
+		while(rocket.getAcceleration()<speed) {
+			rocket.accelerate(rocket.getAcceleration()+1);
+		}
 		
 	}
 	

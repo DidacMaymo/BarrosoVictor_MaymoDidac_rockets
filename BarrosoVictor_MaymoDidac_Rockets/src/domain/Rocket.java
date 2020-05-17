@@ -34,13 +34,14 @@ public class Rocket {
 	}
 
 	public void accelerate(double acceleration) {
+		this.acceleration=0;
 			for (Propellant p: propellants) {
 				this.acceleration += p.setActualAcceleration(acceleration);
 			}
 	}
 	
 	public void updateSpeed() {
-		speed = speed + acceleration * ConstantUtilities.delay;
+		speed += acceleration * ConstantUtilities.delay;
 		setMetersTravelled();
 		fuelTank.updateFuel(speed);
 	}

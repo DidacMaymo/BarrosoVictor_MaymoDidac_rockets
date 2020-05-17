@@ -10,7 +10,7 @@ public class Circuit {
 	private int maxTime;
 	private double length;
 	private Rocket rocket;
-	private int currentTime = 0;
+	private int currentTime = 1;
 	public static Instant start;
 	public static Instant end;
 	public static Duration Interval;
@@ -30,7 +30,7 @@ public class Circuit {
 			decideAction();
 			currentTime += ConstantUtilities.delay;
 		}
-
+		result();
 	}
 
 	public Integer getLimitTime() {
@@ -41,17 +41,13 @@ public class Circuit {
 		return length;
 	}
 
-	public void updateRocketInfo(double acceleration) {
-		rocket.accelerate(acceleration);
+	public void updateRocketInfo() {
+		rocket.accelerate(rocket.getAcceleration());
 	}
 
 	public void decideAction() {
-		if (currentTime < maxTime) {
-			// acceleration = askAcceleration();
-			// updateRocketInfo(acceleration);
-		}
+		Strategy.decideAction(currentTime, rocket, maxTime, length);
 		circuitInfo();
-		result();
 	}
 
 	private void circuitInfo() {
