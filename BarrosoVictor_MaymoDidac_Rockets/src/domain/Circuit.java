@@ -14,7 +14,7 @@ public class Circuit {
 	private static final int sameAcceleration = 3;
 
 	public String id;
-	public int maxTime, currentTime = 0; // time limit of race, and current time
+	public int maxTime, currentTime = 1; // time limit of race, and current time
 	public int length; // circuit distance
 	private Rocket rocket;
 
@@ -37,15 +37,11 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction() {
-		rocket.decideAction(currentTime);
+	public void decideAction() throws Exception {
+		double acceleration = rocket.decideAction(currentTime);
+		rocket.setAcceleration(acceleration, currentTime);//ara actualitzem les variables del rocket
 	}
 	
-	public void updateRocket(double acceleration ) throws Exception {
-		rocket.setAcceleration(acceleration,currentTime);
-	}
-	
-
 	public double getCurrentTime() {
 		return this.currentTime;
 	}

@@ -34,7 +34,7 @@ public class Rocket {
 		}
 		return acc;
 	}
-	
+
 	public double getMaxAcceleration() { // acceleration right now
 		double maxAcc = 0;
 		for (Propellant p : propellants) {
@@ -42,7 +42,7 @@ public class Rocket {
 		}
 		return maxAcc;
 	}
-	
+
 	public void setSpeed(int currentTime) { // speed of rocket right now.
 		this.speed += acceleration * currentTime;
 		fueltank.updateFuel(speed);
@@ -64,15 +64,32 @@ public class Rocket {
 	public double getFuelConsumption() {
 		return fueltank.getFuelConsumption(speed);
 	}
-
-	public void decideAction(double time) {
-		if(time < ConstantUtilities.maxTime) {
-			if(fueltank.getActualFuel() > 0) {
-				if(metersTravelled < ConstantUtilities.length) {
-					
-				}//else ja has arribat a la meta
-			}//else ja no pot correr més
-		}//else no tens més temps
+	
+	public double decideAction(double currentTime) {
+		return 0;
 	}
 
+	/*public double decideAction(double currentTime) {
+		double acceleration = 0; // create mtehod to get the new acceleration we are going to use
+		if (suficientFuel(acceleration, currentTime, this.fueltank.getActualFuel() )) {
+
+		}
+		return acceleration;
+
+	}
+
+	private boolean suficientFuel(double acceleration, double currentTime, double currentFuel) {
+		double newSpeed = this.speed, fuelWaste = ConstantUtilities.fuelTankCapacity - currentFuel,	metersTravelled = this.metersTravelled;
+		for (double i = currentTime; currentTime < ConstantUtilities.maxTime
+				&& metersTravelled <= ConstantUtilities.length && fuelWaste < ConstantUtilities.fuelTankCapacity; i++) {
+			newSpeed += acceleration * currentTime;
+			fuelWaste += fueltank.getFuelConsumption(newSpeed);
+			metersTravelled += newSpeed + newSpeed * currentTime + (acceleration / 2) * Math.pow(currentTime, 2);
+		}
+		if (fuelWaste >= ConstantUtilities.fuelTankCapacity && metersTravelled >= ConstantUtilities.length) {
+			return true;
+		}
+		return false;
+	}
+	*/
 }

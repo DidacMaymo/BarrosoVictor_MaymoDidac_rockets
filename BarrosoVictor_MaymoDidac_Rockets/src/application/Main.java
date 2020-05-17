@@ -48,16 +48,15 @@ public class Main {
 	
 	public static void race() throws InterruptedException {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
-		while(ConstantUtilities.maxTime>circuit.getCurrentTime() && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel()!=0) { 
+		while(ConstantUtilities.maxTime>=circuit.getCurrentTime() && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel()!=0) { 
 			raceActions();					
 			circuit.setCurrentTime(Interval.getSeconds());		
 		}
 	}
 	private static void raceActions() throws InterruptedException {
-		start = Instant.now();       					
+		start = Instant.now(); 
 		TimeUnit.SECONDS.sleep(1);
 		//circuit.decideAction();
-		//updateRocket(acceleration)
 		updatingCirucitInfo();
 		end = Instant.now(); 
 		Interval = Duration.between(start, end) ;
