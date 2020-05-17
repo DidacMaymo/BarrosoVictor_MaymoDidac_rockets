@@ -8,7 +8,7 @@ public class Strategy {
 	
 	public static void decideAction(int actualTime, Rocket rocket, int limitTime, double length ) {
 		if(actualTime==1) {
-			speedToAcceleration(rocket, 160);
+			speedToAcceleration(rocket, 10);
 		}
 		else if(actualTime==2) {
 			speedToAcceleration(rocket, 14);
