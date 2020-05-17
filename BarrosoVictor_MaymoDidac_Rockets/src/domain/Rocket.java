@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import utilities.ConstantUtilities;
+
 public class Rocket {
 
 	private String id;
@@ -31,22 +33,20 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void setAcceleration(double acceleration) {
-		this.acceleration=0;
+	public void accelerate(double acceleration) {
 			for (Propellant p: propellants) {
 				this.acceleration += p.setActualAcceleration(acceleration);
 			}
-			setSpeed();
 	}
 	
-	private void setSpeed() {
-		speed = speed + acceleration;
+	public void updateSpeed() {
+		speed = speed + acceleration * ConstantUtilities.delay;
 		setMetersTravelled();
 		fuelTank.updateFuel(speed);
 	}
 	
 	private void setMetersTravelled() {
-		metersTravelled += speed;
+		metersTravelled += speed*ConstantUtilities.delay + 0.5 * acceleration * Math.pow(ConstantUtilities.delay, 2);
 	}
 	
 	public double getAcceleration() {
@@ -61,6 +61,19 @@ public class Rocket {
 		return fuelTank;
 	}
 	
+	/*public void accelerate(double acceleration) {
+		this.acceleration=0;
+			for (Propellant p: propellants) {
+				this.acceleration += p.setActualAcceleration(acceleration);
+			}
+			setSpeed();
+	}
+	
+	private void setSpeed() {
+		speed = speed + acceleration;
+		setMetersTravelled();
+		fuelTank.updateFuel(speed);
+	} */
 	
 
 }

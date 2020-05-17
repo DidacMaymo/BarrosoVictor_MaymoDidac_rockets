@@ -1,32 +1,32 @@
 package domain;
 
 public class Strategy {
-	private int round = 0;
-	
-	
+
 	public Strategy() {
 		
 	}
 	
-	public int decideAction() {
-		
-		if(round==0) {
-			return getMinSpeed(rocket, limitTime, length);
+	public void decideAction(int actualTime, Rocket rocket, int limitTime, double length ) {
+		if(actualTime==0) {
+			speedToAcceleration(rocket, length/limitTime);
 		}
-		
 		else if(true) {
 			
 		}
-		
-		
-		
-		round++;
-		return -1;
 	}
 	
-	public int getMinSpeed(Rocket rocket, int limitTime, int length) {
+	
+	public void speedToAcceleration (Rocket rocket, double speed) {
+		while(rocket.getAcceleration()<speed) {
+			rocket.accelerate(rocket.getAcceleration()+1);
+		}
+		rocket.updateSpeed();
+	}
+	
+	public boolean isViable() {
 		
 	}
+	
 	
 	
 }
