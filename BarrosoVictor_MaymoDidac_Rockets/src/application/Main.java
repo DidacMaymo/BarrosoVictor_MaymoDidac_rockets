@@ -63,7 +63,7 @@ public class Main {
 	}
 	private static void updatingCirucitInfo() {
 		System.out.println("Current Time: "+ circuit.currentTime+" Acceleration: "+ rocket.getAcceleration()+ " Speed: "+ rocket.getSpeed()+
-				" Distance: "+ rocket.getMetersTravelled()+ " Circuit "+ circuit.length+ " Fuel: "+ rocket.getFuelConsumption() + "/"+ rocket.fueltank.getFuelCapacity());
+				" Distance: "+ rocket.getMetersTravelled()+ " Circuit "+ circuit.length+ " Fuel: "+ rocket.fueltank.getActualFuel() + "/"+ rocket.fueltank.getFuelCapacity());
 	}
 }
 

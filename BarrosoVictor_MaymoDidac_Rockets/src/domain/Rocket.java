@@ -89,10 +89,12 @@ public class Rocket {
 		return false;
 	}
     public void speedToAcceleration (double speed){
-    	acceleration = 0;
-        while(getAcceleration()<speed) {
+    	setAcceleration(0);
+        while(getAcceleration()<speed){
             setAcceleration(getAcceleration()+1);
         }
+        //System.out.println(speed);
+        acceleration = this.getAcceleration();
         setSpeed(); 
     }
 

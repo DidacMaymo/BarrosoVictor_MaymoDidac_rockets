@@ -21,9 +21,8 @@ public class Propellant {
 	public void setActualAcceleration(double newAcceleration)  {
 		if (newAcceleration < 0)
 			newAcceleration= 0 ; 
-		if (actualAcceleration > maxAcceleration)
+		if (newAcceleration > maxAcceleration)
 			newAcceleration = maxAcceleration;
 		this.actualAcceleration = newAcceleration;
 	}
-
 }
