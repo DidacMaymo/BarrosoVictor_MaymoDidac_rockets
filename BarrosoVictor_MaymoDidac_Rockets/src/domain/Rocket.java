@@ -83,7 +83,7 @@ public class Rocket {
 		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
 		if(fuelRemaining-newFuelConsumption*timeRemaining >= 0) {
 			//fins aqui entra
-			if(newSpeed*timeRemaining >= metersRemaining) {
+			if(this.metersTravelled+newSpeed*timeRemaining >= metersRemaining) {
 				return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
 			}
 		}
