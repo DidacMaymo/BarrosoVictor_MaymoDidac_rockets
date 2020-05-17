@@ -65,16 +65,14 @@ public class Rocket {
 	}
 
 	public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
-		double timeRemaining = ConstantUtilities.maxTime - currentTime;
-		double metersRemaining = ConstantUtilities.length - this.metersTravelled;
-		double fuelRemaining = this.fueltank.getActualFuel();
 		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
-			if (tryAcceleration(acc, timeRemaining, metersRemaining, fuelRemaining)) {
+			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime, ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
 				return acc;
 			}
 		}
 		return 0;
 	}
+	
 	// comprovem si es una acceleracio valida (no quedarnos sense fuel fins acabar
 	// la carrera amb acc=0 dspres de aixo
 
@@ -82,7 +80,6 @@ public class Rocket {
 		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
 		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
 		if(fuelRemaining-newFuelConsumption*timeRemaining >= 0) {
-			//fins aqui entra
 			if(this.metersTravelled+newSpeed*timeRemaining >= metersRemaining) {
 				return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
 			}

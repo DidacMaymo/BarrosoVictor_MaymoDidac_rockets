@@ -24,7 +24,7 @@ public class FuelTank {
 	}
 
 	public double getActualFuel() {
-		return Actualfuel;
+		return Math.round(Actualfuel *100)/100;
 	}
 
 }
