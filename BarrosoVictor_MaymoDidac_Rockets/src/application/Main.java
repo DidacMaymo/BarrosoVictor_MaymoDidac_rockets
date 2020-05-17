@@ -17,7 +17,6 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		initialise();
 		circuit.race();
-		//circuit.circuitInfo();
 	}
 
 	public static void initialise() throws Exception { //iniciem les dades del circuit amb les del cohet etc

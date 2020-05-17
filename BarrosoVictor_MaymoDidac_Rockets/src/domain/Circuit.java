@@ -10,10 +10,7 @@ public class Circuit {
 	private int maxTime;
 	private double length;
 	private Rocket rocket;
-	private int currentTime = 1;
-	public static Instant start;
-	public static Instant end;
-	public static Duration Interval;
+	private int currentTime = 0;
 
 	public Circuit(String id, int maxtime, double length, Rocket rocket) {
 		super();
@@ -44,15 +41,15 @@ public class Circuit {
 
 	public void decideAction() {
 		double acceleration = rocket.decideAction(currentTime);
-		rocket.accelerate(acceleration);
-		rocket.updateSpeed(acceleration);
+		rocket.speedToAcceleration(acceleration);
+
 		// ara actualitzem les variables del rocket
 	}
 
 	private void circuitInfo() {
-		System.out.println("Current time: " + currentTime + " Acceleration: " + rocket.getAcceleration() + " Speed: "
-				+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length + " Fuel: "
-				+ rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
+		System.out.println("Current time: " + (currentTime + 1) + " Acceleration: " + rocket.getAcceleration()
+				+ " Speed: " + rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length
+				+ " Fuel: " + rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
 	}
 
 	private void result() {
