@@ -45,13 +45,6 @@ public class Circuit {
 		rocket.setAcceleration(acceleration);
 	}
 	
-	public int getLength() {
-		return length;
-	}
-
-	public double getMaxTime() {
-		return this.maxTime;
-	}
 
 	public double getCurrentTime() {
 		return this.currentTime;
@@ -60,9 +53,5 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
-
-	
-
-	
 
 }
