@@ -46,17 +46,17 @@ public class Main {
     }
 	
 	
-	public static void race() throws InterruptedException {
+	public static void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length + " . Max time: " + circuit.maxTime);
 		while(ConstantUtilities.maxTime>=circuit.getCurrentTime() && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel()!=0) { 
 			raceActions();					
 			circuit.setCurrentTime(Interval.getSeconds());		
 		}
 	}
-	private static void raceActions() throws InterruptedException { // x = xo + v*t + ½ a * t^2 
+	private static void raceActions() throws Exception { // x = xo + v*t + ½ a * t^2 
 		start = Instant.now(); 
 		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
-		//circuit.decideAction();
+		circuit.decideAction();
 		updatingCirucitInfo();
 		end = Instant.now(); 
 		Interval = Duration.between(start, end) ;

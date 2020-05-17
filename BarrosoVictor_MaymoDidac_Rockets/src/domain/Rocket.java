@@ -20,11 +20,10 @@ public class Rocket {
 		this.fueltank = fueltank;
 	}
 
-	public void setAcceleration(double acceleration, int currentTime) throws Exception {
+	public void setAcceleration(double acceleration) {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
-		setSpeed();
 	}
 
 	public double getAcceleration() { // acceleration right now
@@ -69,7 +68,7 @@ public class Rocket {
 		double timeRemaining = ConstantUtilities.maxTime - currentTime;
 		double metersRemaining = ConstantUtilities.length - this.metersTravelled;
 		double fuelRemaining = this.fueltank.getActualFuel();
-		for (double acc = this.getMaxAcceleration(); acc > this.getMaxAcceleration(); acc--) { // comencem per la acceleracio mes alta
+		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
 			if (tryAcceleration(acc, timeRemaining, metersRemaining, fuelRemaining)) {
 				return acc;
 			}
@@ -82,12 +81,19 @@ public class Rocket {
 	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
 		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
 		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
-		if(newFuelConsumption*timeRemaining >= 0) {
+		if(fuelRemaining-newFuelConsumption*timeRemaining >= 0) {
 			if(newSpeed*timeRemaining >= metersRemaining) {
 				return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
 			}
 		}
 		return false;
 	}
+    public void speedToAcceleration (double speed){
+    	acceleration = 0;
+        while(getAcceleration()<speed) {
+            setAcceleration(getAcceleration()+1);
+        }
+        setSpeed(); 
+    }
 
 }

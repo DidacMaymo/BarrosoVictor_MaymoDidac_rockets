@@ -39,7 +39,8 @@ public class Circuit {
 
 	public void decideAction() throws Exception {
 		double acceleration = rocket.decideAction(currentTime);
-		rocket.setAcceleration(acceleration, currentTime);//ara actualitzem les variables del rocket
+		rocket.speedToAcceleration(acceleration);
+		//ara actualitzem les variables del rocket
 	}
 	
 	public double getCurrentTime() {
