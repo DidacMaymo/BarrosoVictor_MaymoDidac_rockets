@@ -43,7 +43,7 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void setSpeed() { // speed of rocket right now. v = v0 + at 
+	public void setSpeed() { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
 		setMetersTravelled();
@@ -54,7 +54,7 @@ public class Rocket {
 	}
 
 	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled +=  speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
+		metersTravelled += speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
 	}
 
 	public int getMetersTravelled() {
@@ -64,19 +64,30 @@ public class Rocket {
 	public double getFuelConsumption() {
 		return fueltank.getFuelConsumption(speed);
 	}
-	
-	public double decideAction(double currentTime) {
-		for(double i = this.getMaxAcceleration(); i > this.getMaxAcceleration();i--) { //comencem per la acceleracio mes alta possible
-			if (tryAcceleration(i, currentTime)){
-				return i;
+
+	public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
+		double timeRemaining = ConstantUtilities.maxTime - currentTime;
+		double metersRemaining = ConstantUtilities.length - this.metersTravelled;
+		double fuelRemaining = this.fueltank.getActualFuel();
+		for (double acc = this.getMaxAcceleration(); acc > this.getMaxAcceleration(); acc--) { // comencem per la acceleracio mes alta
+			if (tryAcceleration(acc, timeRemaining, metersRemaining, fuelRemaining)) {
+				return acc;
 			}
 		}
 		return 0;
 	}
-	public boolean tryAcceleration(double acc,double currentTime) { // to see if this is a valid acceleration
-		
+	// comprovem si es una acceleracio valida (no quedarnos sense fuel fins acabar
+	// la carrera amb acc=0 dspres de aixo
+
+	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
+		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
+		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
+		if(newFuelConsumption*timeRemaining >= 0) {
+			if(newSpeed*timeRemaining >= metersRemaining) {
+				return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
+			}
+		}
 		return false;
 	}
 
-	
 }
