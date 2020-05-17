@@ -28,6 +28,7 @@ public class Circuit {
 		while (currentTime <= maxTime && rocket.getFuelTank().getActualFuel() > 0
 				&& rocket.getMetersTravelled() <= length) {
 			decideAction();
+			circuitInfo();
 			currentTime += ConstantUtilities.delay;
 		}
 		result();
@@ -41,13 +42,10 @@ public class Circuit {
 		return length;
 	}
 
-	public void updateRocketInfo() {
-		rocket.acceleratePropellants(rocket.getAcceleration());
-	}
-
 	public void decideAction() {
 		double acceleration = rocket.decideAction(currentTime);
 		rocket.accelerate(acceleration);
+		rocket.updateSpeed(acceleration);
 		// ara actualitzem les variables del rocket
 	}
 

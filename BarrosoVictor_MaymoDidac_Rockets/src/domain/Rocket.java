@@ -42,6 +42,7 @@ public class Rocket {
 		return fuelTank;
 	}
 
+	
 	public double getAcceleration() {
 		double acceleration = 0;
 		for (Propellant p : propellants) {
@@ -50,9 +51,9 @@ public class Rocket {
 		return acceleration;
 	}
 
-	private void setMetersTravelled() {
+	private void setMetersTravelled(double acceleration) {
 		metersTravelled += speed * ConstantUtilities.delay
-				+ 0.5 * getAcceleration() * Math.pow(ConstantUtilities.delay, 2);
+				+ 0.5 * acceleration * Math.pow(ConstantUtilities.delay, 2);
 	}
 
 	/* Race */
@@ -60,52 +61,42 @@ public class Rocket {
 	// This is the method that is being called by Strategy.decideAction and is the
 	// one who will accelerate the rocket, the acceleration parameter is a real one
 	// m/s^2)
-	public void accelerate(double desiredAcceleration) {
-		acceleratePropellants(0);
-		while (getAcceleration() < desiredAcceleration)
-			acceleratePropellants(getAcceleration() + 1);
-	}
+	
 
 	// This method accelerates all the propellants
-	public void acceleratePropellants(double acceleration) {
-		for (Propellant p : propellants) {
-			p.setActualAcceleration(acceleration);
-		}
-	}
 
-	public void updateSpeed() {
-		speed += getAcceleration() * ConstantUtilities.delay;
-		setMetersTravelled();
+
+	public void updateSpeed(double acceleration) {
+		speed += acceleration * ConstantUtilities.delay;
+		setMetersTravelled(acceleration);
 		fuelTank.updateFuel(speed);
 	}
 
-	public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
-		for (double acc = getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
-			if (tryAcceleration(acc, (ConstantUtilities.maxTime - currentTime),
-					(ConstantUtilities.length - this.metersTravelled), fuelTank.getActualFuel())) {
-				return acc;
-			}
-		}
-		return 0;
-	}
+    public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
+        double timeRemaining = ConstantUtilities.maxTime - currentTime;
+        double metersRemaining = ConstantUtilities.length - this.metersTravelled;
+        double fuelRemaining = this.fuelTank.getActualFuel();
+        for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
+            if (tryAcceleration(acc, timeRemaining, metersRemaining, fuelRemaining)) {
+                return acc;
+            }
+        }
+        return 0;
+    }
+    
+    // comprovem si es una acceleracio valida (no quedarnos sense fuel fins acabar
+    // la carrera amb acc=0 dspres de aixo
 
-	// comprovem si es una acceleracio valida (no quedarnos sense fuel fins acabar
-	// la carrera amb acc=0 dspres de aixo
-
-	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
-		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
-		double newFuelConsumption = fuelTank.getFuelConsumption(newSpeed);
-		if (fuelRemaining - newFuelConsumption * timeRemaining >= 0) {
-			if (this.metersTravelled + newSpeed * timeRemaining >= metersRemaining) {
-				return true; // aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la
-								// gasolina.
-			}
-		}
-		return false;
-	}
-	
-	
-	//
+    public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
+        double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
+        double newFuelConsumption = fuelTank.getFuelConsumption(newSpeed);
+        if(fuelRemaining-newFuelConsumption*timeRemaining >= 0) {
+            if(this.metersTravelled+newSpeed*timeRemaining >= metersRemaining) {
+                return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
+            }
+        }
+        return false;
+    }
 	
     public void speedToAcceleration (Rocket rocket, double speed) {
         while(rocket.getAcceleration()<speed) {
@@ -113,5 +104,11 @@ public class Rocket {
         }
         rocket.updateSpeed();
     }
-
+    
+    public void accelerate(double acceleration) {
+    	for (Propellant p: propellants) {
+    		p.setActualAcceleration(acceleration);
+    	}
+    	
+    }
 }
