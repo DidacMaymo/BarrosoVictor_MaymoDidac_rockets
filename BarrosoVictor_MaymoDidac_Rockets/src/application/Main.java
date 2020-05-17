@@ -76,7 +76,7 @@ public class Main {
 	public static void winnerOrLoser() {
 		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
 			if (circuit.getCurrentTime() <= ConstantUtilities.maxTime) {
-				System.out.println("Tenim Guanaydor!!");
+				System.out.println(ConstantUtilities.nameRocket1+" Your are a WINNER !! With a time of "+circuit.getCurrentTime());
 			} 		
 		}else if (circuit.getCurrentTime() == ConstantUtilities.maxTime) {
 			System.out.println("LOOOSEEER");
