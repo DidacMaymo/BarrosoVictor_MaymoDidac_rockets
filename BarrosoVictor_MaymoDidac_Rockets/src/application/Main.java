@@ -39,7 +39,7 @@ public class Main {
 	private static List<Propellant> initialisePropellants() { //same configuration of propellants for rocket.
         List<Propellant> propellants= new ArrayList<Propellant>();
         for(double d: ConstantUtilities.maxAccProplellant) {
-            propellants.add(new Propellant(d, "first"));
+            propellants.add(new Propellant(d));
         }
 
         return propellants;
@@ -53,9 +53,9 @@ public class Main {
 			circuit.setCurrentTime(Interval.getSeconds());		
 		}
 	}
-	private static void raceActions() throws InterruptedException {
+	private static void raceActions() throws InterruptedException { // x = xo + v*t + ½ a * t^2 
 		start = Instant.now(); 
-		TimeUnit.SECONDS.sleep(1);
+		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
 		//circuit.decideAction();
 		updatingCirucitInfo();
 		end = Instant.now(); 

@@ -6,4 +6,5 @@ public class ConstantUtilities {
 	public static double[] maxAccProplellant = {18,24,38};
 	public static double fuelTankCapacity = 1800; 
 	public static String nameRocket1 = "Star V";
+	public static int delay=1;
 }

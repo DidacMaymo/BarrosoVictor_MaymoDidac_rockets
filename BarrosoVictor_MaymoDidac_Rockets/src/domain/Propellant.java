@@ -5,9 +5,9 @@ public class Propellant {
 	private double maxAcceleration, actualAcceleration = 0;
 	private String id;
 
-	public Propellant(double maxAcceleration, String id) {
+	public Propellant(double maxAcceleration) {
 		this.maxAcceleration = maxAcceleration;
-		this.id = id;
+		//this.id = id;
 	}
 
 	public Double getMaxAcceleration() {

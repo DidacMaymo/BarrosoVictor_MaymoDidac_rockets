@@ -24,7 +24,7 @@ public class Rocket {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
-		setSpeed(currentTime);
+		setSpeed();
 	}
 
 	public double getAcceleration() { // acceleration right now
@@ -43,18 +43,18 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void setSpeed(int currentTime) { // speed of rocket right now.
-		this.speed += acceleration * currentTime;
+	public void setSpeed() { // speed of rocket right now. v = v0 + at 
+		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
-		setMetersTravelled(currentTime);
+		setMetersTravelled();
 	}
 
 	public double getSpeed() {
 		return speed;
 	}
 
-	public void setMetersTravelled(int currentTime) { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed + speed * currentTime + (acceleration / 2) * Math.pow(currentTime, 2);
+	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
+		metersTravelled +=  speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
 	}
 
 	public int getMetersTravelled() {
@@ -66,30 +66,17 @@ public class Rocket {
 	}
 	
 	public double decideAction(double currentTime) {
+		for(double i = this.getMaxAcceleration(); i > this.getMaxAcceleration();i--) { //comencem per la acceleracio mes alta possible
+			if (tryAcceleration(i, currentTime)){
+				return i;
+			}
+		}
 		return 0;
 	}
-
-	/*public double decideAction(double currentTime) {
-		double acceleration = 0; // create mtehod to get the new acceleration we are going to use
-		if (suficientFuel(acceleration, currentTime, this.fueltank.getActualFuel() )) {
-
-		}
-		return acceleration;
-
-	}
-
-	private boolean suficientFuel(double acceleration, double currentTime, double currentFuel) {
-		double newSpeed = this.speed, fuelWaste = ConstantUtilities.fuelTankCapacity - currentFuel,	metersTravelled = this.metersTravelled;
-		for (double i = currentTime; currentTime < ConstantUtilities.maxTime
-				&& metersTravelled <= ConstantUtilities.length && fuelWaste < ConstantUtilities.fuelTankCapacity; i++) {
-			newSpeed += acceleration * currentTime;
-			fuelWaste += fueltank.getFuelConsumption(newSpeed);
-			metersTravelled += newSpeed + newSpeed * currentTime + (acceleration / 2) * Math.pow(currentTime, 2);
-		}
-		if (fuelWaste >= ConstantUtilities.fuelTankCapacity && metersTravelled >= ConstantUtilities.length) {
-			return true;
-		}
+	public boolean tryAcceleration(double acc,double currentTime) { // to see if this is a valid acceleration
+		
 		return false;
 	}
-	*/
+
+	
 }
