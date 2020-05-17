@@ -73,9 +73,6 @@ public class Rocket {
 		return 0;
 	}
 	
-	// comprovem si es una acceleracio valida (no quedarnos sense fuel fins acabar
-	// la carrera amb acc=0 dspres de aixo
-
 	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
 		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
 		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
@@ -91,7 +88,6 @@ public class Rocket {
         while(getAcceleration()<speed){
             setAcceleration(getAcceleration()+1);
         }
-        //System.out.println(speed);
         acceleration = this.getAcceleration();
         setSpeed(); 
     }
