@@ -37,11 +37,11 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction() { // also need to decide when to accelerate when he decides that
+	public void decideAction() {
 		rocket.decideAction(currentTime);
 	}
 	
-	public void updateRocketInfo(double acceleration) throws Exception {
+	public void updateRocket(double acceleration) throws Exception {
 		rocket.setAcceleration(acceleration);
 	}
 	

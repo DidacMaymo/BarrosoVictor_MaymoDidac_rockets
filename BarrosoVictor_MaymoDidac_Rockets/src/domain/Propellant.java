@@ -22,7 +22,7 @@ public class Propellant {
 		if (newAcceleration < 0)
 			newAcceleration= 0 ; //throw new Exception("Acceleration below 0 not valid");
 		if (actualAcceleration > maxAcceleration)
-			actualAcceleration = maxAcceleration;
+			newAcceleration = maxAcceleration;
 		this.actualAcceleration = newAcceleration;
 	}
 

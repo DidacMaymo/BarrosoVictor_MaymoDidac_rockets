@@ -57,7 +57,7 @@ public class Main {
 		start = Instant.now();       					
 		TimeUnit.SECONDS.sleep(1);
 		//circuit.decideAction();
-		//updateRocketInfo(acceleration)
+		//updateRocket(acceleration)
 		updatingCirucitInfo();
 		end = Instant.now(); 
 		Interval = Duration.between(start, end) ;
