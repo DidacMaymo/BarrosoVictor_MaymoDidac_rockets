@@ -14,6 +14,7 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fuelTank;
 	private List<Score> scores = new ArrayList<Score>();
+	private Strategy strategy;
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		super();
@@ -23,6 +24,7 @@ public class Rocket {
 		this.id = id;
 		this.propellants = propellants;
 		this.fuelTank = fuelTank;
+		this.strategy = new Strategy();
 	}
 
 	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
@@ -80,8 +82,8 @@ public class Rocket {
 		fuelTank.updateFuel(speed);
 	}
 
-	public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
-		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
+	public double decideAction(int currentTime) { 
+		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { 
 			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime,
 					ConstantUtilities.length - this.metersTravelled, this.fuelTank.getActualFuel())) {
 				return acc;
@@ -126,4 +128,10 @@ public class Rocket {
 	public void addScore(Score score) {
 		scores.add(score);
 	}
+	
+	public void addStrategy(int time, double acceleration) {
+		strategy.addEstrategy(time, acceleration);
+	}
+	
+	
 }

@@ -13,7 +13,6 @@ public class Circuit {
 	private int currentTime = 0;
 
 	public Circuit(String id, int maxtime, double length, Rocket rocket) throws Exception {
-		super();
 		if (validateAttributes(id, maxtime, length, rocket))
 			throw new Exception("Wrong attributes set!");
 
@@ -52,6 +51,7 @@ public class Circuit {
 	public void decideAction() {
 		double acceleration = rocket.decideAction(currentTime);
 		rocket.speedToAcceleration(acceleration);
+		rocket.addStrategy(currentTime, acceleration);
 	}
 
 	private void circuitInfo() {
