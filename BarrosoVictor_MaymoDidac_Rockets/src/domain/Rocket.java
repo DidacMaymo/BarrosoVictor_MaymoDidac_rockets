@@ -27,7 +27,7 @@ public class Rocket {
 			if(p.getMaxAcceleration()<=0) {
 				throw new Exception();
 			}
-		}if(fueltank.getFuelCapacity()>=0) {
+		}if(fueltank.getFuelCapacity()<=0) {
 			throw new Exception();
 		}
 		return true;
