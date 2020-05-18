@@ -17,9 +17,6 @@ import utilities.ConstantUtilities;
 public class Main {
 	public static Circuit circuit;
 	public static Rocket rocket;
-	public static Instant start;
-	public static Instant end;
-	public static Duration Interval;
 
 	public static void main(String[] args) throws Exception {
 		initialise();
@@ -55,17 +52,17 @@ public class Main {
 		while (ConstantUtilities.maxTime >= circuit.getCurrentTime()
 				&& rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
 			raceActions();
-			circuit.setCurrentTime(Interval.getSeconds());
 		}
 	}
 
 	private static void raceActions() throws Exception  { 
-		start = Instant.now();
+		Instant start = Instant.now();
 		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
 		circuit.decideAction();
 		updatingCirucitInfo();
-		end = Instant.now();
-		Interval = Duration.between(start, end);
+		Instant end = Instant.now();
+		Duration Interval = Duration.between(start, end);
+		circuit.setCurrentTime(Interval.getSeconds());
 		circuit.winnerOrLoser();
 	}
 
