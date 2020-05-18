@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalTime;
-
 import domain.Circuit;
 import domain.FuelTank;
 import domain.Propellant;
