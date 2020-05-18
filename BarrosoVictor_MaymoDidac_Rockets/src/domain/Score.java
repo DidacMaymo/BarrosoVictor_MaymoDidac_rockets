@@ -1,21 +1,27 @@
 package domain;
 
-
-import javax.xml.crypto.Data;
+import java.time.LocalDate;
 
 public class Score {
 
 	String id;
-	Data Date;
+	LocalDate date;
 	double time;
-	
-	
-	public Score(String id, Data date, double time) {
+
+	public Score(String id, double time) throws Exception {
 		super();
+		if (validateAttributes(id, time))
+			throw new Exception("Wrong ID or time");
 		this.id = id;
-		Date = date;
 		this.time = time;
+		this.date = java.time.LocalDate.now();
 	}
 
-	
+	private boolean validateAttributes(String id, double time) {
+		if (id.isEmpty() || time<=0) {
+			return false;
+		}
+		return true;
+	}
+
 }

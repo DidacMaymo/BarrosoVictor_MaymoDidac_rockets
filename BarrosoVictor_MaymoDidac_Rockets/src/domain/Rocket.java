@@ -13,12 +13,23 @@ public class Rocket {
 	private double acceleration = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fuelTank;
+	private List<Score> scores = new ArrayList<Score>();
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) {
+	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		super();
+		if (validateAttributes(id, propellants, fuelTank))
+			throw new Exception("Wrong attributes set!");
+		
 		this.id = id;
 		this.propellants = propellants;
 		this.fuelTank = fuelTank;
+	}
+
+	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
+		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
+			return false;
+		}
+		return true;
 	}
 
 	/* getters and setters */
@@ -90,16 +101,6 @@ public class Rocket {
 		}
 		return false;
 	}
-	/*
-	 * public void speedToAcceleration(double speed) { int lvl=0; while
-	 * (getAcceleration() < speed) { accelerate(lvl++); } updateSpeed(); }
-	 * 
-	 * public void accelerate(double acceleration) { this.acceleration = 0; for
-	 * (Propellant p : propellants) { acceleration +=
-	 * p.setActualAcceleration(acceleration); }
-	 * 
-	 * }
-	 */
 
 	public void speedToAcceleration(double speed) {
 		setAcceleration(0);
@@ -120,5 +121,9 @@ public class Rocket {
 		this.speed += acceleration * ConstantUtilities.delay;
 		fuelTank.updateFuel(speed);
 		setMetersTravelled();
+	}
+
+	public void addScore(Score score) {
+		scores.add(score);
 	}
 }
