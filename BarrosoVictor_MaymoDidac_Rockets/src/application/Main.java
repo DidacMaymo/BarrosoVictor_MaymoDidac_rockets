@@ -33,7 +33,7 @@ public class Main {
 		return rocket;
 	}
 
-	private static List<Propellant> initialisePropellants() { // same configuration of propellants for rocket.
+	private static List<Propellant> initialisePropellants() throws Exception { // same configuration of propellants for rocket.
 		List<Propellant> propellants = new ArrayList<Propellant>();
 		for (double d : ConstantUtilities.maxAccProplellant) {
 			propellants.add(new Propellant(d));

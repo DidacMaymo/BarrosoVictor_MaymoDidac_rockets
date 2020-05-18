@@ -16,25 +16,19 @@ public class Rocket {
 	private Estrategy estrategy = new Estrategy();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
-		if (validAtributes(propellants, fueltank)) {
+		if (validateAttributes(propellants, fueltank)) {
 			this.idRocket = id;
 			this.propellants = propellants;
 			this.fueltank = fueltank;
 		}
 	}
 
-	public boolean validAtributes(List<Propellant> propellants, FuelTank fueltank) throws Exception {
-		for (Propellant p : propellants) {
-			if (p.getMaxAcceleration() <= 0) {
-				throw new Exception();
-			}
-		}
-		if (fueltank.getFuelCapacity() <= 0) {
-			throw new Exception();
-		}
-		return true;
-
-	}
+	private boolean validateAttributes(List<Propellant> propellants, FuelTank fuelTank) {
+        if ( propellants.isEmpty() || fuelTank == null) {
+            return false;
+        }
+        return true;
+    }
 
 	public void setAcceleration(double acceleration) {
 		for (Propellant p : propellants) {

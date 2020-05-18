@@ -4,10 +4,19 @@ public class Propellant {
 
 	private double maxAcceleration, actualAcceleration = 0;
 
-	public Propellant(double maxAcceleration) {
-		this.maxAcceleration = maxAcceleration;
-	}
+	public Propellant(double maxAcceleration) throws Exception {
+        super();
+        if (validateAttributes(maxAcceleration))
+            throw new Exception("Invalid attributes!");
+        this.maxAcceleration = maxAcceleration;
+    }
 
+    private boolean validateAttributes(double maxAcceleration) {
+        if (maxAcceleration <= 0) {
+            return false;
+        }
+        return true;
+    }
 	public Double getMaxAcceleration() {
 		return maxAcceleration;
 	}
