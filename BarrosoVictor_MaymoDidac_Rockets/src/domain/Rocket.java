@@ -14,12 +14,24 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	public FuelTank fueltank;
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) {
-		this.idRocket = id;
-		this.propellants = propellants;
-		this.fueltank = fueltank;
+	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
+		if(validAtributes(propellants, fueltank)) {
+			this.idRocket = id;
+			this.propellants = propellants;
+			this.fueltank = fueltank;
+		}
 	}
-	//public boolean validAtributes() throws Exception {}
+	public boolean validAtributes(List<Propellant> propellants, FuelTank fueltank) throws Exception {
+		for(Propellant p: propellants) {
+			if(p.getMaxAcceleration()<=0) {
+				throw new Exception();
+			}
+		}if(fueltank.getFuelCapacity()>=0) {
+			throw new Exception();
+		}
+		return true;
+		
+	}
 
 	public void setAcceleration(double acceleration) {
 		for (Propellant p : propellants) {
@@ -27,7 +39,7 @@ public class Rocket {
 		}
 	}
 
-	public double getAcceleration() { // acceleration right now
+	public double getAcceleration() { 
 		double acc = 0;
 		for (Propellant p : propellants) {
 			acc += p.getActualAcceleration();
@@ -35,7 +47,7 @@ public class Rocket {
 		return acc;
 	}
 
-	public double getMaxAcceleration() { // acceleration right now
+	public double getMaxAcceleration() { 
 		double maxAcc = 0;
 		for (Propellant p : propellants) {
 			maxAcc += p.getMaxAcceleration();
@@ -43,7 +55,7 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void updateSpeed() { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() { // v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
@@ -81,7 +93,7 @@ public class Rocket {
 		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
 		if(fuelRemaining-newFuelConsumption*timeRemaining >= 0) {
 			if(this.metersTravelled+newSpeed*timeRemaining >= metersRemaining) {
-				return true; //aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la gasolina.
+				return true; 
 			}
 		}
 		return false;

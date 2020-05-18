@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
@@ -28,10 +29,9 @@ public class Main {
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
 		rocket = initialiseRocket();
 		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rocket);
-		// circuit.addRocket(rocket);
 	}
 
-	private static Rocket initialiseRocket() { // iniciem el rocket que fara la cursa
+	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),
 				new FuelTank(ConstantUtilities.fuelTankCapacity));
 		return rocket;

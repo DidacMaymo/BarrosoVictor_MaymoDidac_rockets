@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -13,9 +14,10 @@ import java.time.LocalTime;
 public class Circuit {
 
 	public String id;
-	public int maxTime, currentTime = 0; // time limit of race, and current time
-	public int length; // circuit distance
+	public int maxTime, currentTime = 0; 
+	public int length; 
 	private Rocket rocket;
+	private List<Score> score = new ArrayList<Score>();
 
 	public Circuit(String id, int maxTime, int length, Rocket rocket) throws Exception {
 		if (validAtributes(maxTime, length)) {
@@ -39,7 +41,6 @@ public class Circuit {
 	public void decideAction() throws Exception {
 		double acceleration = rocket.decideAction(currentTime);
 		rocket.speedToAcceleration(acceleration);
-		//ara actualitzem les variables del rocket
 	}
 	
 	public double getCurrentTime() {
@@ -52,8 +53,8 @@ public class Circuit {
 	public void winnerOrLoser() {
 		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
 			if (currentTime <= ConstantUtilities.maxTime) {
-				//crear score
-				System.out.println(ConstantUtilities.nameRocket1+" Your are a WINNER !! With a time of "+currentTime);
+				score.add(new Score(rocket, this, currentTime));
+				System.out.println(rocket.idRocket+" Your are a WINNER !! With a time of "+currentTime);
 			} 		
 		}else if (currentTime == ConstantUtilities.maxTime) {
 			System.out.println("LOOOSEEER");
