@@ -47,14 +47,15 @@ public class Main {
 				+ " . Max time: " + circuit.maxTime);
 		doingRace();
 	}
-	public static void doingRace() throws Exception  {
+
+	public static void doingRace() throws Exception {
 		while (ConstantUtilities.maxTime >= circuit.getCurrentTime()
 				&& rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
 			raceActions();
 		}
 	}
 
-	private static void raceActions() throws Exception  { 
+	private static void raceActions() throws Exception {
 		Instant start = Instant.now();
 		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
 		circuit.decideAction();
@@ -67,8 +68,8 @@ public class Main {
 
 	private static void updatingCirucitInfo() {
 		System.out.println(
-				"Current Time: " + (circuit.currentTime+1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
+				"Current Time: " + (circuit.currentTime + 1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
 						+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit " + circuit.length
 						+ " Fuel: " + rocket.fueltank.getActualFuel() + "/" + rocket.fueltank.getFuelCapacity());
-	}	
+	}
 }

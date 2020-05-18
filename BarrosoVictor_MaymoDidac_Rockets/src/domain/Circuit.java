@@ -14,8 +14,8 @@ import java.time.LocalTime;
 public class Circuit {
 
 	public String id;
-	public int maxTime, currentTime = 0; 
-	public int length; 
+	public int maxTime, currentTime = 0;
+	public int length;
 	private Rocket rocket;
 	private List<Score> score = new ArrayList<Score>();
 
@@ -42,21 +42,22 @@ public class Circuit {
 		double acceleration = rocket.decideAction(currentTime);
 		rocket.speedToAcceleration(acceleration);
 	}
-	
+
 	public double getCurrentTime() {
 		return this.currentTime;
 	}
-	
+
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
+
 	public void winnerOrLoser() {
 		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
 			if (currentTime <= ConstantUtilities.maxTime) {
 				score.add(new Score(rocket, this, currentTime));
-				System.out.println(rocket.idRocket+" Your are a WINNER !! With a time of "+currentTime);
-			} 		
-		}else if (currentTime == ConstantUtilities.maxTime) {
+				System.out.println(rocket.idRocket + " Your are a WINNER !! With a time of " + currentTime);
+			}
+		} else if (currentTime == ConstantUtilities.maxTime) {
 			System.out.println("LOOOSEEER");
 		}
 	}

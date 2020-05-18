@@ -15,7 +15,7 @@ public class FuelTank {
 	}
 
 	public double getFuelConsumption(double speed) {
-		double consumpiton = 0.02 * Math.pow(speed, 2); 
+		double consumpiton = 0.02 * Math.pow(speed, 2);
 		return consumpiton;
 	}
 
@@ -24,7 +24,7 @@ public class FuelTank {
 	}
 
 	public double getActualFuel() {
-		return Math.round(Actualfuel *100)/100;
+		return Math.round(Actualfuel * 100) / 100;
 	}
 
 }
