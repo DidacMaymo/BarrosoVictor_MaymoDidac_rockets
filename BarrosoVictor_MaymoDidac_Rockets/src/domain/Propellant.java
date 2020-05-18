@@ -3,20 +3,19 @@ package domain;
 public class Propellant {
 
 	private double maxAcceleration, actualAcceleration = 0;
-	private String id;
 
 	public Propellant(double maxAcceleration, String id) throws Exception {
 		super();
 		if (validateAttributes(maxAcceleration, id))
-			throw new Exception ("Invalid attributes!");
+			throw new Exception("Invalid attributes!");
 		this.maxAcceleration = maxAcceleration;
-		this.id = id;
 	}
+
 	private boolean validateAttributes(double maxAcceleration, String id) {
-		if (id.isEmpty() ||maxAcceleration<=0) {
+		if (maxAcceleration <= 0) {
 			return false;
 		}
-	  	return true;
+		return true;
 	}
 
 	public double getMaxAcceleration() {
@@ -31,7 +30,7 @@ public class Propellant {
 		return this.actualAcceleration = actualAcceleration;
 
 	}
-	
+
 	public double getActualAcceleration() {
 		return actualAcceleration;
 	}
