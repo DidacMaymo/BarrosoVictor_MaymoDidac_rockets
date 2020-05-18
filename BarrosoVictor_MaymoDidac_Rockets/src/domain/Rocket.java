@@ -19,6 +19,7 @@ public class Rocket {
 		this.propellants = propellants;
 		this.fueltank = fueltank;
 	}
+	//public boolean validAtributes() throws Exception {}
 
 	public void setAcceleration(double acceleration) {
 		for (Propellant p : propellants) {
@@ -42,17 +43,17 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void setSpeed() { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
-		setMetersTravelled();
+		updateMetersTravelled();
 	}
 
 	public double getSpeed() {
 		return speed;
 	}
 
-	public void setMetersTravelled() { // x = xo + v*t + ½ a * t^2
+	public void updateMetersTravelled() { // x = xo + v*t + ½ a * t^2
 		metersTravelled += speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
 	}
 
@@ -64,12 +65,14 @@ public class Rocket {
 		return fueltank.getFuelConsumption(speed);
 	}
 
-	public double decideAction(int currentTime) { // retorna la acceleracio que has decidit posar, pot ser 0 o >, no <
-		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { // comencem per la acceleracio mes alta
+	public double decideAction(int currentTime) { 
+		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { 
 			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime, ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
+				//afegir la acc a la estrategia, posar el segon i la acc escollida
 				return acc;
 			}
 		}
+		
 		return 0;
 	}
 	
@@ -89,7 +92,7 @@ public class Rocket {
             setAcceleration(getAcceleration()+1);
         }
         acceleration = this.getAcceleration();
-        setSpeed(); 
+        updateSpeed(); 
     }
 
 }

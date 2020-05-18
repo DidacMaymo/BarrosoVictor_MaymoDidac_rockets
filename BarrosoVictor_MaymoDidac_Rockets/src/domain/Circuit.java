@@ -52,6 +52,7 @@ public class Circuit {
 	public void winnerOrLoser() {
 		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
 			if (currentTime <= ConstantUtilities.maxTime) {
+				//crear score
 				System.out.println(ConstantUtilities.nameRocket1+" Your are a WINNER !! With a time of "+currentTime);
 			} 		
 		}else if (currentTime == ConstantUtilities.maxTime) {
