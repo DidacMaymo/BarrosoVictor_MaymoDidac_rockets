@@ -3,6 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import utilities.ConstantUtilities;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalTime;
@@ -45,6 +48,15 @@ public class Circuit {
 	
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
+	}
+	public void winnerOrLoser() {
+		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
+			if (currentTime <= ConstantUtilities.maxTime) {
+				System.out.println(ConstantUtilities.nameRocket1+" Your are a WINNER !! With a time of "+currentTime);
+			} 		
+		}else if (currentTime == ConstantUtilities.maxTime) {
+			System.out.println("LOOOSEEER");
+		}
 	}
 
 }

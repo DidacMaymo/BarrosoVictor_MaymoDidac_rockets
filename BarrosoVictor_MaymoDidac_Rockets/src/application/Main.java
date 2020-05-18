@@ -66,7 +66,7 @@ public class Main {
 		updatingCirucitInfo();
 		end = Instant.now();
 		Interval = Duration.between(start, end);
-		winnerOrLoser();
+		circuit.winnerOrLoser();
 	}
 
 	private static void updatingCirucitInfo() {
@@ -76,13 +76,5 @@ public class Main {
 						+ " Fuel: " + rocket.fueltank.getActualFuel() + "/" + rocket.fueltank.getFuelCapacity());
 	}
 
-	public static void winnerOrLoser() {
-		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
-			if (circuit.getCurrentTime() <= ConstantUtilities.maxTime) {
-				System.out.println(ConstantUtilities.nameRocket1+" Your are a WINNER !! With a time of "+circuit.getCurrentTime());
-			} 		
-		}else if (circuit.getCurrentTime() == ConstantUtilities.maxTime) {
-			System.out.println("LOOOSEEER");
-		}
-	}
+	
 }
