@@ -20,7 +20,7 @@ public class Rocket {
 		super();
 		if (validateAttributes(id, propellants, fuelTank))
 			throw new Exception("Wrong attributes set!");
-		
+
 		this.id = id;
 		this.propellants = propellants;
 		this.fuelTank = fuelTank;
@@ -64,6 +64,10 @@ public class Rocket {
 		return acceleration;
 	}
 
+	public String getId() {
+		return this.id;
+	}
+
 	private void setMetersTravelled() {
 		metersTravelled += speed * ConstantUtilities.delay + 0.5 * acceleration * Math.pow(ConstantUtilities.delay, 2);
 	}
@@ -82,8 +86,8 @@ public class Rocket {
 		fuelTank.updateFuel(speed);
 	}
 
-	public double decideAction(int currentTime) { 
-		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { 
+	public double decideAction(int currentTime) {
+		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) {
 			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime,
 					ConstantUtilities.length - this.metersTravelled, this.fuelTank.getActualFuel())) {
 				return acc;
@@ -128,10 +132,9 @@ public class Rocket {
 	public void addScore(Score score) {
 		scores.add(score);
 	}
-	
+
 	public void addStrategy(int time, double acceleration) {
 		strategy.addEstrategy(time, acceleration);
 	}
-	
-	
+
 }

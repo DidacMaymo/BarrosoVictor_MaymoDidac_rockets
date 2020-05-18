@@ -1,27 +1,30 @@
 package domain;
 
-import java.time.LocalDate;
-
 public class Score {
 
-	String id;
-	LocalDate date;
-	double time;
+	public Rocket winner;
+	public Circuit circuit;
+	public double timeTaken;
 
-	public Score(String id, double time) throws Exception {
-		super();
-		if (validateAttributes(id, time))
-			throw new Exception("Wrong ID or time");
-		this.id = id;
-		this.time = time;
-		this.date = java.time.LocalDate.now();
+	public Score(Rocket winner, Circuit circuit, double timeTaken) {
+		if (validateAttributes(timeTaken, winner))
+			this.winner = winner;
+		this.circuit = circuit;
+		this.timeTaken = timeTaken;
 	}
 
-	private boolean validateAttributes(String id, double time) {
-		if (id.isEmpty() || time<=0) {
+	private boolean validateAttributes(double time, Rocket rocket) {
+		if (time <= 0 || rocket == null) {
 			return false;
 		}
 		return true;
 	}
 
+	public void setWinner(Rocket winner) {
+		this.winner = winner;
+	}
+
+	public void displayScore() {
+		System.out.println(winner.getId() + " Your are a WINNER !! With a time of " + timeTaken + " at: " + circuit);
+	}
 }

@@ -71,6 +71,6 @@ public class Circuit {
 
 	private void win() throws Exception {
 		System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
-		rocket.addScore(new Score("dsads", currentTime));
+		rocket.addScore(new Score(currentTime, rocket));
 	}
 }
