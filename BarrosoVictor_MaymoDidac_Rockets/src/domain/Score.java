@@ -6,15 +6,16 @@ public class Score {
 	public Circuit circuit;
 	public double timeTaken;
 
-	public Score(Rocket winner, Circuit circuit, double timeTaken) {
-		if (validateAttributes(timeTaken, winner))
-			this.winner = winner;
+	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
+		if (!validateAttributes(timeTaken, winner, circuit))
+			throw new Exception("Invalid attributes");
+		this.winner = winner;
 		this.circuit = circuit;
 		this.timeTaken = timeTaken;
 	}
 
-	private boolean validateAttributes(double time, Rocket rocket) {
-		if (time <= 0 || rocket == null) {
+	private boolean validateAttributes(double time, Rocket rocket, Circuit circuit) {
+		if (time <= 0 || rocket == null || circuit == null) {
 			return false;
 		}
 		return true;

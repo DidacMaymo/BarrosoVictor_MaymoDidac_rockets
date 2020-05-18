@@ -13,7 +13,7 @@ public class Circuit {
 	private int currentTime = 0;
 
 	public Circuit(String id, int maxtime, double length, Rocket rocket) throws Exception {
-		if (validateAttributes(id, maxtime, length, rocket))
+		if (!validateAttributes(id, maxtime, length, rocket))
 			throw new Exception("Wrong attributes set!");
 
 		this.id = id;
@@ -61,16 +61,16 @@ public class Circuit {
 	}
 
 	private void result() throws Exception {
-		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
+		if (rocket.getMetersTravelled() < length )
+				//|| rocket.getFuelTank().getActualFuel() <= 0)
 			System.out.println("There is no winner");
 		else if (rocket.getMetersTravelled() >= length) {
 			win();
-		} else if (rocket.getFuelTank().getActualFuel() <= 0)
-			System.out.println("");
+		} 
 	}
 
 	private void win() throws Exception {
 		System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
-		rocket.addScore(new Score(currentTime, rocket));
+		rocket.addScore(new Score(rocket,this,currentTime));
 	}
 }

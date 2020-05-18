@@ -18,7 +18,7 @@ public class Rocket {
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		super();
-		if (validateAttributes(id, propellants, fuelTank))
+		if (!validateAttributes(id, propellants, fuelTank))
 			throw new Exception("Wrong attributes set!");
 
 		this.id = id;
