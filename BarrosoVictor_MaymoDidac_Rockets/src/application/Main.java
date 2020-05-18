@@ -49,6 +49,9 @@ public class Main {
 	public static void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length
 				+ " . Max time: " + circuit.maxTime);
+		doingRace();
+	}
+	public static void doingRace() throws Exception  {
 		while (ConstantUtilities.maxTime >= circuit.getCurrentTime()
 				&& rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
 			raceActions();
@@ -56,7 +59,7 @@ public class Main {
 		}
 	}
 
-	private static void raceActions() throws Exception { // x = xo + v*t + ½ a * t^2
+	private static void raceActions() throws Exception  { // x = xo + v*t + ½ a * t^2
 		start = Instant.now();
 		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
 		circuit.decideAction();

@@ -9,10 +9,6 @@ import java.time.LocalTime;
 
 public class Circuit {
 
-	private static final int accelerate = 1;
-	private static final int slowDonw = 2;
-	private static final int sameAcceleration = 3;
-
 	public String id;
 	public int maxTime, currentTime = 0; // time limit of race, and current time
 	public int length; // circuit distance
