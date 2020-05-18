@@ -31,6 +31,10 @@ public class Circuit {
 
 	public void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
+		doingRace();
+	}
+
+	private void doingRace() throws Exception {
 		while (currentTime <= maxTime && rocket.getFuelTank().getActualFuel() > 0
 				&& rocket.getMetersTravelled() <= length) {
 			decideAction();
@@ -61,16 +65,20 @@ public class Circuit {
 	}
 
 	private void result() throws Exception {
-		if (rocket.getMetersTravelled() < length )
-				//|| rocket.getFuelTank().getActualFuel() <= 0)
-			System.out.println("There is no winner");
+		if (rocket.getMetersTravelled() < length)
+			// || rocket.getFuelTank().getActualFuel() <= 0)
+			lose();
 		else if (rocket.getMetersTravelled() >= length) {
 			win();
-		} 
+		}
 	}
 
 	private void win() throws Exception {
 		System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
-		rocket.addScore(new Score(rocket,this,currentTime));
+		rocket.addScore(new Score(rocket, this, currentTime));
+	}
+
+	private void lose() {
+		System.out.println("There is no winner");
 	}
 }
