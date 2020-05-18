@@ -59,7 +59,7 @@ public class Main {
 		}
 	}
 
-	private static void raceActions() throws Exception  { // x = xo + v*t + ½ a * t^2
+	private static void raceActions() throws Exception  { 
 		start = Instant.now();
 		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
 		circuit.decideAction();

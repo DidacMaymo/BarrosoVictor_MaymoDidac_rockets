@@ -85,7 +85,6 @@ public class Rocket {
 				return acc;
 			}
 		}
-		
 		return 0;
 	}
 	
