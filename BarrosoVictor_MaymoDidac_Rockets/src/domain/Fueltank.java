@@ -1,11 +1,11 @@
 package domain;
 
-public class FuelTank {
+public class Fueltank {
 
 	double capacity;
 	double actualFuel;
 
-	public FuelTank(double capacity) throws Exception {
+	public Fueltank(double capacity) throws Exception {
 		super();
 		if (!validateAttributes(capacity))
 			throw new Exception("Invalid attribute!");

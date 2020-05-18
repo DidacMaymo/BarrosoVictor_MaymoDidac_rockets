@@ -35,7 +35,7 @@ public class Circuit {
 	}
 
 	private void doingRace() throws Exception {
-		while (currentTime <= maxTime && rocket.getFuelTank().getActualFuel() > 0
+		while (currentTime <= maxTime && rocket.getFueltank().getActualFuel() > 0
 				&& rocket.getMetersTravelled() <= length) {
 			decideAction();
 			circuitInfo();
@@ -61,7 +61,7 @@ public class Circuit {
 	private void circuitInfo() {
 		System.out.println("Current time: " + (currentTime + 1) + " Acceleration: " + rocket.getAcceleration()
 				+ " Speed: " + rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length
-				+ " Fuel: " + rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
+				+ " Fuel: " + rocket.getFueltank().getActualFuel() + "/" + rocket.getFueltank().getCapacity());
 	}
 
 	private void result() throws Exception {

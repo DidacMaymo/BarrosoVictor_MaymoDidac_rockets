@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Circuit;
-import domain.FuelTank;
+import domain.Fueltank;
 import domain.Propellant;
 import domain.Rocket;
 import utilities.ConstantUtilities;
@@ -26,7 +26,7 @@ public class Main {
 
 	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),
-				new FuelTank(ConstantUtilities.fuelTankCapacity));
+				new Fueltank(ConstantUtilities.fuelTankCapacity));
 		return rocket;
 	}
 

@@ -12,22 +12,22 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private double acceleration = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
-	private FuelTank fuelTank;
+	private Fueltank fueltank;
 	private List<Score> scores = new ArrayList<Score>();
 	private Strategy strategy;
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+	public Rocket(String id, List<Propellant> propellants, Fueltank fuelTank) throws Exception {
 		super();
 		if (!validateAttributes(id, propellants, fuelTank))
 			throw new Exception("Wrong attributes set!");
 
 		this.id = id;
 		this.propellants = propellants;
-		this.fuelTank = fuelTank;
+		this.fueltank = fuelTank;
 		this.strategy = new Strategy();
 	}
 
-	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
+	private boolean validateAttributes(String id, List<Propellant> propellants, Fueltank fuelTank) {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
 			return false;
 		}
@@ -52,8 +52,8 @@ public class Rocket {
 		return speed;
 	}
 
-	public FuelTank getFuelTank() {
-		return fuelTank;
+	public Fueltank getFueltank() {
+		return fueltank;
 	}
 
 	public double getAcceleration() {
@@ -83,13 +83,13 @@ public class Rocket {
 	public void updateSpeed() {
 		speed += acceleration * ConstantUtilities.delay;
 		setMetersTravelled();
-		fuelTank.updateFuel(speed);
+		fueltank.updateFuel(speed);
 	}
 
 	public double decideAction(int currentTime) {
 		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) {
 			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime,
-					ConstantUtilities.length - this.metersTravelled, this.fuelTank.getActualFuel())) {
+					ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
 				return acc;
 			}
 		}
@@ -98,7 +98,7 @@ public class Rocket {
 
 	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
 		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
-		double newFuelConsumption = fuelTank.getFuelConsumption(newSpeed);
+		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
 		if (fuelRemaining - newFuelConsumption * timeRemaining >= 0) {
 			if (this.metersTravelled + newSpeed * timeRemaining >= metersRemaining) {
 				return true; // aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la
@@ -125,7 +125,7 @@ public class Rocket {
 
 	public void setSpeed() { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
-		fuelTank.updateFuel(speed);
+		fueltank.updateFuel(speed);
 		setMetersTravelled();
 	}
 
