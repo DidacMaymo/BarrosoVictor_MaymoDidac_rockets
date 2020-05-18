@@ -21,7 +21,7 @@ public class Score {
 	}
 
 	public void displayScore() {
-		System.out.println(ConstantUtilities.nameRocket1 + " Your are a WINNER !! With a time of " + timeTaken + " at: "
+		System.out.println(winner.idRocket + " Your are a WINNER !! With a time of " + timeTaken + " at: "
 				+ circuit);
 	}
 }
