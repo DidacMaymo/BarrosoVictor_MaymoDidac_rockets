@@ -74,7 +74,5 @@ public class Main {
 				"Current Time: " + (circuit.currentTime+1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
 						+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit " + circuit.length
 						+ " Fuel: " + rocket.fueltank.getActualFuel() + "/" + rocket.fueltank.getFuelCapacity());
-	}
-
-	
+	}	
 }
