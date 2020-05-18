@@ -81,7 +81,7 @@ public class Rocket {
 	public double decideAction(int currentTime) { 
 		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) { 
 			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime, ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
-				//afegir la acc a la estrategia, posar el segon i la acc escollida
+				estrategy.addEstrategy(currentTime, acc);
 				return acc;
 			}
 		}
