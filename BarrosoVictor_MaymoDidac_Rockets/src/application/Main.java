@@ -47,25 +47,16 @@ public class Main {
 				+ " . Max time: " + circuit.maxTime);
 		doingRace();
 	}
-
-	public static void doingRace() throws Exception {
+	
+	private static void doingRace() throws Exception {
 		while (ConstantUtilities.maxTime >= circuit.getCurrentTime()
-				&& rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
-			raceActions();
-		}
-	}
-
-	private static void raceActions() throws Exception {
-		Instant start = Instant.now();
-		TimeUnit.SECONDS.sleep(ConstantUtilities.delay);
-		circuit.decideAction();
-		updatingCirucitInfo();
-		Instant end = Instant.now();
-		Duration Interval = Duration.between(start, end);
-		circuit.setCurrentTime(Interval.getSeconds());
-		circuit.winnerOrLoser();
-	}
-
+                && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
+        	circuit.decideAction();
+        	updatingCirucitInfo();
+            circuit.currentTime += ConstantUtilities.delay;
+        }
+        circuit.result();
+    }
 	private static void updatingCirucitInfo() {
 		System.out.println(
 				"Current Time: " + (circuit.currentTime + 1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "

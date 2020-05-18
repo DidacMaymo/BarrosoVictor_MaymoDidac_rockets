@@ -8,13 +8,12 @@ public class FuelTank {
 	public FuelTank(double capacity) throws Exception {
         super();
         if (validateAttributes(capacity))
-            throw new Exception("Invalid attribute!");
         this.fuelCapacity = capacity;
         this.actualFuel = capacity;
     }
-	private boolean validateAttributes(double capacity) {
+	private boolean validateAttributes(double capacity) throws Exception {
         if (capacity <= 0) {
-            return false;
+        	throw new Exception();
         }
         return true;
     }

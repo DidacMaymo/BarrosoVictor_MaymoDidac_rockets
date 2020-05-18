@@ -50,16 +50,21 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
+	public void result() throws Exception {
+        if (rocket.getMetersTravelled() < length)
+            lose();
+        else if (rocket.getMetersTravelled() >= length) {
+            win();
+        }
+    }
 
-	public void winnerOrLoser() {
-		if (rocket.getMetersTravelled() >= ConstantUtilities.length) {
-			if (currentTime <= ConstantUtilities.maxTime) {
-				score.add(new Score(rocket, this, currentTime));
-				System.out.println(rocket.idRocket + " Your are a WINNER !! With a time of " + currentTime);
-			}
-		} else if (currentTime == ConstantUtilities.maxTime) {
-			System.out.println("LOOOSEEER");
-		}
-	}
+    private void win() throws Exception {
+        System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
+        score.add(new Score(rocket, this, currentTime));
+    }
+
+    private void lose() {
+        System.out.println("There is no winner");
+    }
 
 }

@@ -10,15 +10,15 @@ public class Score {
 	public Circuit circuit;
 	public double timeTaken;
 
-	public Score(Rocket winner, Circuit circuit, double timeTaken) {
+	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
 		if (validateAttributes(timeTaken, winner))
 		this.winner = winner;
 		this.circuit = circuit;
 		this.timeTaken = timeTaken;
 	}
-	private boolean validateAttributes(double time, Rocket rocket) {
+	private boolean validateAttributes(double time, Rocket rocket) throws Exception {
         if (time <= 0 || rocket == null) {
-            return false;
+        	throw new Exception();
         }
         return true;
     }

@@ -23,9 +23,9 @@ public class Rocket {
 		}
 	}
 
-	private boolean validateAttributes(List<Propellant> propellants, FuelTank fuelTank) {
+	private boolean validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
         if ( propellants.isEmpty() || fuelTank == null) {
-            return false;
+        	throw new Exception();
         }
         return true;
     }
