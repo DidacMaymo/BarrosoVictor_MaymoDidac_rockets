@@ -16,6 +16,11 @@ import utilities.ConstantUtilities;
 public class Main {
 	public static Circuit circuit;
 	public static Rocket rocket;
+	public static int maxTime = 10; // time limit of race, and current time
+	public static int length = 800;
+	public static double[] maxAccProplellant = { 18, 24, 38 };
+	public static double fuelTankCapacity = 1800;
+	public static String nameRocket1 = "Star V";
 
 	public static void main(String[] args) throws Exception {
 		initialise();
@@ -24,18 +29,18 @@ public class Main {
 
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
 		rocket = initialiseRocket();
-		circuit = new Circuit("tutorialCircuit", ConstantUtilities.maxTime, ConstantUtilities.length, rocket);
+		circuit = new Circuit("tutorialCircuit", maxTime, length, rocket);
 	}
 
 	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
-		Rocket rocket = new Rocket(ConstantUtilities.nameRocket1, initialisePropellants(),
-				new FuelTank(ConstantUtilities.fuelTankCapacity));
+		Rocket rocket = new Rocket(nameRocket1, initialisePropellants(),
+				new FuelTank(fuelTankCapacity));
 		return rocket;
 	}
 
 	private static List<Propellant> initialisePropellants() throws Exception { // same configuration of propellants for rocket.
 		List<Propellant> propellants = new ArrayList<Propellant>();
-		for (double d : ConstantUtilities.maxAccProplellant) {
+		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
 		}
 
@@ -49,8 +54,8 @@ public class Main {
 	}
 	
 	private static void doingRace() throws Exception {
-		while (ConstantUtilities.maxTime >= circuit.getCurrentTime()
-                && rocket.getMetersTravelled() < ConstantUtilities.length && rocket.fueltank.getActualFuel() != 0) {
+		while (maxTime >= circuit.getCurrentTime()
+                && rocket.getMetersTravelled() < length && rocket.fueltank.getActualFuel() != 0) {
         	circuit.decideAction();
         	updatingCirucitInfo();
             circuit.currentTime += ConstantUtilities.delay;

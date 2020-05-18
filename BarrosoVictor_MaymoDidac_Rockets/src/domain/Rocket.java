@@ -77,10 +77,10 @@ public class Rocket {
 		return fueltank.getFuelConsumption(speed);
 	}
 
-	public double decideAction(int currentTime) {
+	public double decideAction(int currentTime, int maxTime, double length) { //a cambiar
 		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) {
-			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime,
-					ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
+			if (tryAcceleration(acc, maxTime - currentTime,
+					length - this.metersTravelled, this.fueltank.getActualFuel())) {
 				estrategy.addEstrategy(currentTime, acc);
 				return acc;
 			}

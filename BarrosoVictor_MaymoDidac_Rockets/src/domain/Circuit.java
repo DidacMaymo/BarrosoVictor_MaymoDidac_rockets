@@ -39,7 +39,7 @@ public class Circuit {
 	}
 
 	public void decideAction() throws Exception {
-		double acceleration = rocket.decideAction(currentTime);
+		double acceleration = rocket.decideAction(currentTime, maxTime, length);
 		rocket.speedToAcceleration(acceleration);
 	}
 
@@ -59,7 +59,7 @@ public class Circuit {
     }
 
     private void win() throws Exception {
-        System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
+        System.out.println("And the winner is: " + rocket.getId() + " with a time of " + currentTime);
         score.add(new Score(rocket, this, currentTime));
     }
 
