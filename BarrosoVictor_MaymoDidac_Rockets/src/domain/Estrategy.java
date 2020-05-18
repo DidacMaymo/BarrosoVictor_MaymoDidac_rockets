@@ -7,7 +7,7 @@ public class Estrategy {
 
 	public List<String> accions = new ArrayList();
 
-	public void addEstrategy(int time, double acceleration, Rocket rocket) {
+	public void addEstrategy(int time, double acceleration) {
 		accions.add(
 				"For time: " + time + " Has decided to accelerate: " + acceleration);
 	}

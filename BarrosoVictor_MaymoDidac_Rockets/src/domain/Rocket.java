@@ -13,7 +13,7 @@ public class Rocket {
 	public int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	public FuelTank fueltank;
-	public Estrategy estrategy = new Estrategy(this);
+	private Estrategy estrategy = new Estrategy();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
 		if (validAtributes(propellants, fueltank)) {
