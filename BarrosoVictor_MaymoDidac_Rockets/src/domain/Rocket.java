@@ -67,6 +67,9 @@ public class Rocket {
 	public double getSpeed() {
 		return speed;
 	}
+	public String getId() {
+		return this.idRocket;
+	}
 
 	public void updateMetersTravelled() { // x = xo + v*t + ½ a * t^2
 		metersTravelled += speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
