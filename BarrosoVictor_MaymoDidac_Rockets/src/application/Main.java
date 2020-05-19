@@ -14,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		initialise();
-		circuit.race();
+		race();
 	}
 
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
@@ -36,9 +36,24 @@ public class Main {
 
 		return propellants;
 	}
-	/*public void displayScore() {
-		System.out.println(circuit..getId() + " Your are a WINNER !! With a time of " + timeTaken + " at: "
+	public static void race() throws Exception {
+		System.out.println("Starting competition. Circuit: " + circuit.getId()+ ". Length: " + circuit.getLength()+ " . Max time: " + circuit.getMaxTime());
+		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength() && rocket.fueltank.getActualFuel() != 0) {
+			circuit.doingRace();
+			circuitInfo();
+		}
+		circuit.result();
+	}
+	
+	 private static void circuitInfo() {
+	        System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: " + circuit.getRocket().getAcceleration()
+	                + " Speed: " + circuit.getRocket().getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + circuit.getLength()
+	                + " Fuel: " + circuit.getRocket().getFuelTank().getActualFuel() + "/" + circuit.getRocket().getFuelTank().getFuelCapacity());
+	    }
+	
+	public void displayScore(double timeTaken) {
+		System.out.println(circuit.getId() + " Your are a WINNER !! With a time of " + timeTaken + " at: "
 				+ circuit);
-	}*/
+	}
 
 }

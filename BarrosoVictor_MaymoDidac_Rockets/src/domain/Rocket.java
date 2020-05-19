@@ -100,4 +100,9 @@ public class Rocket {
         estrategy.addEstrategy(acceleration);
     }
 
+	public FuelTank getFuelTank() {
+		// TODO Auto-generated method stub
+		return this.fueltank;
+	}
+
 }
