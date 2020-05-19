@@ -6,19 +6,16 @@ public class FuelTank {
 	double actualFuel;
 
 	public FuelTank(double capacity) throws Exception {
-		super();
-		if (!validateAttributes(capacity))
-			throw new Exception("Invalid attribute!");
+		validateAttributes(capacity);
 		this.capacity = capacity;
 		this.actualFuel = capacity;
 	}
 
 	/* Validating attributes */
-	private boolean validateAttributes(double capacity) {
-		if (capacity <= 0) {
-			return false;
-		}
-		return true;
+	private void validateAttributes(double capacity) throws Exception {
+		if (capacity <= 0)
+			throw new Exception("Invalid attribute!");
+
 	}
 
 	/* getters and setters methods */

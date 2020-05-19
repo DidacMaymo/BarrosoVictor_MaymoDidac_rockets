@@ -17,10 +17,7 @@ public class Rocket {
 	private Strategy strategy;
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		super();
-		if (!validateAttributes(id, propellants, fuelTank))
-			throw new Exception("Wrong attributes set!");
-
+		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fueltank = fuelTank;
@@ -28,11 +25,11 @@ public class Rocket {
 	}
 
 	/* Validating attributes */
-	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
+	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
-			return false;
+			throw new Exception("Wrong attributes set!");
 		}
-		return true;
+
 	}
 
 	/* getters and setters */
