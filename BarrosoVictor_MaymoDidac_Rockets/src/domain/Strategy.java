@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Strategy {
 
-	private List<String> accions = new ArrayList<String>();
+	private List<Double> accelerations = new ArrayList<Double>();
 
 	public Strategy() throws Exception {
 
 	}
 
-	public void addEstrategy(int time, double acceleration) {
-		accions.add("For time: " + time + "Has decided to accelerate: " + acceleration);
+	public void addEstrategy(double acceleration) {
+		accelerations.add(acceleration);
 	}
 }
