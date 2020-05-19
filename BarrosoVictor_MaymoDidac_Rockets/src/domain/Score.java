@@ -26,6 +26,7 @@ public class Score {
 	public void setWinner(Rocket winner) {
 		this.winner = winner;
 	}
+	
 
 	
 }

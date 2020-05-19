@@ -14,7 +14,6 @@ public class Circuit {
 	private int maxTime, currentTime = 0;
 	private int length;
 	private Rocket rocket;
-	private List<Score> score = new ArrayList<Score>();
 
 	public Circuit(String id, int maxTime, int length, Rocket rocket) throws Exception {
 		if (validAtributes(maxTime, length)) {
@@ -62,26 +61,17 @@ public class Circuit {
 			decideAction();
 			currentTime += ConstantUtilities.delay;		
 	}
-
-	public void result() throws Exception {
-		if (rocket.getMetersTravelled() < length)
-			lose();
-		else if (rocket.getMetersTravelled() >= length) {
-			win();
-		}
-	}
-
-	private void win() throws Exception {
-		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + currentTime);
-		score.add(new Score(rocket, this, currentTime));
-	}
-
-	private void lose() {
-		System.out.println("There is no winner");
-	}
+	public boolean result() throws Exception {
+        if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
+            return true;
+        return false;
+    }
 
 	public Rocket getRocket() {
 		return rocket;
 	}
+	 public void addScoreToRocket() throws Exception {
+	        rocket.addScore(new Score(rocket, this, currentTime));
+	    }
 
 }

@@ -14,8 +14,8 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
-	private Estrategy estrategy = new Estrategy();
-
+	private Strategy strategy = new Strategy();
+	private List<Score> scores = new ArrayList<Score>();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
 		if (validateAttributes(propellants, fueltank)) {
@@ -26,11 +26,11 @@ public class Rocket {
 	}
 
 	private boolean validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-        if ( propellants.isEmpty() || fuelTank == null) {
-        	throw new Exception();
-        }
-        return true;
-    }
+		if (propellants.isEmpty() || fuelTank == null) {
+			throw new Exception();
+		}
+		return true;
+	}
 
 	public void setAcceleration(double acceleration) {
 		for (Propellant p : propellants) {
@@ -63,6 +63,7 @@ public class Rocket {
 	public double getSpeed() {
 		return speed;
 	}
+
 	public String getId() {
 		return this.idRocket;
 	}
@@ -78,14 +79,14 @@ public class Rocket {
 	public double getFuelConsumption() {
 		return fueltank.getFuelConsumption(speed);
 	}
-	
-	 public double decideAction(int currentTime, double maxTime,double length) {
-	        if (currentTime == 0)
-	            return length / maxTime;
-	        else if (currentTime < 5) {
-	            return 12;
-	        }
-	        return 0;
+
+	public double decideAction(int currentTime, double maxTime, double length) {
+		if (currentTime == 0)
+			return length / maxTime;
+		else if (currentTime < 5) {
+			return 12;
+		}
+		return 0;
 	}
 
 	public void speedToAcceleration(double speed) {
@@ -96,12 +97,17 @@ public class Rocket {
 		acceleration = this.getAcceleration();
 		updateSpeed();
 	}
-	public void addStrategy(double acceleration) {
-        estrategy.addEstrategy(acceleration);
-    }
 
 	public FuelTank getFuelTank() {
 		return this.fueltank;
+	}
+
+	public void addScore(Score score) {
+		scores.add(score);
+	}
+
+	public void addStrategy(double acceleration) {
+		strategy.addEstrategy(acceleration);
 	}
 
 }

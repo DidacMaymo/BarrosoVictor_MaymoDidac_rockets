@@ -36,24 +36,43 @@ public class Main {
 
 		return propellants;
 	}
+
 	public static void race() throws Exception {
-		System.out.println("Starting competition. Circuit: " + circuit.getId()+ ". Length: " + circuit.getLength()+ " . Max time: " + circuit.getMaxTime());
-		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength() && rocket.getFuelTank().getActualFuel() != 0) {
+		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
+				+ " . Max time: " + circuit.getMaxTime());
+		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
+				&& rocket.getFuelTank().getActualFuel() != 0) {
 			circuit.doingRace();
 			circuitInfo();
 		}
 		circuit.result();
 	}
-	
-	 private static void circuitInfo() {
-	        System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: " + circuit.getRocket().getAcceleration()
-	                + " Speed: " + circuit.getRocket().getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + circuit.getLength()
-	                + " Fuel: " + circuit.getRocket().getFuelTank().getActualFuel() + "/" + circuit.getRocket().getFuelTank().getFuelCapacity());
-	    }
-	
-	public void displayScore(double timeTaken) {
-		System.out.println(circuit.getId() + " Your are a WINNER !! With a time of " + timeTaken + " at: "
-				+ circuit);
+
+	private static void circuitInfo() {
+		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
+				+ circuit.getRocket().getAcceleration() + " Speed: " + circuit.getRocket().getSpeed() + " Distance: "
+				+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
+				+ circuit.getRocket().getFuelTank().getActualFuel() + "/"
+				+ circuit.getRocket().getFuelTank().getFuelCapacity());
 	}
+
+	 
+
+	public static void printResult() throws Exception {
+        if (circuit.result())
+            win();
+        else
+            lose();
+    }
+
+    private static void win() throws Exception {
+        System.out.println(
+                "And the winner is: " + circuit.getRocket().getId() + " with a time of " + circuit.getCurrentTime());
+        circuit.addScoreToRocket();
+    }
+
+    private static void lose() {
+        System.out.println("There is no winner");
+    }
 
 }
