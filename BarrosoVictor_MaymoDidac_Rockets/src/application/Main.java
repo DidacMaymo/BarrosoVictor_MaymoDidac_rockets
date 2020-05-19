@@ -16,11 +16,7 @@ import utilities.ConstantUtilities;
 public class Main {
 	public static Circuit circuit;
 	public static Rocket rocket;
-	public static int maxTime = 10; // time limit of race, and current time
-	public static int length = 800;
-	public static double[] maxAccProplellant = { 18, 24, 38 };
-	public static double fuelTankCapacity = 1800;
-	public static String nameRocket1 = "Star V";
+
 
 	public static void main(String[] args) throws Exception {
 		initialise();
@@ -29,16 +25,17 @@ public class Main {
 
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
 		rocket = initialiseRocket();
-		circuit = new Circuit("tutorialCircuit", maxTime, length, rocket);
+		circuit = new Circuit("tutorialCircuit", 10, 800, rocket); // 10 is seconds, and 800 is fuel capacity
 	}
 
 	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
-		Rocket rocket = new Rocket(nameRocket1, initialisePropellants(),
-				new FuelTank(fuelTankCapacity));
+		double[] maxAccProplellant = { 18, 24, 38 };
+		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant),
+				new FuelTank(1800));
 		return rocket;
 	}
 
-	private static List<Propellant> initialisePropellants() throws Exception { // same configuration of propellants for rocket.
+	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same configuration of propellants for rocket.
 		List<Propellant> propellants = new ArrayList<Propellant>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
@@ -54,8 +51,8 @@ public class Main {
 	}
 	
 	private static void doingRace() throws Exception {
-		while (maxTime >= circuit.getCurrentTime()
-                && rocket.getMetersTravelled() < length && rocket.fueltank.getActualFuel() != 0) {
+		while (circuit.maxTime >= circuit.getCurrentTime()
+                && rocket.getMetersTravelled() < circuit.length && rocket.fueltank.getActualFuel() != 0) {
         	circuit.decideAction();
         	updatingCirucitInfo();
             circuit.currentTime += ConstantUtilities.delay;
