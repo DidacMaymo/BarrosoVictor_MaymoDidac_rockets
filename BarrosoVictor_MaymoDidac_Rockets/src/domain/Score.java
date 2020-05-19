@@ -13,17 +13,13 @@ public class Score {
 		this.circuit = circuit;
 		this.timeTaken = timeTaken;
 	}
-
+	
+	/* Validating attributes */
 	private boolean validateAttributes(double time, Rocket rocket, Circuit circuit) {
 		if (time <= 0 || rocket == null || circuit == null) {
 			return false;
 		}
 		return true;
 	}
-
-	public void setWinner(Rocket winner) {
-		this.winner = winner;
-	}
-
 
 }

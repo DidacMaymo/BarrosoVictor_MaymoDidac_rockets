@@ -22,6 +22,7 @@ public class Circuit {
 		this.rocket = rocket;
 	}
 
+	/* Validating attributes */
 	private boolean validateAttributes(String id, int maxtime, double length, Rocket rocket) {
 		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rocket == null) {
 			return false;
@@ -29,60 +30,51 @@ public class Circuit {
 		return true;
 	}
 
-	public void race() throws Exception {
-		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length + " . Max time: " + maxTime);
-		doingRace();
+	/* getters and setters methods */
+	public void addScoreToRocket() throws Exception {
+		rocket.addScore(new Score(rocket, this, currentTime));
 	}
 
-	private void doingRace() throws Exception {
-		while (currentTime <= maxTime && rocket.getFuelTank().getActualFuel() > 0
-				&& rocket.getMetersTravelled() <= length) {
-			decideAction();
-			circuitInfo();
-			currentTime += ConstantUtilities.delay;
-		}
-		result();
+	public int getCurrentTime() {
+		return currentTime;
+	}
+
+	public Rocket getRocket() {
+		return rocket;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public int getMaxTime() {
+		return maxTime;
 	}
 
 	public Integer getLimitTime() {
 		return maxTime;
 	}
 
-	public Double getLenght() {
+	public Double getLength() {
 		return length;
 	}
 
-	public void decideAction() {
+	public void doingRace() throws Exception {
+		decideAction();
+		currentTime += ConstantUtilities.delay;
+	}
+
+	// race methods
+	private void decideAction() {
 		double acceleration = rocket.decideAction(currentTime, length, maxTime);
 		rocket.speedToAcceleration(acceleration);
-		rocket.addStrategy(currentTime, acceleration);
+		rocket.addStrategy(acceleration);
 	}
 
-	private void circuitInfo() {
-		System.out.println("Current time: " + (currentTime + 1) + " Acceleration: " + rocket.getAcceleration()
-				+ " Speed: " + rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length
-				+ " Fuel: " + rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
-	}
-
-	private void result() throws Exception {
+	public boolean result() throws Exception {
 		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
-			lose();
-		else if (rocket.getMetersTravelled() >= length) {
-			win();
-		}
-	}
-
-	private void win() throws Exception {
-		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + currentTime);
-		addScoreToRocket();
-	}
-
-	private void lose() {
-		System.out.println("There is no winner");
-	}
-
-	private void addScoreToRocket() throws Exception {
-		rocket.addScore(new Score(rocket, this, currentTime));
+			return false;
+		return true;
 	}
 
 }

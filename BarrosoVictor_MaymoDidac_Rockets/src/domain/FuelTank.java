@@ -13,6 +13,7 @@ public class FuelTank {
 		this.actualFuel = capacity;
 	}
 
+	/* Validating attributes */
 	private boolean validateAttributes(double capacity) {
 		if (capacity <= 0) {
 			return false;
@@ -20,12 +21,7 @@ public class FuelTank {
 		return true;
 	}
 
-	public void updateFuel(double speed) {
-		actualFuel -= getFuelConsumption(speed);
-		if (actualFuel < 0)
-			actualFuel = 0;
-	}
-
+	/* getters and setters methods */
 	public double getFuelConsumption(double speed) {
 		return 0.02 * Math.pow(speed, 2);
 
@@ -37,6 +33,13 @@ public class FuelTank {
 
 	public double getActualFuel() {
 		return actualFuel;
+	}
+
+	/* Updating attributes */
+	public void updateFuel(double speed) {
+		actualFuel -= getFuelConsumption(speed);
+		if (actualFuel < 0)
+			actualFuel = 0;
 	}
 
 }

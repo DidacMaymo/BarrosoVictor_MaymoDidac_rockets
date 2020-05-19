@@ -11,6 +11,7 @@ public class Propellant {
 		this.maxAcceleration = maxAcceleration;
 	}
 
+	/* Validating attributes */
 	private boolean validateAttributes(double maxAcceleration) {
 		if (maxAcceleration <= 0) {
 			return false;
@@ -18,8 +19,13 @@ public class Propellant {
 		return true;
 	}
 
+	/* getters and setters */
 	public double getMaxAcceleration() {
 		return maxAcceleration;
+	}
+
+	public double getActualAcceleration() {
+		return actualAcceleration;
 	}
 
 	public double setActualAcceleration(double actualAcceleration) {
@@ -29,10 +35,6 @@ public class Propellant {
 			actualAcceleration = maxAcceleration;
 		return this.actualAcceleration = actualAcceleration;
 
-	}
-
-	public double getActualAcceleration() {
-		return actualAcceleration;
 	}
 
 }

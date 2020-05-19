@@ -27,6 +27,7 @@ public class Rocket {
 		this.strategy = new Strategy();
 	}
 
+	/* Validating attributes */
 	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
 			return false;
@@ -35,7 +36,6 @@ public class Rocket {
 	}
 
 	/* getters and setters */
-
 	public int getMetersTravelled() {
 		return metersTravelled;
 	}
@@ -68,24 +68,25 @@ public class Rocket {
 		return this.id;
 	}
 
-	private void setMetersTravelled() {
+	public void setAcceleration(double acceleration) {
+		for (Propellant p : propellants) {
+			p.setActualAcceleration(acceleration);
+		}
+	}
+
+	/* Updating attributes */
+
+	public void updateSpeed() { // speed of rocket right now. v = v0 + at
+		this.speed += acceleration * ConstantUtilities.delay;
+		fueltank.updateFuel(speed);
+		updateMetersTravelled();
+	}
+
+	private void updateMetersTravelled() {
 		metersTravelled += speed * ConstantUtilities.delay + 0.5 * acceleration * Math.pow(ConstantUtilities.delay, 2);
 	}
 
 	/* Race */
-
-	// This is the method that is being called by Strategy.decideAction and is the
-	// one who will accelerate the rocket, the acceleration parameter is a real one
-	// m/s^2)
-
-	// This method accelerates all the propellants
-
-	public void updateSpeed() {
-		speed += acceleration * ConstantUtilities.delay;
-		setMetersTravelled();
-		fueltank.updateFuel(speed);
-	}
-
 	public double decideAction(int currentTime, double length, double maxTime) {
 		if (currentTime == 0)
 			return length / maxTime;
@@ -95,42 +96,22 @@ public class Rocket {
 		return 0;
 	}
 
-	/*
-	 * public boolean tryAcceleration(double acc, double timeRemaining, double
-	 * metersRemaining, double fuelRemaining) { double newSpeed = this.getSpeed() +
-	 * acc * ConstantUtilities.delay; double newFuelConsumption =
-	 * fueltank.getFuelConsumption(newSpeed); if (fuelRemaining - newFuelConsumption
-	 * * timeRemaining >= 0) { if (this.metersTravelled + newSpeed * timeRemaining
-	 * >= metersRemaining) { return true; // aqui es que amb la nova acceleracio
-	 * arribariem a temps a la meta i amb la // gasolina. } } return false; }
-	 */
 	public void speedToAcceleration(double speed) {
 		setAcceleration(0);
 		while (getAcceleration() < speed) {
 			setAcceleration(getAcceleration() + 1);
 		}
 		acceleration = this.getAcceleration();
-		setSpeed();
+		updateSpeed();
 	}
 
-	public void setAcceleration(double acceleration) {
-		for (Propellant p : propellants) {
-			p.setActualAcceleration(acceleration);
-		}
-	}
-
-	public void setSpeed() { // speed of rocket right now. v = v0 + at
-		this.speed += acceleration * ConstantUtilities.delay;
-		fueltank.updateFuel(speed);
-		setMetersTravelled();
-	}
-
-	public void addScore(Score score) { 
+	/* Adds score and strategy */
+	public void addScore(Score score) {
 		scores.add(score);
 	}
 
-	public void addStrategy(int time, double acceleration) {
-		strategy.addEstrategy(time, acceleration);
+	public void addStrategy(double acceleration) {
+		strategy.addEstrategy(acceleration);
 	}
 
 }
