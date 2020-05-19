@@ -17,7 +17,6 @@ public class Main {
 	public static Circuit circuit;
 	public static Rocket rocket;
 
-
 	public static void main(String[] args) throws Exception {
 		initialise();
 		race();
@@ -30,12 +29,11 @@ public class Main {
 
 	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		double[] maxAccProplellant = { 18, 24, 38 };
-		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant),
-				new FuelTank(1800));
+		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
 		return rocket;
 	}
 
-	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same configuration of propellants for rocket.
+	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
 		List<Propellant> propellants = new ArrayList<Propellant>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
@@ -49,6 +47,5 @@ public class Main {
 				+ " . Max time: " + circuit.maxTime);
 		circuit.doingRace();
 	}
-	
-	
+
 }
