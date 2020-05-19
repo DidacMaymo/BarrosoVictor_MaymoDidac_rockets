@@ -8,13 +8,13 @@ import utilities.ConstantUtilities;
 
 public class Rocket {
 
-	public String idRocket;
+	private String idRocket;
 	private double speed = 0; // at start here counts as v0
-	public double acceleration = 0;
-	public int metersTravelled = 0;
+	private double acceleration = 0;
+	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
-	public FuelTank fueltank;
-	public Estrategy estrategy = new Estrategy();
+	private FuelTank fueltank;
+	private Estrategy estrategy = new Estrategy();
 
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {

@@ -6,9 +6,9 @@ import utilities.ConstantUtilities;
 
 public class Score {
 
-	public Rocket winner;
-	public Circuit circuit;
-	public double timeTaken;
+	private Rocket winner;
+	private Circuit circuit;
+	private double timeTaken;
 
 	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
 		if (validateAttributes(timeTaken, winner))
