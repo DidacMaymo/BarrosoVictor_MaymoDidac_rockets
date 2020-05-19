@@ -3,15 +3,10 @@ package application;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalTime;
 import domain.Circuit;
 import domain.FuelTank;
 import domain.Propellant;
 import domain.Rocket;
-import utilities.ConstantUtilities;
 
 public class Main {
 	private static Circuit circuit;

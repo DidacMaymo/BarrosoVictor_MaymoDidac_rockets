@@ -2,14 +2,11 @@ package domain;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import utilities.ConstantUtilities;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalTime;
 
 public class Circuit {
 
