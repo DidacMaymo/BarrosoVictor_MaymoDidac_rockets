@@ -22,6 +22,8 @@ public class FuelTank {
 
 	public void updateFuel(double speed) {
 		actualFuel -= getFuelConsumption(speed);
+		if (actualFuel < 0)
+			actualFuel = 0;
 	}
 
 	public double getFuelConsumption(double speed) {

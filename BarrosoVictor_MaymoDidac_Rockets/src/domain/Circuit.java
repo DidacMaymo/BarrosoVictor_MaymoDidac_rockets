@@ -35,7 +35,7 @@ public class Circuit {
 	}
 
 	private void doingRace() throws Exception {
-		while (currentTime <= maxTime && rocket.getFueltank().getActualFuel() > 0
+		while (currentTime <= maxTime && rocket.getFuelTank().getActualFuel() > 0
 				&& rocket.getMetersTravelled() <= length) {
 			decideAction();
 			circuitInfo();
@@ -53,7 +53,7 @@ public class Circuit {
 	}
 
 	public void decideAction() {
-		double acceleration = rocket.decideAction(currentTime);
+		double acceleration = rocket.decideAction(currentTime, length, maxTime);
 		rocket.speedToAcceleration(acceleration);
 		rocket.addStrategy(currentTime, acceleration);
 	}
@@ -61,12 +61,11 @@ public class Circuit {
 	private void circuitInfo() {
 		System.out.println("Current time: " + (currentTime + 1) + " Acceleration: " + rocket.getAcceleration()
 				+ " Speed: " + rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + length
-				+ " Fuel: " + rocket.getFueltank().getActualFuel() + "/" + rocket.getFueltank().getCapacity());
+				+ " Fuel: " + rocket.getFuelTank().getActualFuel() + "/" + rocket.getFuelTank().getCapacity());
 	}
 
 	private void result() throws Exception {
-		if (rocket.getMetersTravelled() < length)
-			// || rocket.getFuelTank().getActualFuel() <= 0)
+		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
 			lose();
 		else if (rocket.getMetersTravelled() >= length) {
 			win();
@@ -74,11 +73,16 @@ public class Circuit {
 	}
 
 	private void win() throws Exception {
-		System.out.println("And the winner is: " + ConstantUtilities.nameRocket1 + " with a time of " + currentTime);
-		rocket.addScore(new Score(rocket, this, currentTime));
+		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + currentTime);
+		addScoreToRocket();
 	}
 
 	private void lose() {
 		System.out.println("There is no winner");
 	}
+
+	private void addScoreToRocket() throws Exception {
+		rocket.addScore(new Score(rocket, this, currentTime));
+	}
+
 }

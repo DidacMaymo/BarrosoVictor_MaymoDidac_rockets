@@ -52,7 +52,7 @@ public class Rocket {
 		return speed;
 	}
 
-	public FuelTank getFueltank() {
+	public FuelTank getFuelTank() {
 		return fueltank;
 	}
 
@@ -86,28 +86,24 @@ public class Rocket {
 		fueltank.updateFuel(speed);
 	}
 
-	public double decideAction(int currentTime) {
-		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) {
-			if (tryAcceleration(acc, ConstantUtilities.maxTime - currentTime,
-					ConstantUtilities.length - this.metersTravelled, this.fueltank.getActualFuel())) {
-				return acc;
-			}
+	public double decideAction(int currentTime, double length, double maxTime) {
+		if (currentTime == 0)
+			return length / maxTime;
+		else if (currentTime < 5) {
+			return 12;
 		}
 		return 0;
 	}
 
-	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
-		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
-		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
-		if (fuelRemaining - newFuelConsumption * timeRemaining >= 0) {
-			if (this.metersTravelled + newSpeed * timeRemaining >= metersRemaining) {
-				return true; // aqui es que amb la nova acceleracio arribariem a temps a la meta i amb la
-								// gasolina.
-			}
-		}
-		return false;
-	}
-
+	/*
+	 * public boolean tryAcceleration(double acc, double timeRemaining, double
+	 * metersRemaining, double fuelRemaining) { double newSpeed = this.getSpeed() +
+	 * acc * ConstantUtilities.delay; double newFuelConsumption =
+	 * fueltank.getFuelConsumption(newSpeed); if (fuelRemaining - newFuelConsumption
+	 * * timeRemaining >= 0) { if (this.metersTravelled + newSpeed * timeRemaining
+	 * >= metersRemaining) { return true; // aqui es que amb la nova acceleracio
+	 * arribariem a temps a la meta i amb la // gasolina. } } return false; }
+	 */
 	public void speedToAcceleration(double speed) {
 		setAcceleration(0);
 		while (getAcceleration() < speed) {
@@ -129,7 +125,7 @@ public class Rocket {
 		setMetersTravelled();
 	}
 
-	public void addScore(Score score) {
+	public void addScore(Score score) { 
 		scores.add(score);
 	}
 

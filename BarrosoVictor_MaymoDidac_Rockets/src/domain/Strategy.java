@@ -6,7 +6,6 @@ import java.util.List;
 public class Strategy {
 
 	private List<String> accions = new ArrayList<String>();
-	int timesAccelerated = 0;
 
 	public Strategy() throws Exception {
 
