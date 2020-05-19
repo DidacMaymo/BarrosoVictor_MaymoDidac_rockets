@@ -40,7 +40,7 @@ public class Main {
 	public static void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 				+ " . Max time: " + circuit.getMaxTime());
-		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
+		while (circuit.getMaxTime() > circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
 				&& rocket.getFuelTank().getActualFuel() != 0) {
 			circuit.doingRace();
 			circuitInfo();
