@@ -50,6 +50,22 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
+	
+	public void doingRace() throws Exception {
+		while (maxTime >= currentTime
+                && rocket.getMetersTravelled() < length && rocket.fueltank.getActualFuel() != 0) {
+        	decideAction();
+        	updatingCirucitInfo();
+            currentTime += ConstantUtilities.delay;
+        }
+        result();
+    }
+	private void updatingCirucitInfo() {
+		System.out.println(
+				"Current Time: " + (currentTime + 1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
+						+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit " + length
+						+ " Fuel: " + rocket.fueltank.getActualFuel() + "/" + rocket.fueltank.getFuelCapacity());
+	}
 	public void result() throws Exception {
         if (rocket.getMetersTravelled() < length)
             lose();
@@ -66,5 +82,6 @@ public class Circuit {
     private void lose() {
         System.out.println("There is no winner");
     }
+    
 
 }

@@ -47,22 +47,8 @@ public class Main {
 	public static void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length
 				+ " . Max time: " + circuit.maxTime);
-		doingRace();
+		circuit.doingRace();
 	}
 	
-	private static void doingRace() throws Exception {
-		while (circuit.maxTime >= circuit.getCurrentTime()
-                && rocket.getMetersTravelled() < circuit.length && rocket.fueltank.getActualFuel() != 0) {
-        	circuit.decideAction();
-        	updatingCirucitInfo();
-            circuit.currentTime += ConstantUtilities.delay;
-        }
-        circuit.result();
-    }
-	private static void updatingCirucitInfo() {
-		System.out.println(
-				"Current Time: " + (circuit.currentTime + 1) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
-						+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit " + circuit.length
-						+ " Fuel: " + rocket.fueltank.getActualFuel() + "/" + rocket.fueltank.getFuelCapacity());
-	}
+	
 }
