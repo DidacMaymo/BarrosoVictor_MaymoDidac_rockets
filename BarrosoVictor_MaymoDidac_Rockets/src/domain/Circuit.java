@@ -38,6 +38,7 @@ public class Circuit {
 	public void decideAction() throws Exception {
 		double acceleration = rocket.decideAction(currentTime, maxTime, length);
 		rocket.speedToAcceleration(acceleration);
+		rocket.addStrategy(acceleration);
 	}
 
 	public double getCurrentTime() {
@@ -47,6 +48,7 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
+	
 	
 	public void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length

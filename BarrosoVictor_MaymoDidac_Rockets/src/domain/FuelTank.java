@@ -18,9 +18,11 @@ public class FuelTank {
         return true;
     }
 	public void updateFuel(double speed) {
-		this.actualFuel -= getFuelConsumption(speed);
-	}
-
+        actualFuel -= getFuelConsumption(speed);
+        if (actualFuel < 0)
+            actualFuel = 0;
+    }
+	
 	public double getFuelConsumption(double speed) {
 		double consumpiton = 0.02 * Math.pow(speed, 2);
 		return consumpiton;

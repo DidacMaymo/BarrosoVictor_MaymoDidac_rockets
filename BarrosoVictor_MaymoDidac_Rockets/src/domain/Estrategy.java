@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Estrategy {
 
-	public List<String> accions = new ArrayList();
+	private List<Double> accelerations = new ArrayList<Double>();
 
-	public void addEstrategy(int time, double acceleration) {
-		accions.add(
-				"For time: " + time + " Has decided to accelerate: " + acceleration);
+	public Estrategy() throws Exception {
+	}
+
+	public void addEstrategy(double acceleration) {
+		accelerations.add(acceleration);
 	}
 }

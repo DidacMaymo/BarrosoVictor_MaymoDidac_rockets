@@ -14,7 +14,8 @@ public class Rocket {
 	public int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	public FuelTank fueltank;
-	private Estrategy estrategy = new Estrategy();
+	public Estrategy estrategy = new Estrategy();
+
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
 		if (validateAttributes(propellants, fueltank)) {
@@ -77,27 +78,14 @@ public class Rocket {
 	public double getFuelConsumption() {
 		return fueltank.getFuelConsumption(speed);
 	}
-
-	public double decideAction(int currentTime, int maxTime, double length) { //a cambiar
-		for (double acc = this.getMaxAcceleration(); acc >= 0; acc--) {
-			if (tryAcceleration(acc, maxTime - currentTime,
-					length - this.metersTravelled, this.fueltank.getActualFuel())) {
-				estrategy.addEstrategy(currentTime, acc);
-				return acc;
-			}
-		}
-		return 0;
-	}
-
-	public boolean tryAcceleration(double acc, double timeRemaining, double metersRemaining, double fuelRemaining) {
-		double newSpeed = this.getSpeed() + acc * ConstantUtilities.delay;
-		double newFuelConsumption = fueltank.getFuelConsumption(newSpeed);
-		if (fuelRemaining - newFuelConsumption * timeRemaining >= 0) {
-			if (this.metersTravelled + newSpeed * timeRemaining >= metersRemaining) {
-				return true;
-			}
-		}
-		return false;
+	
+	 public double decideAction(int currentTime, double maxTime,double length) {
+	        if (currentTime == 0)
+	            return length / maxTime;
+	        else if (currentTime < 5) {
+	            return 12;
+	        }
+	        return 0;
 	}
 
 	public void speedToAcceleration(double speed) {
@@ -108,5 +96,8 @@ public class Rocket {
 		acceleration = this.getAcceleration();
 		updateSpeed();
 	}
+	public void addStrategy(double acceleration) {
+        estrategy.addEstrategy(acceleration);
+    }
 
 }

@@ -27,8 +27,5 @@ public class Score {
 		this.winner = winner;
 	}
 
-	public void displayScore() {
-		System.out.println(winner.getId() + " Your are a WINNER !! With a time of " + timeTaken + " at: "
-				+ circuit);
-	}
+	
 }
