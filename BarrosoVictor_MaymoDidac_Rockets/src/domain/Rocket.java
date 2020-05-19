@@ -101,7 +101,6 @@ public class Rocket {
     }
 
 	public FuelTank getFuelTank() {
-		// TODO Auto-generated method stub
 		return this.fueltank;
 	}
 

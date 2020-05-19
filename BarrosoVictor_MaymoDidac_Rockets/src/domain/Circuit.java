@@ -35,7 +35,7 @@ public class Circuit {
 		return true;
 	}
 
-	public void decideAction() throws Exception {
+	private void decideAction() throws Exception {
 		double acceleration = rocket.decideAction(currentTime, maxTime, length);
 		rocket.speedToAcceleration(acceleration);
 		rocket.addStrategy(acceleration);
