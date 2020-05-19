@@ -9,26 +9,26 @@ import domain.Propellant;
 import domain.Rocket;
 
 public class Main {
-	private static Circuit circuit;
-	private static Rocket rocket;
+	private Circuit circuit;
+	private Rocket rocket;
 
-	public static void main(String[] args) throws Exception {
+	public  void main(String[] args) throws Exception {
 		initialise();
 		race();
 	}
 
-	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
+	public  void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
 		rocket = initialiseRocket();
 		circuit = new Circuit("tutorialCircuit", 10, 800, rocket); // 10 is seconds, and 800 is fuel capacity
 	}
 
-	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
+	private  Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		double[] maxAccProplellant = { 18, 24, 38 };
 		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
 		return rocket;
 	}
 
-	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
+	private  List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
 		List<Propellant> propellants = new ArrayList<Propellant>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
@@ -36,7 +36,7 @@ public class Main {
 
 		return propellants;
 	}
-	public static void race() throws Exception {
+	public  void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId()+ ". Length: " + circuit.getLength()+ " . Max time: " + circuit.getMaxTime());
 		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength() && rocket.fueltank.getActualFuel() != 0) {
 			circuit.doingRace();
@@ -45,7 +45,7 @@ public class Main {
 		circuit.result();
 	}
 	
-	 private static void circuitInfo() {
+	 private  void circuitInfo() {
 	        System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: " + circuit.getRocket().getAcceleration()
 	                + " Speed: " + circuit.getRocket().getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + circuit.getLength()
 	                + " Fuel: " + circuit.getRocket().getFuelTank().getActualFuel() + "/" + circuit.getRocket().getFuelTank().getFuelCapacity());
