@@ -11,16 +11,15 @@ public class Score {
 	private double timeTaken;
 
 	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
-		if (validateAttributes(timeTaken, winner))
+		validateAttributes(timeTaken, winner);
 		this.winner = winner;
 		this.circuit = circuit;
 		this.timeTaken = timeTaken;
 	}
-	private boolean validateAttributes(double time, Rocket rocket) throws Exception {
+	private void validateAttributes(double time, Rocket rocket) throws Exception {
         if (time <= 0 || rocket == null) {
         	throw new Exception();
         }
-        return true;
     }
 
 	public void setWinner(Rocket winner) {

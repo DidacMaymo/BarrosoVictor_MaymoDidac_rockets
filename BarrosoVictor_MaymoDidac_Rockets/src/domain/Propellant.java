@@ -5,16 +5,15 @@ public class Propellant {
 	private double maxAcceleration, actualAcceleration = 0;
 
 	public Propellant(double maxAcceleration) throws Exception {
-        super();
-        if (validateAttributes(maxAcceleration))
+       
+        validateAttributes(maxAcceleration);
         this.maxAcceleration = maxAcceleration;
     }
 
-    private boolean validateAttributes(double maxAcceleration) throws Exception {
+    private void validateAttributes(double maxAcceleration) throws Exception {
         if (maxAcceleration <= 0) {
         	throw new Exception();
         }
-        return true;
     }
 	public Double getMaxAcceleration() {
 		return maxAcceleration;

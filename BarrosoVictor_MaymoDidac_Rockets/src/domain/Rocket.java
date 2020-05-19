@@ -18,18 +18,16 @@ public class Rocket {
 	private List<Score> scores = new ArrayList<Score>();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
-		if (validateAttributes(propellants, fueltank)) {
-			this.idRocket = id;
-			this.propellants = propellants;
-			this.fueltank = fueltank;
-		}
+		validateAttributes(propellants, fueltank);
+		this.idRocket = id;
+		this.propellants = propellants;
+		this.fueltank = fueltank;
 	}
 
-	private boolean validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+	private void validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (propellants.isEmpty() || fuelTank == null) {
 			throw new Exception();
 		}
-		return true;
 	}
 
 	public void setAcceleration(double acceleration) {

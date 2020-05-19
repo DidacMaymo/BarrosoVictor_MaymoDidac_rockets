@@ -7,15 +7,14 @@ public class FuelTank {
 
 	public FuelTank(double capacity) throws Exception {
         super();
-        if (validateAttributes(capacity))
+        validateAttributes(capacity);
         this.fuelCapacity = capacity;
         this.actualFuel = capacity;
     }
-	private boolean validateAttributes(double capacity) throws Exception {
+	private void validateAttributes(double capacity) throws Exception {
         if (capacity <= 0) {
         	throw new Exception();
         }
-        return true;
     }
 	public void updateFuel(double speed) {
         actualFuel -= getFuelConsumption(speed);
