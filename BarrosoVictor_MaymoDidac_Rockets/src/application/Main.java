@@ -17,12 +17,12 @@ public class Main {
 		race();
 	}
 
-	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
+	public static void initialise() throws Exception {
 		rocket = initialiseRocket();
-		circuit = new Circuit("tutorialCircuit", 10, 800, rocket); // 10 is seconds, and 800 is fuel capacity
+		circuit = new Circuit("tutorialCircuit", 10, 800, rocket);
 	}
 
-	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
+	private static Rocket initialiseRocket() throws Exception {
 		double[] maxAccProplellant = { 18, 24, 38 };
 		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
 		return rocket;
@@ -42,7 +42,7 @@ public class Main {
 	public static void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 				+ " . Max time: " + circuit.getMaxTime());
-		while (circuit.getMaxTime() >= circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
+		while (circuit.getMaxTime() > circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
 				&& circuit.getRocket().getFuelTank().getActualFuel() != 0) {
 			circuit.doingRace();
 			circuitInfo();
@@ -52,7 +52,7 @@ public class Main {
 
 	// prints
 	private static void circuitInfo() {
-		System.out.println("Current time: " + (circuit.getCurrentTime() + 1) + " Acceleration: "
+		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
 				+ circuit.getRocket().getAcceleration() + " Speed: " + circuit.getRocket().getSpeed() + " Distance: "
 				+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
 				+ circuit.getRocket().getFuelTank().getActualFuel() + "/"

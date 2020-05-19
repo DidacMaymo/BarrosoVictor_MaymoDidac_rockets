@@ -1,8 +1,5 @@
 package domain;
 
-import java.time.Duration;
-import java.time.Instant;
-
 import utilities.ConstantUtilities;
 
 public class Circuit {
