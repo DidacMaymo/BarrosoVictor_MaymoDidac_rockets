@@ -63,8 +63,8 @@ public class Circuit {
 	}
 	public boolean result() throws Exception {
         if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
 	public Rocket getRocket() {

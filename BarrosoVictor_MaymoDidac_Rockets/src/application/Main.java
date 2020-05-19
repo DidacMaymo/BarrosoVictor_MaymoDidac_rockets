@@ -45,7 +45,7 @@ public class Main {
 			circuit.doingRace();
 			circuitInfo();
 		}
-		circuit.result();
+		printResult();
 	}
 
 	private static void circuitInfo() {
@@ -55,8 +55,6 @@ public class Main {
 				+ circuit.getRocket().getFuelTank().getActualFuel() + "/"
 				+ circuit.getRocket().getFuelTank().getFuelCapacity());
 	}
-
-	 
 
 	public static void printResult() throws Exception {
         if (circuit.result())
