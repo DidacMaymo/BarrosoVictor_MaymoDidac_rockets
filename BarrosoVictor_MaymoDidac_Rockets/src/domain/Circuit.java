@@ -13,9 +13,9 @@ import java.time.LocalTime;
 
 public class Circuit {
 
-	public String id;
-	public int maxTime, currentTime = 0;
-	public int length;
+	private String id;
+	private int maxTime, currentTime = 0;
+	private int length;
 	private Rocket rocket;
 	private List<Score> score = new ArrayList<Score>();
 
@@ -49,6 +49,12 @@ public class Circuit {
 
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
+	}
+	
+	public void race() throws Exception {
+		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length
+				+ " . Max time: " + maxTime);
+		doingRace();
 	}
 
 	public void doingRace() throws Exception {

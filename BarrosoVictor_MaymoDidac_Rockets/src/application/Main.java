@@ -14,12 +14,12 @@ import domain.Rocket;
 import utilities.ConstantUtilities;
 
 public class Main {
-	public static Circuit circuit;
-	public static Rocket rocket;
+	private static Circuit circuit;
+	private static Rocket rocket;
 
 	public static void main(String[] args) throws Exception {
 		initialise();
-		race();
+		circuit.race();
 	}
 
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
@@ -42,10 +42,6 @@ public class Main {
 		return propellants;
 	}
 
-	public static void race() throws Exception {
-		System.out.println("Starting competition. Circuit: " + circuit.id + ". Length: " + circuit.length
-				+ " . Max time: " + circuit.maxTime);
-		circuit.doingRace();
-	}
+	
 
 }
