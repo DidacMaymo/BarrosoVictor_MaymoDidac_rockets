@@ -33,10 +33,10 @@ public class FuelTank {
 	}
 
 	/* Updating attributes */
-	public void updateFuel(double speed) {
+	public void updateFuel(double speed) throws Exception {
 		actualFuel -= getFuelConsumption(speed);
 		if (actualFuel < 0)
-			actualFuel = 0;
+			throw new Exception("No fuel remainng!");
 	}
 
 }

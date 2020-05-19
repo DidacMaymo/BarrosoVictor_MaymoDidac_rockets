@@ -73,7 +73,7 @@ public class Rocket {
 
 	/* Updating attributes */
 
-	public void updateSpeed() { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
@@ -93,7 +93,7 @@ public class Rocket {
 		return 0;
 	}
 
-	public void speedToAcceleration(double speed) {
+	public void speedToAcceleration(double speed) throws Exception {
 		setAcceleration(0);
 		while (getAcceleration() < speed) {
 			setAcceleration(getAcceleration() + 1);

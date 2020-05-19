@@ -62,7 +62,7 @@ public class Circuit {
 	}
 
 	// race methods
-	private void decideAction() {
+	private void decideAction() throws Exception {
 		double acceleration = rocket.decideAction(currentTime, length, maxTime);
 		rocket.speedToAcceleration(acceleration);
 		rocket.addStrategy(acceleration);
