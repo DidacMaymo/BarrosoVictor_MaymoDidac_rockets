@@ -12,11 +12,11 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private double acceleration = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
-	private Fueltank fueltank;
+	private FuelTank fueltank;
 	private List<Score> scores = new ArrayList<Score>();
 	private Strategy strategy;
 
-	public Rocket(String id, List<Propellant> propellants, Fueltank fuelTank) throws Exception {
+	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		super();
 		if (!validateAttributes(id, propellants, fuelTank))
 			throw new Exception("Wrong attributes set!");
@@ -27,7 +27,7 @@ public class Rocket {
 		this.strategy = new Strategy();
 	}
 
-	private boolean validateAttributes(String id, List<Propellant> propellants, Fueltank fuelTank) {
+	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
 			return false;
 		}
@@ -52,7 +52,7 @@ public class Rocket {
 		return speed;
 	}
 
-	public Fueltank getFueltank() {
+	public FuelTank getFueltank() {
 		return fueltank;
 	}
 
