@@ -49,7 +49,6 @@ public class Circuit {
 		this.currentTime += time;
 	}
 	
-	
 	public void race() throws Exception {
 		System.out.println("Starting competition. Circuit: " + id + ". Length: " + length
 				+ " . Max time: " + maxTime);
