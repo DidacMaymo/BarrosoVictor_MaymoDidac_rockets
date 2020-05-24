@@ -62,7 +62,6 @@ public class Circuit {
 	private void decideAction(Rocket rocket) throws Exception {
 		double acceleration = rocket.decideAction(currentTime, length, maxTime);
 		rocket.setDesiredAcceleration(acceleration);
-		rocket.addStrategy(acceleration);
 	}
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
