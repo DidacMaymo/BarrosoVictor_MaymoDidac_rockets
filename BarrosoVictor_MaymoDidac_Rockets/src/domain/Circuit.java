@@ -11,9 +11,10 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
-	private Rocket rocket;
+	private Rocket winner;
+	private List<Rocket> rocket = new ArrayList<Rocket>();
 
-	public Circuit(String id, int maxTime, int length, Rocket rocket) throws Exception {
+	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
 		if (validAtributes(maxTime, length)) {
 			this.id = id;
 			this.maxTime = maxTime;
@@ -30,12 +31,6 @@ public class Circuit {
 			throw new Exception("length of circuit not valid");
 		}
 		return true;
-	}
-
-	private void decideAction() throws Exception {
-		double acceleration = rocket.decideAction(currentTime, maxTime, length);
-		rocket.speedToAcceleration(acceleration);
-		rocket.addStrategy(acceleration);
 	}
 
 	public double getCurrentTime() {
@@ -58,37 +53,63 @@ public class Circuit {
 		this.currentTime += time;
 	}
 
-	public void doingRace() throws Exception {
-		decideAction();
+	public void doingRace(Rocket rocket) throws Exception {
+		decideAction(rocket);
 		currentTime += ConstantUtilities.DELAY;
 	}
 
-	public boolean result() throws Exception {
-		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
-			return false;
-		return true;
-	}
-
-	public Rocket getRocket() {
-		return rocket;
+	private void decideAction(Rocket rocket) throws Exception {
+		double acceleration = rocket.decideAction(currentTime, maxTime, length);
+		rocket.speedToAcceleration(acceleration);
+		rocket.addStrategy(acceleration);
 	}
 
 	public boolean raceIsGoing(Rocket rocket) {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
 	}
 
-	public void addScoreToRocket() throws Exception {
-		rocket.addScore(new Score(rocket, this, currentTime));
+	public void addScoreToRocket(Rocket rocket) throws Exception {
+		rocket.addScore(new Score(rocket, this, currentTime, rocket.getMetersTravelled()));
 	}
 
-	public boolean isAWinner() {
-		// TODO Auto-generated method stub
+	public boolean isAWinner(Rocket rocket) throws Exception {
+		if(winner==null) {
+			setWinner(rocket);
+		}
+		else if (isItTheWinner(rocket)){
+				setWinner(rocket);
+				return true;
+		}
 		return false;
 	}
 
-	public Circuit getWinner() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isItTheWinner(Rocket rocket) throws Exception {
+		if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
+			if (rocket.getScore(this).getMetersTravelled() < winner.getScore(this).getMetersTravelled()) {
+				return true;
+			}
+		} else if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
+			return true;
+		}
+		return false;
+	}
+
+	public void setWinner(Rocket r) {
+		winner = r;
+	}
+
+	public Rocket getWinner() {
+
+		return winner;
+	}
+
+	public List<Rocket> getRockets() {
+		return rocket;
+	}
+
+	public void resetTime() {
+		currentTime = 0;
+
 	}
 
 }

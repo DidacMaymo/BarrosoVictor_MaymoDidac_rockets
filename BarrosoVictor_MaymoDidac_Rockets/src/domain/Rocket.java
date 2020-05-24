@@ -109,6 +109,14 @@ public class Rocket {
 	public void addScore(Score score) {
 		scores.add(score);
 	}
+	public Score getScore(Circuit circuit) throws Exception {
+		for(Score s: this.scores) {
+			if(s.getCircuit().equals(circuit)) {
+				return s;
+			}
+		}
+		throw new Exception("not cirucit existent");
+	}
 
 	public void addStrategy(double acceleration) {
 		strategy.addEstrategy(acceleration);

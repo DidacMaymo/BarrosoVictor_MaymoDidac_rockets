@@ -2,30 +2,37 @@ package domain;
 
 import javax.xml.crypto.Data;
 
+
 import utilities.ConstantUtilities;
 
 public class Score {
 
-	private Rocket winner;
+	private Rocket rocket;
 	private Circuit circuit;
 	private double timeTaken;
+	private double metersTravelled;
 
-	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
-		validateAttributes(timeTaken, winner);
-		this.winner = winner;
-		this.circuit = circuit;
-		this.timeTaken = timeTaken;
+	public Score(Rocket rocket, Circuit circuit, double timeTaken, double MetersTravelled) throws Exception {
+		validateAttributes(timeTaken, rocket, MetersTravelled);
+			this.rocket = rocket;
+			this.circuit = circuit;
+			this.timeTaken = timeTaken;
+			this.metersTravelled = MetersTravelled;
 	}
-	private void validateAttributes(double time, Rocket rocket) throws Exception {
-        if (time <= 0 || rocket == null) {
-        	throw new Exception();
-        }
-    }
 
-	public void setWinner(Rocket winner) {
-		this.winner = winner;
+	private void validateAttributes(double time, Rocket rocket, double metersTravelled) throws Exception {
+		if (time <= 0 || rocket == null || metersTravelled == 0) {
+			throw new Exception();
+		}
 	}
-	
 
-	
+	public double getTimeTaken() {
+		return timeTaken;
+	}
+	public double getMetersTravelled() {
+		return metersTravelled;
+	}
+	public Circuit getCircuit() {
+		return circuit;
+	}
 }
