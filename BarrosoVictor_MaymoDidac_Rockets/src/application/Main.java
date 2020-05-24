@@ -14,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		initialise();
-		race();
+		startRace();
 	}
 
 	public static void initialise() throws Exception { // iniciem les dades del circuit amb les del cohet etc
@@ -37,7 +37,7 @@ public class Main {
 		return propellants;
 	}
 
-	public static void race() throws Exception {
+	public static void startRace() throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 				+ " . Max time: " + circuit.getMaxTime());
 		while (circuit.getMaxTime() > circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
