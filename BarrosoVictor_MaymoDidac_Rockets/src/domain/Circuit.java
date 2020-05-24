@@ -70,8 +70,14 @@ public class Circuit {
 	public Rocket getRocket() {
 		return rocket;
 	}
+	public static boolean raceIsGoing(Rocket rocket,	Circuit circuit) {
+		if(circuit.getCurrentTime() < circuit.getMaxTime() && rocket.getMetersTravelled() < circuit.getLength()
+				&& circuit.getRocket().getActualFuel() != 0)
+			return true;
+		return false;
+	}
 	 public void addScoreToRocket() throws Exception {
 	        rocket.addScore(new Score(rocket, this, currentTime));
-	    }
+	 }
 
 }

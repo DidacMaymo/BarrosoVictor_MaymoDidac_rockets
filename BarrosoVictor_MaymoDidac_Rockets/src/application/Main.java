@@ -34,18 +34,13 @@ public class Main {
 	public static void startRace(Rocket rocket,	Circuit circuit) throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 				+ " . Max time: " + circuit.getMaxTime());
-		while (raceIsGoing(rocket, circuit)) {
+		while (circuit.raceIsGoing(rocket, circuit)) {
 			circuit.doingRace();
 			circuitInfo(rocket, circuit);
 		}
 		printResult(rocket, circuit);
 	}
-	public static boolean raceIsGoing(Rocket rocket,	Circuit circuit) {
-		if(circuit.getCurrentTime() < circuit.getMaxTime() && rocket.getMetersTravelled() < circuit.getLength()
-				&& circuit.getRocket().getActualFuel() != 0)
-			return true;
-		return false;
-	}
+	
 
 	private static void circuitInfo(Rocket rocket,	Circuit circuit) {
 		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
