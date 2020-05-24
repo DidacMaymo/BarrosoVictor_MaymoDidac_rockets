@@ -106,10 +106,6 @@ public class Rocket {
 		scores.add(score);
 	}
 
-	public void addStrategy(double acceleration) {
-		strategy.addEstrategy(acceleration);
-	}
-
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
 		return fueltank.getCapacity();
