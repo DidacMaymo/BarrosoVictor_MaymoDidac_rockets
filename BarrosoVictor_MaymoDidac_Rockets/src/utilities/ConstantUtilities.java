@@ -1,5 +1,5 @@
 package utilities;
 
 public class ConstantUtilities {
-	public static int delay = 1;
+	public static int DELAY = 1;
 }

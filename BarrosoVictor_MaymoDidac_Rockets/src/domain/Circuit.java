@@ -59,7 +59,7 @@ public class Circuit {
 	
 	public void doingRace() throws Exception {
 			decideAction();
-			currentTime += ConstantUtilities.delay;		
+			currentTime += ConstantUtilities.DELAY;		
 	}
 	public boolean result() throws Exception {
         if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)

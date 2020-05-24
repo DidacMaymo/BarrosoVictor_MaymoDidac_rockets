@@ -53,7 +53,7 @@ public class Rocket {
 	}
 
 	public void updateSpeed() throws Exception { // v = v0 + at
-		this.speed += acceleration * ConstantUtilities.delay;
+		this.speed += acceleration * ConstantUtilities.DELAY;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
 	}
@@ -67,7 +67,7 @@ public class Rocket {
 	}
 
 	public void updateMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed * ConstantUtilities.delay + (acceleration / 2) * Math.pow(ConstantUtilities.delay, 2);
+		metersTravelled += speed * ConstantUtilities.DELAY + (acceleration / 2) * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
 	public int getMetersTravelled() {
