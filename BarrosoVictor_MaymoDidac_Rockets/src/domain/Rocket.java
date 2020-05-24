@@ -17,10 +17,7 @@ public class Rocket {
 	private Strategy strategy;
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		super();
-		if (!validateAttributes(id, propellants, fuelTank))
-			throw new Exception("Wrong attributes set!");
-
+		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fueltank = fuelTank;
@@ -28,11 +25,11 @@ public class Rocket {
 	}
 
 	/* Validating attributes */
-	private boolean validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) {
+	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
-			return false;
+			throw new Exception("Wrong attributes set!");
 		}
-		return true;
+
 	}
 
 	/* getters and setters */
@@ -76,7 +73,7 @@ public class Rocket {
 
 	/* Updating attributes */
 
-	public void updateSpeed() { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.delay;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
@@ -96,7 +93,7 @@ public class Rocket {
 		return 0;
 	}
 
-	public void speedToAcceleration(double speed) {
+	public void speedToAcceleration(double speed) throws Exception {
 		setAcceleration(0);
 		while (getAcceleration() < speed) {
 			setAcceleration(getAcceleration() + 1);

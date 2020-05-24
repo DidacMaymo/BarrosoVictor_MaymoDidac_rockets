@@ -10,8 +10,8 @@ public class Strategy {
 	public Strategy() throws Exception {
 
 	}
-	
-	//Adds an acceleration to the strategy
+
+	// Adds an acceleration to the strategy
 	public void addEstrategy(double acceleration) {
 		accelerations.add(acceleration);
 	}
