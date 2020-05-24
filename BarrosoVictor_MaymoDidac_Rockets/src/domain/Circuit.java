@@ -2,11 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 
-
 import java.util.List;
 
 import utilities.ConstantUtilities;
-
 
 public class Circuit {
 
@@ -43,12 +41,15 @@ public class Circuit {
 	public double getCurrentTime() {
 		return this.currentTime;
 	}
+
 	public double getMaxTime() {
 		return this.maxTime;
 	}
+
 	public String getId() {
 		return this.id;
 	}
+
 	public double getLength() {
 		return this.length;
 	}
@@ -56,28 +57,38 @@ public class Circuit {
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
-	
+
 	public void doingRace() throws Exception {
-			decideAction();
-			currentTime += ConstantUtilities.DELAY;		
+		decideAction();
+		currentTime += ConstantUtilities.DELAY;
 	}
+
 	public boolean result() throws Exception {
-        if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
-            return false;
-        return true;
-    }
+		if (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0)
+			return false;
+		return true;
+	}
 
 	public Rocket getRocket() {
 		return rocket;
 	}
-	public static boolean raceIsGoing(Rocket rocket,	Circuit circuit) {
-		if(circuit.getCurrentTime() < circuit.getMaxTime() && rocket.getMetersTravelled() < circuit.getLength()
-				&& circuit.getRocket().getActualFuel() != 0)
-			return true;
+
+	public boolean raceIsGoing(Rocket rocket) {
+		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
+	}
+
+	public void addScoreToRocket() throws Exception {
+		rocket.addScore(new Score(rocket, this, currentTime));
+	}
+
+	public boolean isAWinner() {
+		// TODO Auto-generated method stub
 		return false;
 	}
-	 public void addScoreToRocket() throws Exception {
-	        rocket.addScore(new Score(rocket, this, currentTime));
-	 }
+
+	public Circuit getWinner() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

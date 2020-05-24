@@ -34,7 +34,7 @@ public class Main {
 	public static void startRace(Rocket rocket,	Circuit circuit) throws Exception {
 		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 				+ " . Max time: " + circuit.getMaxTime());
-		while (circuit.raceIsGoing(rocket, circuit)) {
+		while (circuit.raceIsGoing(rocket)) {
 			circuit.doingRace();
 			circuitInfo(rocket, circuit);
 		}
@@ -46,12 +46,12 @@ public class Main {
 		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
 				+ circuit.getRocket().getAcceleration() + " Speed: " + circuit.getRocket().getSpeed() + " Distance: "
 				+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
-				+ circuit.getRocket().getFuelTank().getActualFuel() + "/"
-				+ circuit.getRocket().getFuelTank().getFuelCapacity());
+				+ circuit.getRocket().getActualFuel() + "/"
+				+ circuit.getRocket().getFuelCapacity());
 	}
 
 	public static void printResult(Rocket rocket,	Circuit circuit) throws Exception {
-        if (circuit.result())
+        if (circuit.isAWinner())
             win(rocket, circuit);
         else
             lose(rocket, circuit);
@@ -59,7 +59,7 @@ public class Main {
 
     private static void win(Rocket rocket,	Circuit circuit) throws Exception {
         System.out.println(
-                "And the winner is: " + circuit.getRocket().getId() + " with a time of " + circuit.getCurrentTime());
+                "And the winner is: " + circuit.getWinner().getId() + " with a time of " + circuit.getCurrentTime());
         circuit.addScoreToRocket();
     }
 

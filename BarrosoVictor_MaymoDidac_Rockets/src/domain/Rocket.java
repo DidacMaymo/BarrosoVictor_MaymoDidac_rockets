@@ -78,7 +78,10 @@ public class Rocket {
 		return fueltank.getFuelConsumption(speed);
 	}
 	public double getActualFuel() {
-		return this.getFuelTank().getActualFuel();
+		return fueltank.getActualFuel();
+	}
+	public double getFuelCapacity() {
+		return fueltank.getFuelCapacity();
 	}
 
 	public double decideAction(int currentTime, double maxTime, double length) {
