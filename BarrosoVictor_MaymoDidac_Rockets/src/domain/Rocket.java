@@ -24,12 +24,9 @@ public class Rocket {
 		this.strategy = new Strategy();
 	}
 
-	/* Validating attributes */
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null) {
+		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)
 			throw new Exception("Wrong attributes set!");
-		}
-
 	}
 
 	/* getters and setters */
@@ -61,6 +58,10 @@ public class Rocket {
 		return acceleration;
 	}
 
+	public double getActualFuel() {
+		return fueltank.getActualFuel();
+	}
+
 	public String getId() {
 		return this.id;
 	}
@@ -71,19 +72,17 @@ public class Rocket {
 		}
 	}
 
-	/* Updating attributes */
-
 	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
-		this.speed += acceleration * ConstantUtilities.delay;
+		this.speed += acceleration * ConstantUtilities.DELAY;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
 	}
 
 	private void updateMetersTravelled() {
-		metersTravelled += speed * ConstantUtilities.delay + 0.5 * acceleration * Math.pow(ConstantUtilities.delay, 2);
+		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	/* Race */
+	// decide action va a strategy
 	public double decideAction(int currentTime, double length, double maxTime) {
 		if (currentTime == 0)
 			return length / maxTime;
@@ -93,12 +92,12 @@ public class Rocket {
 		return 0;
 	}
 
-	public void speedToAcceleration(double speed) throws Exception {
+	public void setDesiredAcceleration(double acceleration) throws Exception {
 		setAcceleration(0);
-		while (getAcceleration() < speed) {
+		while (getAcceleration() < acceleration) {
 			setAcceleration(getAcceleration() + 1);
 		}
-		acceleration = this.getAcceleration();
+		this.acceleration = this.getAcceleration();
 		updateSpeed();
 	}
 
@@ -107,8 +106,9 @@ public class Rocket {
 		scores.add(score);
 	}
 
-	public void addStrategy(double acceleration) {
-		strategy.addEstrategy(acceleration);
+	public double getFuelCapacity() {
+		// TODO Auto-generated method stub
+		return fueltank.getCapacity();
 	}
 
 }

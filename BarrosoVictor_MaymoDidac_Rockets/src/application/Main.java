@@ -9,20 +9,16 @@ import domain.Propellant;
 import domain.Rocket;
 
 public class Main {
-	private static Circuit circuit;
-	private static Rocket rocket;
 
 	public static void main(String[] args) throws Exception {
-		initialise();
-		race();
+		Rocket rocket = initialiseRocket();
+		ArrayList<Rocket> rockets = new ArrayList<Rocket>();
+		rockets.add(rocket);
+		Circuit circuit = new Circuit("tutorialCircuit", 10, 800, rockets);
+		startRace(circuit);
 	}
 
-	public static void initialise() throws Exception {
-		rocket = initialiseRocket();
-		circuit = new Circuit("tutorialCircuit", 10, 800, rocket);
-	}
-
-	private static Rocket initialiseRocket() throws Exception {
+	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		double[] maxAccProplellant = { 18, 24, 38 };
 		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
 		return rocket;
@@ -37,43 +33,39 @@ public class Main {
 		return propellants;
 	}
 
-	// starting race
-
-	public static void race() throws Exception {
-		System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
-				+ " . Max time: " + circuit.getMaxTime());
-		while (circuit.getMaxTime() > circuit.getCurrentTime() && rocket.getMetersTravelled() < circuit.getLength()
-				&& circuit.getRocket().getFuelTank().getActualFuel() != 0) {
-			circuit.doingRace();
-			circuitInfo();
+	public static void startRace(Circuit circuit) throws Exception {
+		for (Rocket rocket : circuit.getRockets()) {
+			System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
+					+ " . Max time: " + circuit.getMaxTime());
+			while (circuit.raceIsGoing(rocket)) {
+				circuit.doingRace(rocket);
+				circuitInfo(rocket, circuit);
+			}
+			printResult(rocket, circuit);
+			circuit.resetTime();
 		}
-		printResult();
 	}
 
-	// prints
-	private static void circuitInfo() {
-		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
-				+ circuit.getRocket().getAcceleration() + " Speed: " + circuit.getRocket().getSpeed() + " Distance: "
-				+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
-				+ circuit.getRocket().getFuelTank().getActualFuel() + "/"
-				+ circuit.getRocket().getFuelTank().getCapacity());
+	private static void circuitInfo(Rocket rocket, Circuit circuit) {
+		System.out.println("Current time: " + (circuit.getCurrentTime()) + " Acceleration: " + rocket.getAcceleration()
+				+ " Speed: " + rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: "
+				+ circuit.getLength() + " Fuel: " + rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
 
-	// result prints
-	public static void printResult() throws Exception {
-		if (circuit.result())
-			win();
+	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
+		circuit.addScoreToRocket(rocket);
+		if (circuit.isAWinner(rocket))
+			win(rocket, circuit);
 		else
-			lose();
+			lose(rocket, circuit);
 	}
 
-	private static void win() throws Exception {
-		System.out.println(
-				"And the winner is: " + circuit.getRocket().getId() + " with a time of " + circuit.getCurrentTime());
-		circuit.addScoreToRocket();
+	private static void win(Rocket rocket, Circuit circuit) throws Exception {
+		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + circuit.getCurrentTime());
 	}
 
-	private static void lose() {
+	private static void lose(Rocket rocket, Circuit circuit) {
 		System.out.println("There is no winner");
 	}
+
 }
