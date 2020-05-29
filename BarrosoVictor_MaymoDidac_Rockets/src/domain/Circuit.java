@@ -15,23 +15,17 @@ public class Circuit {
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 
 	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
-		if (validAtributes(maxTime, length)) {
+		validateAttributes(id,maxTime, length, rocket);
 			this.id = id;
 			this.maxTime = maxTime;
 			this.length = length;
 			this.rocket = rocket;
-		}
 	}
 
-	public boolean validAtributes(double maxTime, int length) throws Exception {
-		if (maxTime <= 0) {
-			throw new Exception("maxTime of circuit not valid");
-		}
-		if (length <= 0) {
-			throw new Exception("length of circuit not valid");
-		}
-		return true;
-	}
+	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
+        if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
+            throw new Exception("Wrong attributes set!");
+    }
 
 	public double getCurrentTime() {
 		return this.currentTime;
@@ -99,7 +93,6 @@ public class Circuit {
 	}
 
 	public Rocket getWinner() {
-
 		return winner;
 	}
 

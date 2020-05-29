@@ -45,7 +45,7 @@ public class Main {
 				circuit.doingRace(rocket);
 				circuitInfo(rocket, circuit);
 			}
-			printResult(rocket, circuit);
+			addScoreToRocketFinished(rocket, circuit);
 			circuit.resetTime();
 		}
 	}
@@ -57,7 +57,6 @@ public class Main {
 	}
 
 	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
-		addScoreToRocketFinished(rocket, circuit);
 		if (circuit.isAWinner(rocket))
 			System.out.println("And the winner is: " + circuit.getWinner().getId() + " with a time of "
 					+ circuit.getCurrentTime());
@@ -67,6 +66,8 @@ public class Main {
 
 	private static void addScoreToRocketFinished(Rocket rocket, Circuit circuit) throws Exception {
 		circuit.addScoreToRocket(rocket);
+		//cuando todos cohetes tirados
+		printResult(rocket, circuit);
 	}
 
 }
