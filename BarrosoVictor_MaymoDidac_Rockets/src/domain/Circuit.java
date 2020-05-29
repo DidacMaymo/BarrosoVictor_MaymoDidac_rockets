@@ -15,17 +15,17 @@ public class Circuit {
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 
 	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
-		validateAttributes(id,maxTime, length, rocket);
-			this.id = id;
-			this.maxTime = maxTime;
-			this.length = length;
-			this.rocket = rocket;
+		validateAttributes(id, maxTime, length, rocket);
+		this.id = id;
+		this.maxTime = maxTime;
+		this.length = length;
+		this.rocket = rocket;
 	}
 
 	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
-        if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
-            throw new Exception("Wrong attributes set!");
-    }
+		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
+			throw new Exception("Wrong attributes set!");
+	}
 
 	public double getCurrentTime() {
 		return this.currentTime;
@@ -48,14 +48,14 @@ public class Circuit {
 	}
 
 	public void doingRace(Rocket rocket) throws Exception {
-        decideAction(rocket);
-        currentTime += ConstantUtilities.DELAY;
-    }
+		decideAction(rocket);
+		currentTime += ConstantUtilities.DELAY;
+	}
 
-    private void decideAction(Rocket rocket) throws Exception {
-        double acceleration = rocket.decideAction(currentTime, length, maxTime);
-        rocket.setDesiredAcceleration(acceleration);
-    }
+	private void decideAction(Rocket rocket) throws Exception {
+		double acceleration = rocket.decideAction(currentTime, length, maxTime);
+		rocket.setDesiredAcceleration(acceleration);
+	}
 
 	public boolean raceIsGoing(Rocket rocket) {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
@@ -66,19 +66,19 @@ public class Circuit {
 	}
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
-		if(winner==null) {
+		if (winner == null) {
 			setWinner(rocket);
-		}
-		else if (isItTheWinner(rocket)){
-				setWinner(rocket);
-				return true;
+			return true;
+		} else if (isItTheWinner(rocket)) {
+			setWinner(rocket);
+			return true;
 		}
 		return false;
 	}
 
-	public boolean isItTheWinner(Rocket rocket) throws Exception {
-		if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
-			if (rocket.getScore(this).getMetersTravelled() < winner.getScore(this).getMetersTravelled()) {
+	private boolean isItTheWinner(Rocket rocket) throws Exception {
+		if (rocket.getScore(this).getTimeTaken() == winner.getScore(this).getTimeTaken()) {
+			if (rocket.getScore(this).getMetersTravelled() > winner.getScore(this).getMetersTravelled()) {
 				return true;
 			}
 		} else if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
@@ -87,7 +87,7 @@ public class Circuit {
 		return false;
 	}
 
-	public void setWinner(Rocket r) {
+	private void setWinner(Rocket r) {
 		winner = r;
 	}
 

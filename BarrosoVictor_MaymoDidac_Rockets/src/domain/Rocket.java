@@ -107,11 +107,11 @@ public class Rocket {
 	}
 
 	public Score getScore(Circuit circuit) throws Exception {
-		for (Score s : this.scores) {
-			if (s.getCircuit().equals(circuit)) {
-				return s;
-			}
-		}
-		throw new Exception("not cirucit existent");
-	}
+        for (Score s : this.scores) {
+            if (s.getCircuit().equals(circuit)) {
+                return s;
+            }
+        }
+        throw new Exception("not cirucit existent");
+    }
 }
