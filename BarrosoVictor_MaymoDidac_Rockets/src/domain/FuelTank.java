@@ -19,7 +19,6 @@ public class FuelTank {
 
     public double getFuelConsumption(double speed) {
         return 0.02 * Math.pow(speed, 2);
-
     }
 
     public double getCapacity() {

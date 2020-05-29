@@ -68,6 +68,7 @@ public class Circuit {
 	public boolean isAWinner(Rocket rocket) throws Exception {
 		if(winner==null) {
 			setWinner(rocket);
+			return true;
 		}
 		else if (isItTheWinner(rocket)){
 				setWinner(rocket);
@@ -76,10 +77,10 @@ public class Circuit {
 		return false;
 	}
 
-	public boolean isItTheWinner(Rocket rocket) throws Exception {
-		if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
-			if (rocket.getScore(this).getMetersTravelled() < winner.getScore(this).getMetersTravelled()) {
-				return true;
+	private boolean isItTheWinner(Rocket rocket) throws Exception {
+		if (rocket.getScore(this).getTimeTaken() == winner.getScore(this).getTimeTaken()) {
+			if (rocket.getScore(this).getMetersTravelled() > winner.getScore(this).getMetersTravelled()) {
+			return true;
 			}
 		} else if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
 			return true;
@@ -87,7 +88,7 @@ public class Circuit {
 		return false;
 	}
 
-	public void setWinner(Rocket r) {
+	private void setWinner(Rocket r) {
 		winner = r;
 	}
 
