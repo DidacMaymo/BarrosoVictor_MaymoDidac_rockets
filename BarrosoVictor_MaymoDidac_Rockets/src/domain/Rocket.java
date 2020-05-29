@@ -1,14 +1,13 @@
 package domain;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import utilities.ConstantUtilities;
 
 public class Rocket {
 
-	private String idRocket;
+	private String id;
 	private double speed = 0; // at start here counts as v0
 	private double acceleration = 0;
 	private int metersTravelled = 0;
@@ -17,31 +16,22 @@ public class Rocket {
 	private Strategy strategy = new Strategy();
 	private List<Score> scores = new ArrayList<Score>();
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fueltank) throws Exception {
-		validateAttributes(propellants, fueltank);
-		this.idRocket = id;
+	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+		validateAttributes(id, propellants, fuelTank);
+		this.id = id;
 		this.propellants = propellants;
-		this.fueltank = fueltank;
+		this.fueltank = fuelTank;
+		this.strategy = new Strategy();
 	}
 
-	private void validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		if (propellants.isEmpty() || fuelTank == null) {
-			throw new Exception();
-		}
+	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)
+			throw new Exception("Wrong attributes set!");
 	}
 
-	public void setAcceleration(double acceleration) {
-		for (Propellant p : propellants) {
-			p.setActualAcceleration(acceleration);
-		}
-	}
-
-	public double getAcceleration() {
-		double acc = 0;
-		for (Propellant p : propellants) {
-			acc += p.getActualAcceleration();
-		}
-		return acc;
+	/* getters and setters */
+	public int getMetersTravelled() {
+		return metersTravelled;
 	}
 
 	public double getMaxAcceleration() {
@@ -52,74 +42,76 @@ public class Rocket {
 		return maxAcc;
 	}
 
-	public void updateSpeed() throws Exception { // v = v0 + at
+	public double getSpeed() {
+		return speed;
+	}
+
+	public FuelTank getFuelTank() {
+		return fueltank;
+	}
+
+	public double getAcceleration() {
+		double acceleration = 0;
+		for (Propellant p : propellants) {
+			acceleration += p.getActualAcceleration();
+		}
+		return acceleration;
+	}
+
+	public double getActualFuel() {
+		return fueltank.getActualFuel();
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setAcceleration(double acceleration) {
+		for (Propellant p : propellants) {
+			p.setActualAcceleration(acceleration);
+		}
+	}
+
+	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.DELAY;
 		fueltank.updateFuel(speed);
 		updateMetersTravelled();
 	}
 
-	public double getSpeed() {
-		return speed;
+	private void updateMetersTravelled() {
+		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	public String getId() {
-		return this.idRocket;
-	}
-
-	public void updateMetersTravelled() { // x = xo + v*t + ½ a * t^2
-		metersTravelled += speed * ConstantUtilities.DELAY + (acceleration / 2) * Math.pow(ConstantUtilities.DELAY, 2);
-	}
-
-	public int getMetersTravelled() {
-		return metersTravelled;
-	}
-
-	public double getFuelConsumption() {
-		return fueltank.getFuelConsumption(speed);
-	}
-	public double getActualFuel() {
-		return fueltank.getActualFuel();
-	}
-	public double getFuelCapacity() {
-		return fueltank.getFuelCapacity();
-	}
-
-	public double decideAction(int currentTime, double maxTime, double length) {
-		if (currentTime == 0)
-			return length / maxTime;
-		else if (currentTime < 5) {
-			return 12;
-		}
-		return 0;
+	// decide action va a strategy
+	public double decideAction(int currentTime, double length, double maxTime) {
+		return Strategy.decideAction(currentTime, length, maxTime);
 	}
 
 	public void setDesiredAcceleration(double acceleration) throws Exception {
-        setAcceleration(0);
-        while (getAcceleration() < acceleration) {
-            setAcceleration(getAcceleration() + 1);
-        }
-        this.acceleration = this.getAcceleration();
-        updateSpeed();
-    }
-
-	public FuelTank getFuelTank() {
-		return this.fueltank;
+		setAcceleration(0);
+		while (getAcceleration() < acceleration) {
+			setAcceleration(getAcceleration() + 1);
+		}
+		this.acceleration = this.getAcceleration();
+		updateSpeed();
 	}
 
+	/* Adds score and strategy */
 	public void addScore(Score score) {
 		scores.add(score);
 	}
+
+	public double getFuelCapacity() {
+		// TODO Auto-generated method stub
+		return fueltank.getCapacity();
+	}
+
 	public Score getScore(Circuit circuit) throws Exception {
-		for(Score s: this.scores) {
-			if(s.getCircuit().equals(circuit)) {
+		for (Score s : this.scores) {
+			if (s.getCircuit().equals(circuit)) {
 				return s;
 			}
 		}
 		throw new Exception("not cirucit existent");
 	}
-
-	public void addStrategy(double acceleration) {
-		strategy.addEstrategy(acceleration);
-	}
-
 }

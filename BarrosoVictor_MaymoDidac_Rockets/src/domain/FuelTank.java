@@ -2,37 +2,38 @@ package domain;
 
 public class FuelTank {
 
-	private double fuelCapacity, actualFuel;
+    private double capacity;
+    private double actualFuel;
 
-
-	public FuelTank(double capacity) throws Exception {
-        super();
+    public FuelTank(double capacity) throws Exception {
         validateAttributes(capacity);
-        this.fuelCapacity = capacity;
+        this.capacity = capacity;
         this.actualFuel = capacity;
     }
-	private void validateAttributes(double capacity) throws Exception {
-        if (capacity <= 0) {
-        	throw new Exception();
-        }
+
+    private void validateAttributes(double capacity) throws Exception {
+        if (capacity <= 0)
+            throw new Exception("Invalid attribute!");
+
     }
-	public void updateFuel(double speed) throws Exception {
+
+    public double getFuelConsumption(double speed) {
+        return 0.02 * Math.pow(speed, 2);
+
+    }
+
+    public double getCapacity() {
+        return capacity;
+    }
+
+    public double getActualFuel() {
+        return actualFuel;
+    }
+
+    public void updateFuel(double speed) throws Exception {
         actualFuel -= getFuelConsumption(speed);
         if (actualFuel < 0)
-            throw new Exception();
+            throw new Exception("No fuel remainng!");
     }
-	
-	public double getFuelConsumption(double speed) {
-		double consumpiton = 0.02 * Math.pow(speed, 2);
-		return consumpiton;
-	}
-
-	public double getFuelCapacity() {
-		return fuelCapacity;
-	}
-
-	public double getActualFuel() {
-		return Math.round(actualFuel * 100) / 100;
-	}
 
 }

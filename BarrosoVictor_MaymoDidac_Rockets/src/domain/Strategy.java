@@ -1,16 +1,13 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Strategy {
 
-	private List<Double> accelerations = new ArrayList<Double>();
-
-	public Strategy() throws Exception {
-	}
-
-	public void addEstrategy(double acceleration) {
-		accelerations.add(acceleration);
-	}
+    public static double decideAction(int currentTime, double length, double maxTime) {
+        if (currentTime == 0)
+            return length / maxTime;
+        else if (currentTime < 5) {
+            return 12;
+        }
+        return 0;
+    }
 }
