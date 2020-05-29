@@ -93,14 +93,14 @@ public class Rocket {
 		return 0;
 	}
 
-	public void speedToAcceleration(double speed) throws Exception {
-		setAcceleration(0);
-		while (getAcceleration() < speed) {
-			setAcceleration(getAcceleration() + 1);
-		}
-		acceleration = this.getAcceleration();
-		updateSpeed();
-	}
+	public void setDesiredAcceleration(double acceleration) throws Exception {
+        setAcceleration(0);
+        while (getAcceleration() < acceleration) {
+            setAcceleration(getAcceleration() + 1);
+        }
+        this.acceleration = this.getAcceleration();
+        updateSpeed();
+    }
 
 	public FuelTank getFuelTank() {
 		return this.fueltank;

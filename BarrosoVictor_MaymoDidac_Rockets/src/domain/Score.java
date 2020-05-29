@@ -7,21 +7,19 @@ import utilities.ConstantUtilities;
 
 public class Score {
 
-	private Rocket rocket;
 	private Circuit circuit;
 	private double timeTaken;
 	private double metersTravelled;
 
-	public Score(Rocket rocket, Circuit circuit, double timeTaken, double MetersTravelled) throws Exception {
-		validateAttributes(timeTaken, rocket, MetersTravelled);
-			this.rocket = rocket;
+	public Score(Circuit circuit, double timeTaken, double MetersTravelled) throws Exception {
+		validateAttributes(timeTaken, MetersTravelled);
 			this.circuit = circuit;
 			this.timeTaken = timeTaken;
 			this.metersTravelled = MetersTravelled;
 	}
 
-	private void validateAttributes(double time, Rocket rocket, double metersTravelled) throws Exception {
-		if (time <= 0 || rocket == null || metersTravelled == 0) {
+	private void validateAttributes(double time,double metersTravelled) throws Exception {
+		if (time <= 0 || metersTravelled == 0) {
 			throw new Exception();
 		}
 	}

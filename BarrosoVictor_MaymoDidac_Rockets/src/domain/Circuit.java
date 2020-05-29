@@ -48,22 +48,21 @@ public class Circuit {
 	}
 
 	public void doingRace(Rocket rocket) throws Exception {
-		decideAction(rocket);
-		currentTime += ConstantUtilities.DELAY;
-	}
+        decideAction(rocket);
+        currentTime += ConstantUtilities.DELAY;
+    }
 
-	private void decideAction(Rocket rocket) throws Exception {
-		double acceleration = rocket.decideAction(currentTime, maxTime, length);
-		rocket.speedToAcceleration(acceleration);
-		rocket.addStrategy(acceleration);
-	}
+    private void decideAction(Rocket rocket) throws Exception {
+        double acceleration = rocket.decideAction(currentTime, length, maxTime);
+        rocket.setDesiredAcceleration(acceleration);
+    }
 
 	public boolean raceIsGoing(Rocket rocket) {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
 	}
 
 	public void addScoreToRocket(Rocket rocket) throws Exception {
-		rocket.addScore(new Score(rocket, this, currentTime, rocket.getMetersTravelled()));
+		rocket.addScore(new Score(this, currentTime, rocket.getMetersTravelled()));
 	}
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
