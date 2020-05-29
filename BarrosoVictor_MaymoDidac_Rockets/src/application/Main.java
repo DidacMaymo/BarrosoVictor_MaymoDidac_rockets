@@ -18,17 +18,13 @@ public class Main {
 		startRace(circuit);
 	}
 
-	public void addRocketsToRace() {
-
-	}
-
-	private static Rocket initialiseRocket() throws Exception {
+	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
 		double[] maxAccProplellant = { 18, 24, 38 };
 		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
 		return rocket;
 	}
 
-	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception {
+	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
 		List<Propellant> propellants = new ArrayList<Propellant>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
@@ -57,19 +53,19 @@ public class Main {
 	}
 
 	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
-        circuit.addScoreToRocket(rocket);
-        if (circuit.isAWinner(rocket))
-            win(rocket, circuit);
-        else
-            lose(rocket, circuit);
-    }
+		circuit.addScoreToRocket(rocket);
+		if (circuit.isAWinner(rocket))
+			win(rocket, circuit);
+		else
+			lose(rocket, circuit);
+	}
 
-    private static void win(Rocket rocket, Circuit circuit) throws Exception {
-        System.out.println("And the winner is: " + rocket.getId() + " with a time of " + circuit.getCurrentTime());
-    }
+	private static void win(Rocket rocket, Circuit circuit) throws Exception {
+		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + circuit.getCurrentTime());
+	}
 
-    private static void lose(Rocket rocket, Circuit circuit) {
-        System.out.println("There is no winner");
-    }
+	private static void lose(Rocket rocket, Circuit circuit) {
+		System.out.println("There is no winner");
+	}
 
 }
