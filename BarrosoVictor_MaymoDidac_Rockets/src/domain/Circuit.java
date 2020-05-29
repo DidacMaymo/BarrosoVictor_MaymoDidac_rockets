@@ -1,23 +1,25 @@
 package domain;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import utilities.ConstantUtilities;
 
 public class Circuit {
-	private String id;
-	private int maxTime;
-	private double length;
-	private List<Rocket> rockets = new ArrayList<Rocket>();
-	private int currentTime = 0;
 
-	public Circuit(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
-		validateAttributes(id, maxtime, length, rockets);
+	private String id;
+	private int maxTime, currentTime = 0;
+	private int length;
+	private Rocket winner;
+	private List<Rocket> rocket = new ArrayList<Rocket>();
+
+	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
+		validateAttributes(id, maxTime, length, rocket);
 		this.id = id;
-		this.maxTime = maxtime;
+		this.maxTime = maxTime;
 		this.length = length;
-		this.rockets = rockets;
+		this.rocket = rocket;
 	}
 
 	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
@@ -25,33 +27,24 @@ public class Circuit {
 			throw new Exception("Wrong attributes set!");
 	}
 
-	/* getters and setters methods */
-	public void addScoreToRocket(Rocket rocket) throws Exception {
-		rocket.addScore(new Score(rocket, this, currentTime));
+	public double getCurrentTime() {
+		return this.currentTime;
 	}
 
-	public int getCurrentTime() {
-		return currentTime;
-	}
-
-	public List<Rocket> getRockets() {
-		return rockets;
+	public double getMaxTime() {
+		return this.maxTime;
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	public int getMaxTime() {
-		return maxTime;
+	public double getLength() {
+		return this.length;
 	}
 
-	public Integer getLimitTime() {
-		return maxTime;
-	}
-
-	public Double getLength() {
-		return length;
+	public void setCurrentTime(double time) {
+		this.currentTime += time;
 	}
 
 	public void doingRace(Rocket rocket) throws Exception {
@@ -60,20 +53,55 @@ public class Circuit {
 	}
 
 	private void decideAction(Rocket rocket) throws Exception {
-		double acceleration = rocket.decideAction(currentTime, length, maxTime);
-		rocket.setDesiredAcceleration(acceleration);
-	}
-
-	public boolean isAWinner(Rocket rocket) throws Exception {
-		return (rocket.getMetersTravelled() < length || rocket.getFuelTank().getActualFuel() <= 0);
+		double acceleration = rocket.decideAction(currentTime, maxTime, length);
+		rocket.speedToAcceleration(acceleration);
+		rocket.addStrategy(acceleration);
 	}
 
 	public boolean raceIsGoing(Rocket rocket) {
-		return currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0;
+		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
+	}
+
+	public void addScoreToRocket(Rocket rocket) throws Exception {
+		rocket.addScore(new Score(this, currentTime, rocket.getMetersTravelled()));
+	}
+
+	public boolean isAWinner(Rocket rocket) throws Exception {
+		if (winner == null) {
+			setWinner(rocket);
+		} else if (isItTheWinner(rocket)) {
+			setWinner(rocket);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isItTheWinner(Rocket rocket) throws Exception {
+		if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
+			if (rocket.getScore(this).getMetersTravelled() < winner.getScore(this).getMetersTravelled()) {
+				return true;
+			}
+		} else if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
+			return true;
+		}
+		return false;
+	}
+
+	public void setWinner(Rocket r) {
+		winner = r;
+	}
+
+	public Rocket getWinner() {
+		return winner;
+	}
+
+	public List<Rocket> getRockets() {
+		return rocket;
 	}
 
 	public void resetTime() {
 		currentTime = 0;
+
 	}
 
 }

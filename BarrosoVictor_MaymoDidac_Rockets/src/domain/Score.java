@@ -2,28 +2,32 @@ package domain;
 
 public class Score {
 
-	private Rocket winner;
 	private Circuit circuit;
 	private double timeTaken;
+	private double metersTravelled;
 
-	public Score(Rocket winner, Circuit circuit, double timeTaken) throws Exception {
-		validateAttributes(timeTaken, winner, circuit);
-		this.winner = winner;
+	public Score(Circuit circuit, double timeTaken, double MetersTravelled) throws Exception {
+		validateAttributes(timeTaken, MetersTravelled);
 		this.circuit = circuit;
 		this.timeTaken = timeTaken;
+		this.metersTravelled = MetersTravelled;
 	}
 
-	private void validateAttributes(double time, Rocket rocket, Circuit circuit) throws Exception {
-		if (time <= 0 || rocket == null || circuit == null)
-			throw new Exception("Wrong attributes set!");
-	}
-
-	public Rocket getWinner() {
-		return winner;
+	private void validateAttributes(double time, double metersTravelled) throws Exception {
+		if (time <= 0 || metersTravelled == 0) {
+			throw new Exception();
+		}
 	}
 
 	public double getTimeTaken() {
 		return timeTaken;
 	}
 
+	public double getMetersTravelled() {
+		return metersTravelled;
+	}
+
+	public Circuit getCircuit() {
+		return circuit;
+	}
 }

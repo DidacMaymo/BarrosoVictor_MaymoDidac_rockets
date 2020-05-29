@@ -53,6 +53,7 @@ public class Main {
 	}
 
 	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
+		circuit.addScoreToRocket(rocket);
 		if (circuit.isAWinner(rocket))
 			win(rocket, circuit);
 		else
@@ -60,9 +61,7 @@ public class Main {
 	}
 
 	private static void win(Rocket rocket, Circuit circuit) throws Exception {
-		//agafar winner des de l'score, justo cuando gana la carrera añadir la score
 		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + circuit.getCurrentTime());
-		circuit.addScoreToRocket(rocket);
 	}
 
 	private static void lose(Rocket rocket, Circuit circuit) {
