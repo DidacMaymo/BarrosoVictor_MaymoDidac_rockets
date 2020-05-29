@@ -8,13 +8,13 @@ import utilities.ConstantUtilities;
 public class Rocket {
 
 	private String id;
-	private double speed = 0;
-	private int metersTravelled = 0;
+	private double speed = 0; // at start here counts as v0
 	private double acceleration = 0;
+	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
+	private Strategy strategy = new Strategy();
 	private List<Score> scores = new ArrayList<Score>();
-	private Strategy strategy;
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
@@ -84,12 +84,7 @@ public class Rocket {
 
 	// decide action va a strategy
 	public double decideAction(int currentTime, double length, double maxTime) {
-		if (currentTime == 0)
-			return length / maxTime;
-		else if (currentTime < 5) {
-			return 12;
-		}
-		return 0;
+		return Strategy.decideAction(currentTime, length, maxTime);
 	}
 
 	public void setDesiredAcceleration(double acceleration) throws Exception {
@@ -111,4 +106,12 @@ public class Rocket {
 		return fueltank.getCapacity();
 	}
 
+	public Score getScore(Circuit circuit) throws Exception {
+		for (Score s : this.scores) {
+			if (s.getCircuit().equals(circuit)) {
+				return s;
+			}
+		}
+		throw new Exception("not cirucit existent");
+	}
 }
