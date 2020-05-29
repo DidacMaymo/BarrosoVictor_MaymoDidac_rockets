@@ -56,10 +56,6 @@ public class Main {
 				+ circuit.getLength() + " Fuel: " + rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
 
-	private static void addScoreToRocketFinished(Rocket rocket, Circuit circuit) throws Exception {
-		circuit.addScoreToRocket(rocket);
-		printResult(rocket, circuit);
-	}
 	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
         circuit.addScoreToRocket(rocket);
         if (circuit.isAWinner(rocket))
