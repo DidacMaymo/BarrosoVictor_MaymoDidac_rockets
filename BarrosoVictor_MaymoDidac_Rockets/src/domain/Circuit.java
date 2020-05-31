@@ -11,7 +11,6 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
-	private Rocket winner;
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
 
@@ -58,34 +57,21 @@ public class Circuit {
 	}
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
-		if (winner == null || isBestWinner(rocket)) {
-			setWinner(rocket);
-			bestScore = new Score(this.getCurrentTime(), rocket.getMetersTravelled());
-			return true;
-		}
-		return false;
+        if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
+            if (isBestWinner(new Score(rocket, this.getCurrentTime(), rocket.getMetersTravelled()))) {
+                return true;
+            }
+        return false;
+    }
+		   
+	 public boolean isBestWinner(Score score) throws Exception {
+	        if (score.compareTo(bestScore) > 0) {
+	            bestScore = score;
+	            return true;
+	        }
+	        return false;
 	}
-
-	private boolean isBestWinner(Rocket rocket) throws Exception {
-		Score score = new Score(this.getCurrentTime(), rocket.getMetersTravelled());
-		if(score.getTimeTaken()  == bestScore.getTimeTaken()) {
-			if(score.getMetersTravelled() > bestScore.getMetersTravelled()) {
-				return true;
-			}
-		} else if (score.getTimeTaken() < bestScore.getTimeTaken()) {
-			return true;
-		}
-		return false;
-	}
-
-	private void setWinner(Rocket r) {
-		winner = r;
-	}
-
-	public Rocket getWinner() {
-		return winner;
-	}
-
+	
 	public List<Rocket> getRockets() {
 		return rocket;
 	}
