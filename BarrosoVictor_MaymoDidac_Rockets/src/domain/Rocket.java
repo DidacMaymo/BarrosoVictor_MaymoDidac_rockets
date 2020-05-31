@@ -13,14 +13,13 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
-	private Strategy strategy = new Strategy();
+
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fueltank = fuelTank;
-		this.strategy = new Strategy();
 	}
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
@@ -96,21 +95,11 @@ public class Rocket {
 	}
 
 	/* Adds score and strategy */
-	public void addScore(Score score) {
-		scores.add(score);
-	}
-
+	
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
 		return fueltank.getCapacity();
 	}
 
-	public Score getScore(Circuit circuit) throws Exception {
-		for (Score s : this.scores) {
-			if (s.getCircuit().equals(circuit)) {
-				return s;
-			}
-		}
-		throw new Exception("not cirucit existent");
-	}
+	
 }

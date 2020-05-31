@@ -13,7 +13,7 @@ public class Circuit {
 	private int length;
 	private Rocket winner;
 	private List<Rocket> rocket = new ArrayList<Rocket>();
-	private Score score;
+	private Score bestScore;
 
 	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
 		validateAttributes(id, maxTime, length, rocket);
@@ -57,24 +57,22 @@ public class Circuit {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
 	}
 
-	public void addScoreToRocket(Rocket rocket) throws Exception {
-		rocket.addScore(new Score(this, currentTime, rocket.getMetersTravelled()));
-	}
-
 	public boolean isAWinner(Rocket rocket) throws Exception {
 		if (winner == null || isBestWinner(rocket)) {
 			setWinner(rocket);
+			bestScore = new Score(this.getCurrentTime(), rocket.getMetersTravelled());
 			return true;
 		}
 		return false;
 	}
 
 	private boolean isBestWinner(Rocket rocket) throws Exception {
-		if (rocket.getScore(this).getTimeTaken() == winner.getScore(this).getTimeTaken()) {
-			if (rocket.getScore(this).getMetersTravelled() > winner.getScore(this).getMetersTravelled()) {
+		Score score = new Score(this.getCurrentTime(), rocket.getMetersTravelled());
+		if(score.getTimeTaken()  == bestScore.getTimeTaken()) {
+			if(score.getMetersTravelled() > bestScore.getMetersTravelled()) {
 				return true;
 			}
-		} else if (rocket.getScore(this).getTimeTaken() < winner.getScore(this).getTimeTaken()) {
+		} else if (score.getTimeTaken() < bestScore.getTimeTaken()) {
 			return true;
 		}
 		return false;
