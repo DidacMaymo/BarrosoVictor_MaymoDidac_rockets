@@ -53,7 +53,6 @@ public class Main {
 	}
 
 	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
-		circuit.addScoreToRocket(rocket);
 		if (circuit.isAWinner(rocket))
 			win(rocket, circuit);
 		else
