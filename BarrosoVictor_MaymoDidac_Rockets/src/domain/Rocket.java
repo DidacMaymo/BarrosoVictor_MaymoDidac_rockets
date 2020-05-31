@@ -13,15 +13,12 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
-	private Strategy strategy = new Strategy();
-	private List<Score> scores = new ArrayList<Score>();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fueltank = fuelTank;
-		this.strategy = new Strategy();
 	}
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
@@ -29,7 +26,6 @@ public class Rocket {
 			throw new Exception("Wrong attributes set!");
 	}
 
-	/* getters and setters */
 	public int getMetersTravelled() {
 		return metersTravelled;
 	}
@@ -82,7 +78,6 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	// decide action va a strategy
 	public double decideAction(int currentTime, double length, double maxTime) {
 		return Strategy.decideAction(currentTime, length, maxTime);
 	}
@@ -96,22 +91,8 @@ public class Rocket {
 		updateSpeed();
 	}
 
-	/* Adds score and strategy */
-	public void addScore(Score score) {
-		scores.add(score);
-	}
-
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
 		return fueltank.getCapacity();
 	}
-
-	public Score getScore(Circuit circuit) throws Exception {
-        for (Score s : this.scores) {
-            if (s.getCircuit().equals(circuit)) {
-                return s;
-            }
-        }
-        throw new Exception("not cirucit existent");
-    }
 }
