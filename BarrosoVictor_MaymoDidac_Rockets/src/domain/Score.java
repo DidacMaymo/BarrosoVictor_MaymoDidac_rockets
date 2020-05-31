@@ -10,6 +10,7 @@ public class Score {
 	private Circuit circuit;
 	private double timeTaken;
 	private double metersTravelled;
+	private Rocket winner;
 
 	public Score(Circuit circuit, double timeTaken, double MetersTravelled) throws Exception {
 		validateAttributes(timeTaken, MetersTravelled);

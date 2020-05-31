@@ -14,7 +14,6 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
 	private Strategy strategy = new Strategy();
-	private List<Score> scores = new ArrayList<Score>();
 
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
