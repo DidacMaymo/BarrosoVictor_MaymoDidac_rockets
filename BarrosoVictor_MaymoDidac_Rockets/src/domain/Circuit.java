@@ -81,7 +81,8 @@ public class Circuit {
 
 	}
 
-	public void setScore(Score score) {
+	public void setScore(Score score) throws Exception { 
+		if(score==null) throw new Exception();
 		bestScore = score;
 	}
 
