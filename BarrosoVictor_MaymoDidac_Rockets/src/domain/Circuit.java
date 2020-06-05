@@ -43,7 +43,7 @@ public class Circuit {
 		return this.length;
 	}
 
-	public void setCurrentTime(double time) {
+	public void increaseTime(double time) {
 		this.currentTime += time;
 	}
 

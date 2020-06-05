@@ -9,6 +9,9 @@ import domain.Propellant;
 import domain.Rocket;
 
 public class Main {
+	//dto
+	//jdbc
+	//una classe personalitzada exceptions
 
 	public static void main(String[] args) throws Exception {
 		Rocket rocket = initialiseRocket();

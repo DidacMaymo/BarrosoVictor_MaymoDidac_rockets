@@ -80,7 +80,7 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	// decide action va a strategy
+	
 	public double decideAction(int currentTime, double length, double maxTime) {
 		return Strategy.decideAction(currentTime, length, maxTime);
 	}
@@ -94,10 +94,7 @@ public class Rocket {
 		updateSpeed();
 	}
 
-	/* Adds score and strategy */
-	
 	public double getFuelCapacity() {
-		// TODO Auto-generated method stub
 		return fueltank.getCapacity();
 	}
 

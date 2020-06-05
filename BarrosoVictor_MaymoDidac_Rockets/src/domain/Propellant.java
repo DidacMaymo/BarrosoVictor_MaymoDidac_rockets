@@ -5,7 +5,6 @@ public class Propellant {
 	private double maxAcceleration, actualAcceleration = 0;
 
 	public Propellant(double maxAcceleration) throws Exception {
-       
         validateAttributes(maxAcceleration);
         this.maxAcceleration = maxAcceleration;
     }
