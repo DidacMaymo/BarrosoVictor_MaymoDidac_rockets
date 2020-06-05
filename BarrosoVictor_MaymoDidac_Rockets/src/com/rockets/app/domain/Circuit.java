@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.utilities.ConstantUtilities;
+import com.rockets.app.utilities.InvalidParamException;
 
 public class Circuit {
 
@@ -13,7 +15,11 @@ public class Circuit {
 	private int length;
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
+	
+	public  Circuit (){
 
+	}
+	
 	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
 		validateAttributes(id, maxTime, length, rocket);
 		this.id = id;
@@ -26,12 +32,20 @@ public class Circuit {
 		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
 			throw new Exception("Wrong attributes set!");
 	}
+	
+	public Circuit(CircuitDTO circuit) throws InvalidParamException {
+		if(circuit == null) throw new InvalidParamException();
+		this.id=circuit.getId();
+		this.maxTime=circuit.getMaxTime();
+		this.length=circuit.getLength();
+		this.rocket=circuit.getRocket();
+	}
 
 	public double getCurrentTime() {
 		return this.currentTime;
 	}
 
-	public double getMaxTime() {
+	public int getMaxTime() {
 		return this.maxTime;
 	}
 
@@ -39,12 +53,24 @@ public class Circuit {
 		return this.id;
 	}
 
-	public double getLength() {
+	public int getLength() {
 		return this.length;
 	}
+	public List<Rocket> getRockets() {
+		return rocket;
+	}
+	public Score getScore() {
+		// TODO Auto-generated method stub
+		return bestScore;
+	}
 
-	public void setCurrentTime(double time) {
+	public void increaseTime(double time) {
 		this.currentTime += time;
+	}
+	public void setScore(Score score) throws Exception {
+		if (score == null)
+			throw new Exception();
+		bestScore = score;
 	}
 
 	public void doingRace(Rocket rocket) throws Exception {
@@ -71,24 +97,11 @@ public class Circuit {
 		}
 		return false;
 	}
-
-	public List<Rocket> getRockets() {
-		return rocket;
-	}
-
+	
 	public void resetTime() {
 		currentTime = 0;
 
 	}
-
-	public void setScore(Score score) throws Exception { 
-		if(score==null) throw new Exception();
-		bestScore = score;
-	}
-
-	public Score getScore() {
-		// TODO Auto-generated method stub
-		return bestScore;
-	}
-
+	
+	//seria necessari un update circuit¿?
 }
