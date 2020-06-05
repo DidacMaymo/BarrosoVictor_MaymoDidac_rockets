@@ -14,7 +14,6 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
 
-
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
@@ -27,7 +26,6 @@ public class Rocket {
 			throw new Exception("Wrong attributes set!");
 	}
 
-	/* getters and setters */
 	public int getMetersTravelled() {
 		return metersTravelled;
 	}
@@ -80,7 +78,6 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	
 	public double decideAction(int currentTime, double length, double maxTime) {
 		return Strategy.decideAction(currentTime, length, maxTime);
 	}
@@ -95,8 +92,7 @@ public class Rocket {
 	}
 
 	public double getFuelCapacity() {
+		// TODO Auto-generated method stub
 		return fueltank.getCapacity();
 	}
-
-	
 }

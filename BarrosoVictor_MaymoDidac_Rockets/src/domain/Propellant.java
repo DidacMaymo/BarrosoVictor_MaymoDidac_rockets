@@ -11,7 +11,7 @@ public class Propellant {
 
     private void validateAttributes(double maxAcceleration) throws Exception {
         if (maxAcceleration <= 0) {
-        	throw new Exception();
+        	throw new Exception("Invalid attribute!");
         }
     }
 	public Double getMaxAcceleration() {
