@@ -30,6 +30,11 @@ public class Score {
 	public double getMetersTravelled() {
 		return metersTravelled;
 	}
+	
+	public Rocket getRocket() {
+		return winner;
+	}
+
 	public double compareTo(Object obj) {
         Score other = (Score) obj;
         if (obj == null)
