@@ -3,7 +3,9 @@ package com.rockets.app.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
+import com.rockets.app.utilities.InvalidParamException;
 
 public class Rocket {
 
@@ -14,11 +16,22 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fueltank;
 
+	
+	public Rocket() {
+		
+	}
+	
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fueltank = fuelTank;
+	}
+	
+	public Rocket(RocketDTO rocket) throws InvalidParamException {
+		if(rocket==null)throw new InvalidParamException();
+		this.id=rocket.getId();
+		this.fueltank=rocket.getFueltank();
 	}
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {

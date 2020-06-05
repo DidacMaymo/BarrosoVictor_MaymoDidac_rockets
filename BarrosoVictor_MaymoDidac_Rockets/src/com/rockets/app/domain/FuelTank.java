@@ -29,7 +29,7 @@ public class FuelTank {
     }
 
     public double getFuelConsumption(double speed) throws Exception {
-    	if(speed==0)throw new Exception();
+    	if(speed==0)throw new InvalidParamException();
         return 0.02 * Math.pow(speed, 2);
     }
 

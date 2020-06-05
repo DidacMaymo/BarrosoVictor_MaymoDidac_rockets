@@ -1,13 +1,26 @@
 package com.rockets.app.domain;
 
+import com.rockets.app.application.dto.PropellantDTO;
+import com.rockets.app.utilities.InvalidParamException;
+
 public class Propellant {
 
 	private double maxAcceleration, actualAcceleration = 0;
+	
+	public Propellant() {
+		
+	}
 
 	public Propellant(double maxAcceleration) throws Exception {
         validateAttributes(maxAcceleration);
         this.maxAcceleration = maxAcceleration;
     }
+	
+	public Propellant(PropellantDTO propellantdto) throws InvalidParamException {
+		if(propellantdto==null)throw new InvalidParamException();
+		this.actualAcceleration=propellantdto.getActualAcceleration();
+		this.maxAcceleration=propellantdto.getMaxAcceleration();
+	}
 
     private void validateAttributes(double maxAcceleration) throws Exception {
         if (maxAcceleration <= 0) {

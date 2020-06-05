@@ -16,8 +16,7 @@ public class CircuitDTO {
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
 	
-	public CircuitDTO(String id, int maxTime, int length, List<Rocket> rocket) {
-		this.id = id;
+	public CircuitDTO(int maxTime, int length, List<Rocket> rocket) {
 		this.maxTime = maxTime;
 		this.length = length;
 		this.rocket = rocket;
