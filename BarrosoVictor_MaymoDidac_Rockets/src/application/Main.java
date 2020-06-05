@@ -3,11 +3,12 @@ package application;
 import java.util.ArrayList;
 
 import java.util.List;
-import domain.Circuit;
-import domain.FuelTank;
-import domain.Propellant;
-import domain.Rocket;
-import domain.Score;
+
+import com.rockets.app.application.Circuit;
+import com.rockets.app.application.FuelTank;
+import com.rockets.app.application.Propellant;
+import com.rockets.app.application.Rocket;
+import com.rockets.app.application.Score;
 
 public class Main {
 

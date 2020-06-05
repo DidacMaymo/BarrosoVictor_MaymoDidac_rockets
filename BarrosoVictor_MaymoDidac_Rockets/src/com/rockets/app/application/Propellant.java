@@ -1,4 +1,4 @@
-package domain;
+package com.rockets.app.application;
 
 public class Propellant {
 

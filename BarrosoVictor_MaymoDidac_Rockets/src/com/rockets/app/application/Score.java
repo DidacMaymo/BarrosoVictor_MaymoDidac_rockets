@@ -1,8 +1,8 @@
-package domain;
+package com.rockets.app.application;
 
 import javax.xml.crypto.Data;
 
-import utilities.ConstantUtilities;
+import com.rockets.app.utilities.ConstantUtilities;
 
 public class Score {
 

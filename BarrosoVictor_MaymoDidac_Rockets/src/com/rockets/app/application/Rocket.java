@@ -1,9 +1,9 @@
-package domain;
+package com.rockets.app.application;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import utilities.ConstantUtilities;
+import com.rockets.app.utilities.ConstantUtilities;
 
 public class Rocket {
 
