@@ -26,9 +26,9 @@ public class FuelTank {
 		return capacity;
 	}
 
-	public double getActualFuel() {
-		return actualFuel;
-	}
+	 public double getActualFuel() {
+	        return Math.round(actualFuel * 100.0) / 100.0;
+	 }
 
 	public void updateFuel(double speed) throws Exception {
 		actualFuel -= getFuelConsumption(speed);
