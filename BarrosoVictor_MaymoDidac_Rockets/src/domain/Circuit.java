@@ -43,7 +43,7 @@ public class Circuit {
 		return this.length;
 	}
 
-	public void setCurrentTime(double time) {
+	public void increaseTime(double time) {
 		this.currentTime += time;
 	}
 
@@ -81,7 +81,8 @@ public class Circuit {
 
 	}
 
-	public void setScore(Score score) {
+	public void setScore(Score score) throws Exception { 
+		if(score==null) throw new Exception();
 		bestScore = score;
 	}
 

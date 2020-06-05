@@ -17,7 +17,8 @@ public class FuelTank {
 
     }
 
-    public double getFuelConsumption(double speed) {
+    public double getFuelConsumption(double speed) throws Exception {
+    	if(speed==0)throw new Exception();
         return 0.02 * Math.pow(speed, 2);
     }
 
