@@ -80,5 +80,12 @@ public class Circuit {
 		currentTime = 0;
 
 	}
+	public void setScore(Score score) {
+		bestScore = score;
+	}
+
+	public Score getScore() {
+		return bestScore;
+	}
 
 }
