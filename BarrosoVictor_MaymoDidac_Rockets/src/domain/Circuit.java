@@ -43,7 +43,7 @@ public class Circuit {
 		return this.length;
 	}
 
-	public void increaseTime(double time) {
+	public void setCurrentTime(double time) {
 		this.currentTime += time;
 	}
 
@@ -57,21 +57,21 @@ public class Circuit {
 	}
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
-        if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
-            if (isBestWinner(new Score(rocket, this.getCurrentTime(), rocket.getMetersTravelled()))) {
-                return true;
-            }
-        return false;
-    }
-		   
-	 public boolean isBestWinner(Score score) throws Exception {
-	        if (score.compareTo(bestScore) > 0) {
-	            bestScore = score;
-	            return true;
-	        }
-	        return false;
+		if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
+			if (isBestWinner(new Score(rocket, this.getCurrentTime(), rocket.getMetersTravelled()))) {
+				return true;
+			}
+		return false;
 	}
-	
+
+	public boolean isBestWinner(Score score) throws Exception {
+		if (score.compareTo(bestScore) > 0) {
+			bestScore = score;
+			return true;
+		}
+		return false;
+	}
+
 	public List<Rocket> getRockets() {
 		return rocket;
 	}
@@ -80,11 +80,13 @@ public class Circuit {
 		currentTime = 0;
 
 	}
+
 	public void setScore(Score score) {
 		bestScore = score;
 	}
 
 	public Score getScore() {
+		// TODO Auto-generated method stub
 		return bestScore;
 	}
 
