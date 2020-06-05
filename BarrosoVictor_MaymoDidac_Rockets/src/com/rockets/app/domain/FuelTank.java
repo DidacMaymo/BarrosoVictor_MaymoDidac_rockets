@@ -1,4 +1,4 @@
-package com.rockets.app.application;
+package com.rockets.app.domain;
 
 public class FuelTank {
 
