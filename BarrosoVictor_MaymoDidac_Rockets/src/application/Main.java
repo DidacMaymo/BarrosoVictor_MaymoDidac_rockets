@@ -7,24 +7,25 @@ import domain.Circuit;
 import domain.FuelTank;
 import domain.Propellant;
 import domain.Rocket;
+import domain.Score;
 
 public class Main {
-	//dto
-	//jdbc
-	//una classe personalitzada exceptions
 
 	public static void main(String[] args) throws Exception {
-		Rocket rocket = initialiseRocket();
-		ArrayList<Rocket> rockets = new ArrayList<Rocket>();
-		rockets.add(rocket);
+
+		ArrayList<Rocket> rockets = initialiseRockets();
 		Circuit circuit = new Circuit("tutorialCircuit", 10, 800, rockets);
 		startRace(circuit);
 	}
 
-	private static Rocket initialiseRocket() throws Exception { // iniciem el rocket que fara la cursa
+	private static ArrayList<Rocket> initialiseRockets() throws Exception { // iniciem el rocket que fara la cursa
 		double[] maxAccProplellant = { 18, 24, 38 };
-		Rocket rocket = new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800));
-		return rocket;
+		ArrayList<Rocket> rockets = new ArrayList<Rocket>();
+
+		rockets.add(
+				new Rocket("Falcon IX", initialisePropellants(new double[] { 50, 50, 60, 60 }), new FuelTank(200000)));
+		rockets.add(new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800)));
+		return rockets;
 	}
 
 	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
@@ -44,9 +45,10 @@ public class Main {
 				circuit.doingRace(rocket);
 				circuitInfo(rocket, circuit);
 			}
-			printResult(rocket, circuit);
+			printResult(circuit, rocket);
 			circuit.resetTime();
 		}
+		printBestScore(circuit.getScore());
 	}
 
 	private static void circuitInfo(Rocket rocket, Circuit circuit) {
@@ -55,7 +57,7 @@ public class Main {
 				+ circuit.getLength() + " Fuel: " + rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
 
-	public static void printResult(Rocket rocket, Circuit circuit) throws Exception {
+	public static void printResult(Circuit circuit, Rocket rocket) throws Exception {
 		if (circuit.isAWinner(rocket))
 			win(rocket, circuit);
 		else
@@ -63,11 +65,17 @@ public class Main {
 	}
 
 	private static void win(Rocket rocket, Circuit circuit) throws Exception {
-		System.out.println("And the winner is: " + rocket.getId() + " with a time of " + circuit.getCurrentTime());
+		System.out.println("The rocket: " + rocket.getId() + " with a time of " + circuit.getCurrentTime()
+				+ " is winning the race!\n");
 	}
 
 	private static void lose(Rocket rocket, Circuit circuit) {
-		System.out.println("There is no winner");
+		System.out.println("The rocket: " + rocket.getId() + " is not a winner\n");
+	}
+
+	private static void printBestScore(Score score) {
+		System.out.println("\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of "
+				+ score.getTimeTaken());
 	}
 
 }
