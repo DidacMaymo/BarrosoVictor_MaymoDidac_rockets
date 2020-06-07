@@ -1,18 +1,21 @@
 package domain;
 
+import application.dto.PropellantDTO;
+import utilities.InvalidParamException;
+
 public class Propellant {
 
 	private double maxAcceleration, actualAcceleration = 0;
 
-	public Propellant(double maxAcceleration) throws Exception {
-		validateAttributes(maxAcceleration);
+	public Propellant(double maxAcceleration) throws InvalidParamException {
+		if (maxAcceleration <= 0) {
+			throw new InvalidParamException();
+		}
 		this.maxAcceleration = maxAcceleration;
 	}
 
-	private void validateAttributes(double maxAcceleration) throws Exception {
-		if (maxAcceleration <= 0)
-			throw new Exception("Invalid attribute!");
-
+	public Propellant(PropellantDTO propellantDTO) throws InvalidParamException {
+		this.maxAcceleration = propellantDTO.getMaxAcceleration();
 	}
 
 	public double getMaxAcceleration() {

@@ -1,8 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import utilities.ConstantUtilities;
 
@@ -11,20 +12,14 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
-	private List<Rocket> rocket = new ArrayList<Rocket>();
-	private Score bestScore;
-
-	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
-		validateAttributes(id, maxTime, length, rocket);
+	private Set<Rocket> rockets = new HashSet<Rocket>();
+	private double 
+	
+	
+	public Circuit(String id, int maxTime, int length) throws Exception {
 		this.id = id;
 		this.maxTime = maxTime;
 		this.length = length;
-		this.rocket = rocket;
-	}
-
-	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
-		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
-			throw new Exception("Wrong attributes set!");
 	}
 
 	public double getCurrentTime() {
@@ -45,6 +40,11 @@ public class Circuit {
 
 	public void setCurrentTime(double time) {
 		this.currentTime += time;
+	}
+
+	public void addRockets(ArrayList<Rocket> rockets) {
+		this.rockets.addAll(rockets);
+
 	}
 
 	public void doingRace(Rocket rocket) throws Exception {
@@ -73,7 +73,7 @@ public class Circuit {
 	}
 
 	public List<Rocket> getRockets() {
-		return rocket;
+		return new ArrayList<>(rockets);
 	}
 
 	public void resetTime() {

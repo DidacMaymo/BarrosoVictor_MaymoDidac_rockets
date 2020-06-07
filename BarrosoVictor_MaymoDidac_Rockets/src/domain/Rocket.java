@@ -3,7 +3,9 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.dto.RocketDTO;
 import utilities.ConstantUtilities;
+import utilities.InvalidParamException;
 
 public class Rocket {
 
@@ -12,18 +14,32 @@ public class Rocket {
 	private double acceleration = 0;
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
-	private FuelTank fueltank;
+	private FuelTank fuelTank;
 
-	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		validateAttributes(id, propellants, fuelTank);
+	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws InvalidParamException {
+		if (id == null || id.equals(""))
+			throw new InvalidParamException();
+		if (propellants == null || propellants.isEmpty()) {
+			throw new InvalidParamException();
+		}
+		if (speed < 0) {
+			throw new InvalidParamException();
+		}
+		if (acceleration < 0) {
+			throw new InvalidParamException();
+		}
 		this.id = id;
 		this.propellants = propellants;
-		this.fueltank = fuelTank;
+		this.fuelTank = fuelTank;
 	}
 
-	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)
-			throw new Exception("Wrong attributes set!");
+	public Rocket(RocketDTO rocketDTO) throws InvalidParamException {
+		id = rocketDTO.getId();
+		speed = rocketDTO.getSpeed();
+		acceleration = rocketDTO.getAcceleration();
+		metersTravelled = rocketDTO.getMetersTravelled();
+		propellants = rocketDTO.getPropellants();
+		fuelTank = rocketDTO.getFuelTank();
 	}
 
 	public int getMetersTravelled() {
@@ -43,7 +59,7 @@ public class Rocket {
 	}
 
 	public FuelTank getFuelTank() {
-		return fueltank;
+		return fuelTank;
 	}
 
 	public double getAcceleration() {
@@ -55,7 +71,7 @@ public class Rocket {
 	}
 
 	public double getActualFuel() {
-		return fueltank.getActualFuel();
+		return fuelTank.getActualFuel();
 	}
 
 	public String getId() {
@@ -70,7 +86,7 @@ public class Rocket {
 
 	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.DELAY;
-		fueltank.updateFuel(speed);
+		fuelTank.updateFuel(speed);
 		updateMetersTravelled();
 	}
 
@@ -93,6 +109,11 @@ public class Rocket {
 
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
-		return fueltank.getCapacity();
+		return fuelTank.getCapacity();
 	}
+
+	public List<Propellant> getPropellants()  {
+		return propellants;
+	}
+
 }
