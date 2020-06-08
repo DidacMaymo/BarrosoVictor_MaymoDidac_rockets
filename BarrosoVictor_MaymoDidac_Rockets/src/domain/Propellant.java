@@ -5,13 +5,14 @@ import utilities.InvalidParamException;
 
 public class Propellant {
 
-	private double maxAcceleration, actualAcceleration = 0;
+	private double maxAcceleration, actualAcceleration;
 
-	public Propellant(double maxAcceleration) throws InvalidParamException {
+	public Propellant(double maxAcceleration, double actualAcceleration) throws InvalidParamException {
 		if (maxAcceleration <= 0) {
 			throw new InvalidParamException();
 		}
 		this.maxAcceleration = maxAcceleration;
+		this.actualAcceleration = actualAcceleration;
 	}
 
 	public Propellant(PropellantDTO propellantDTO) throws InvalidParamException {

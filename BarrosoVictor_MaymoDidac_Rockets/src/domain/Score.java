@@ -1,22 +1,30 @@
 package domain;
 
+import application.dto.ScoreDTO;
+import utilities.InvalidParamException;
+
 public class Score {
 
-	private Rocket rocket;
+	private String rocketId;
 	private double timeTaken;
 	private double metersTravelled;
 
-	public Score(Rocket rocket, double timeTaken, double MetersTravelled) throws Exception {
-		validateAttributes(rocket, timeTaken, MetersTravelled);
-		this.rocket = rocket;
+	public Score(String rocketId, double timeTaken, double MetersTravelled) throws InvalidParamException {
+		if (rocketId == null || rocketId.equals(""))
+			throw new InvalidParamException();
+		if (timeTaken <= 0)
+			throw new InvalidParamException();
+		if (metersTravelled <= 0)
+			throw new InvalidParamException();
+		this.rocketId = rocketId;
 		this.timeTaken = timeTaken;
 		this.metersTravelled = MetersTravelled;
 	}
 
-	private void validateAttributes(Rocket rocket, double time, double metersTravelled) throws Exception {
-		if (time <= 0 || metersTravelled == 0 || rocket == null) {
-			throw new Exception();
-		}
+	public Score(ScoreDTO score) throws InvalidParamException {
+		this.rocketId = score.getRocketId();
+		this.timeTaken = score.getTimeTaken();
+		this.metersTravelled = score.getMetersTravelled();
 	}
 
 	public double getTimeTaken() {
@@ -27,8 +35,8 @@ public class Score {
 		return metersTravelled;
 	}
 
-	public Rocket getRocket() {
-		return rocket;
+	public String getRocketId() {
+		return rocketId;
 	}
 
 	public double compareTo(Object obj) {

@@ -1,6 +1,7 @@
 package application.dto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import domain.FuelTank;
@@ -14,13 +15,14 @@ public class RocketDTO {
 	private double speed = 0; // at start here counts as v0
 	private double acceleration = 0;
 	private int metersTravelled = 0;
-	private List<Propellant> propellants = new ArrayList<Propellant>();
-	private FuelTank fuelTank;
+	private List<Double> maxAcceleration = new ArrayList<Double>();
+	private List<Double> actualAcceleration = new ArrayList<Double>();
+	private double capacity;
+	private double actualFuel;
 
-	public RocketDTO(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+	public RocketDTO(String id, List<Double> maxAcceleration, List<Double> actualAcceleration, double capacity,
+			double actualFuel) throws Exception {
 		this.id = id;
-		this.propellants = propellants;
-		this.fuelTank = fuelTank;
 	}
 
 	public RocketDTO(Rocket rocket) {
@@ -28,8 +30,6 @@ public class RocketDTO {
 		speed = rocket.getSpeed();
 		acceleration = rocket.getAcceleration();
 		metersTravelled = rocket.getMetersTravelled();
-		propellants = rocket.getPropellants();
-		fuelTank = rocket.getFuelTank();
 	}
 
 	public String getId() throws InvalidParamException {
@@ -38,11 +38,28 @@ public class RocketDTO {
 		return id;
 	}
 
-	public List<Propellant> getPropellants() throws InvalidParamException {
-		if (propellants == null || propellants.isEmpty()) {
+	public List<Double> getMaxAcceleration() throws InvalidParamException {
+		if (maxAcceleration == null || maxAcceleration.isEmpty())
 			throw new InvalidParamException();
-		}
-		return propellants;
+		return maxAcceleration;
+	}
+
+	public List<Double> getActualAcceleration() throws InvalidParamException {
+		if (maxAcceleration == null || maxAcceleration.isEmpty())
+			throw new InvalidParamException();
+		return actualAcceleration;
+	}
+
+	public double getCapacity() throws InvalidParamException {
+		if (maxAcceleration == null || maxAcceleration.isEmpty())
+			throw new InvalidParamException();
+		return capacity;
+	}
+
+	public double getActualFuel() throws InvalidParamException {
+		if (actualFuel > capacity || actualFuel < 0)
+			throw new InvalidParamException();
+		return actualFuel;
 	}
 
 	public double getSpeed() throws InvalidParamException {
@@ -65,13 +82,6 @@ public class RocketDTO {
 			throw new InvalidParamException();
 		}
 		return metersTravelled;
-	}
-
-	public FuelTank getFuelTank() throws InvalidParamException {
-		if (fuelTank == null) {
-			throw new InvalidParamException();
-		}
-		return fuelTank;
 	}
 
 }

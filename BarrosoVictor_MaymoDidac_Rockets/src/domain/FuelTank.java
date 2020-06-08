@@ -8,12 +8,14 @@ public class FuelTank {
 	private double capacity;
 	private double actualFuel;
 
-	public FuelTank(double capacity) throws Exception {
+	public FuelTank(double capacity, double actualFuel) throws InvalidParamException {
 		if (capacity <= 0) {
 			throw new InvalidParamException();
 		}
+		if (actualFuel <= 0 || actualFuel > capacity)
+			throw new InvalidParamException();
 		this.capacity = capacity;
-		this.actualFuel = capacity;
+		this.actualFuel = actualFuel;
 	}
 
 	public FuelTank(FuelTankDTO fuelTankDTO) throws InvalidParamException {

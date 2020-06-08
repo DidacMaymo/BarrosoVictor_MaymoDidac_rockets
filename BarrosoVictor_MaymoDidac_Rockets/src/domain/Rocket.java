@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import application.dto.RocketDTO;
@@ -38,8 +39,19 @@ public class Rocket {
 		speed = rocketDTO.getSpeed();
 		acceleration = rocketDTO.getAcceleration();
 		metersTravelled = rocketDTO.getMetersTravelled();
-		propellants = rocketDTO.getPropellants();
-		fuelTank = rocketDTO.getFuelTank();
+		propellants = createPropellants(rocketDTO.getMaxAcceleration(), rocketDTO.getActualAcceleration());
+		fuelTank = new FuelTank(rocketDTO.getCapacity(), rocketDTO.getActualFuel());
+	}
+
+	private List<Propellant> createPropellants(List<Double> maxAcceleration, List<Double> actualAcceleration)
+			throws InvalidParamException {
+		Iterator<Double> maxAccIt = maxAcceleration.iterator();
+		Iterator<Double> actualAccIt = actualAcceleration.iterator();
+		List<Propellant> propellants = new ArrayList<>();
+		while (maxAccIt.hasNext() && actualAccIt.hasNext()) {
+			propellants.add(new Propellant(maxAccIt.next(), actualAccIt.next()));
+		}
+		return propellants;
 	}
 
 	public int getMetersTravelled() {
@@ -112,7 +124,7 @@ public class Rocket {
 		return fuelTank.getCapacity();
 	}
 
-	public List<Propellant> getPropellants()  {
+	public List<Propellant> getPropellants() {
 		return propellants;
 	}
 

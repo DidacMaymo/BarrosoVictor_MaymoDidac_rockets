@@ -7,9 +7,9 @@ public class CircuitDTO {
 
 	private String id;
 	private int maxTime;
-	private int length;
+	private double length;
 
-	public CircuitDTO(String id, int maxTime, int length) throws Exception {
+	public CircuitDTO(String id, int maxTime, int length) throws InvalidParamException {
 		this.id = id;
 		this.maxTime = maxTime;
 		this.length = length;
@@ -19,7 +19,28 @@ public class CircuitDTO {
 		if (circuit == null) {
 			throw new InvalidParamException();
 		}
+		this.id = circuit.getId();
+		this.maxTime = circuit.getMaxTime();
+		this.length = circuit.getLength();
 
+	}
+
+	public String getId() throws InvalidParamException {
+		if (id == null || id.equals(""))
+			throw new InvalidParamException();
+		return id;
+	}
+
+	public int getMaxTime() throws InvalidParamException {
+		if (maxTime <= 0)
+			throw new InvalidParamException();
+		return maxTime;
+	}
+
+	public double getLength() throws InvalidParamException {
+		if (length <= 0)
+			throw new InvalidParamException();
+		return length;
 	}
 
 }
