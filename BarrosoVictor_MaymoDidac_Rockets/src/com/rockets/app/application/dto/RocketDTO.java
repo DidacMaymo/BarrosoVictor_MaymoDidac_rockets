@@ -15,13 +15,17 @@ public class RocketDTO {
 	private FuelTank fueltank;
 	
 	
-	public RocketDTO(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
-		validateAttributes( propellants, fuelTank);
-		this.propellants = propellants;
-		this.fueltank = fuelTank;
+	public RocketDTO(String id,List<PropellantDTO> propellants, FuelTankDTO fuelTankdto) throws Exception {
+		validateAttributes(propellants, fuelTankdto);
+		this.id=id;
+		for(PropellantDTO p: propellants) {
+			this.propellants.add(new Propellant(p));
+		}
+		
+		this.fueltank = new FuelTank(fuelTankdto);
 	}
 
-	private void validateAttributes(List<Propellant> propellants, FuelTank fuelTank) throws Exception {
+	private void validateAttributes(List<PropellantDTO> propellants, FuelTankDTO fuelTank) throws Exception {
 		if (propellants.isEmpty() || fuelTank == null)
 			throw new Exception("Wrong attributes set!");
 	}

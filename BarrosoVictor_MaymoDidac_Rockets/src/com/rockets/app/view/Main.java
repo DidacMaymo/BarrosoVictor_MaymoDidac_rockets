@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import com.rockets.app.aplication.CircuitController;
+import com.rockets.app.application.dto.CircuitDTO;
+import com.rockets.app.application.dto.FuelTankDTO;
+import com.rockets.app.application.dto.PropellantDTO;
+import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.domain.Circuit;
 import com.rockets.app.domain.FuelTank;
 import com.rockets.app.domain.Propellant;
@@ -12,35 +17,33 @@ import com.rockets.app.domain.Rocket;
 import com.rockets.app.domain.Score;
 
 public class Main {
-
+	
+	public static CircuitController controller = new CircuitController();
+	
 	public static void main(String[] args) throws Exception {
-
-		ArrayList<Rocket> rockets = initialiseRockets();
-		Circuit circuit = new Circuit("tutorialCircuit", 10, 800, rockets);
+		ArrayList<RocketDTO> rockets = initialiseRockets();
+		CircuitDTO circuit = new CircuitDTO("tutorialCircuit", 10, 800, rockets);
 		startRace(circuit);
 	}
 
-	private static ArrayList<Rocket> initialiseRockets() throws Exception { // iniciem el rocket que fara la cursa
+	private static ArrayList<RocketDTO> initialiseRockets() throws Exception { 
 		double[] maxAccProplellant = { 18, 24, 38 };
-		ArrayList<Rocket> rockets = new ArrayList<Rocket>();
-
-		rockets.add(
-				new Rocket("Falcon IX", initialisePropellants(new double[] { 50, 50, 60, 60 }), new FuelTank(200000)));
-		rockets.add(new Rocket("Star V", initialisePropellants(maxAccProplellant), new FuelTank(1800)));
+		ArrayList<RocketDTO> rockets = new ArrayList<RocketDTO>();
+		rockets.add(new RocketDTO("Falcon IX", initialisePropellants(new double[] { 50, 50, 60, 60 }), new FuelTankDTO(200000)));
+		rockets.add(new RocketDTO("Star V", initialisePropellants(maxAccProplellant), new FuelTankDTO(1800)));
 		return rockets;
 	}
 
-	private static List<Propellant> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
-		List<Propellant> propellants = new ArrayList<Propellant>();
+	private static List<PropellantDTO> initialisePropellants(double[] maxAccProplellant) throws Exception { // same
+		List<PropellantDTO> propellants = new ArrayList<PropellantDTO>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new Propellant(d));
 		}
-
 		return propellants;
 	}
 
-	public static void startRace(Circuit circuit) throws Exception {
-		for (Rocket rocket : circuit.getRockets()) {
+	public static void startRace(CircuitDTO circuit) throws Exception {
+		for (Rocket rocket : circuit.getRocket()) {
 			System.out.println("Starting competition. Circuit: " + circuit.getId() + ". Length: " + circuit.getLength()
 					+ " . Max time: " + circuit.getMaxTime());
 			while (circuit.raceIsGoing(rocket)) {

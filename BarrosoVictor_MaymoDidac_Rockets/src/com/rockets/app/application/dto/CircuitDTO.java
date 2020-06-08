@@ -15,24 +15,31 @@ public class CircuitDTO {
 	private int length;
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
-	
-	public CircuitDTO(int maxTime, int length, List<Rocket> rocket) {
+
+	public CircuitDTO(String id,int maxTime, int length, List<RocketDTO> rocket) throws InvalidParamException {
+		this.id=id;
 		this.maxTime = maxTime;
 		this.length = length;
-		this.rocket = rocket;
+		for (RocketDTO r : rocket) {
+			this.rocket.add(new Rocket(r));
+		}
 	}
+
 	public CircuitDTO(Circuit circuit) throws InvalidParamException {
-		if(circuit==null)throw new InvalidParamException();
+		if (circuit == null)
+			throw new InvalidParamException();
 		this.id = circuit.getId();
 		this.maxTime = circuit.getMaxTime();
 		this.length = circuit.getLength();
-		this.rocket = circuit.getRockets();
+		this.rocket = circuit.getRocket();
 	}
+
 	public String getId() throws InvalidParamException {
 		if (id == null || id.equals(""))
 			throw new InvalidParamException();
 		return id;
 	}
+
 	public int getMaxTime() throws InvalidParamException {
 		if (maxTime == 0)
 			throw new InvalidParamException();
@@ -40,24 +47,27 @@ public class CircuitDTO {
 	}
 
 	public int getLength() throws InvalidParamException {
-		if (length==0)
+		if (length == 0)
 			throw new InvalidParamException();
 		return length;
 	}
+
 	public List<Rocket> getRocket() throws InvalidParamException {
 		if (rocket == null)
 			throw new InvalidParamException();
 		return rocket;
 	}
+
 	public Score getBestScore() throws InvalidParamException {
-		if (bestScore == null )
+		if (bestScore == null)
 			throw new InvalidParamException();
 		return bestScore;
 	}
+
 	@Override
 	public String toString() {
 		return "CircuitDTO [id=" + id + ", maxTime=" + maxTime + ", length=" + length + ", rocket=" + rocket
 				+ ", bestScore=" + bestScore + "]";
 	}
-	
+
 }

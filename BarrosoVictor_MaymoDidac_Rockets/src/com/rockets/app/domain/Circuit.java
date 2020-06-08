@@ -56,7 +56,7 @@ public class Circuit {
 	public int getLength() {
 		return this.length;
 	}
-	public List<Rocket> getRockets() {
+	public List<Rocket> getRocket() {
 		return rocket;
 	}
 	public Score getScore() {
