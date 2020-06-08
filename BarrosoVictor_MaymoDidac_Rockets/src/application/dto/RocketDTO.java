@@ -1,11 +1,7 @@
 package application.dto;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import domain.FuelTank;
-import domain.Propellant;
 import domain.Rocket;
 import utilities.InvalidParamException;
 
@@ -23,6 +19,10 @@ public class RocketDTO {
 	public RocketDTO(String id, List<Double> maxAcceleration, List<Double> actualAcceleration, double capacity,
 			double actualFuel) throws Exception {
 		this.id = id;
+		this.maxAcceleration = maxAcceleration;
+		this.actualAcceleration = actualAcceleration;
+		this.capacity = capacity;
+		this.actualFuel = actualFuel;
 	}
 
 	public RocketDTO(Rocket rocket) {
@@ -30,6 +30,11 @@ public class RocketDTO {
 		speed = rocket.getSpeed();
 		acceleration = rocket.getAcceleration();
 		metersTravelled = rocket.getMetersTravelled();
+		// maxAcceleration = rocket.getMaxAcceleration();
+		// actualAcceleration = rocket.getActualAcceleration();
+		capacity = rocket.getFuelCapacity();
+		actualFuel = rocket.getActualFuel();
+
 	}
 
 	public String getId() throws InvalidParamException {
@@ -45,13 +50,13 @@ public class RocketDTO {
 	}
 
 	public List<Double> getActualAcceleration() throws InvalidParamException {
-		if (maxAcceleration == null || maxAcceleration.isEmpty())
+		if (actualAcceleration == null || actualAcceleration.isEmpty())
 			throw new InvalidParamException();
 		return actualAcceleration;
 	}
 
 	public double getCapacity() throws InvalidParamException {
-		if (maxAcceleration == null || maxAcceleration.isEmpty())
+		if (capacity <= 0)
 			throw new InvalidParamException();
 		return capacity;
 	}

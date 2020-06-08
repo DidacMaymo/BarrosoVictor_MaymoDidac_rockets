@@ -74,8 +74,8 @@ public class Main {
 	}
 
 	private static void printBestScore(Score score) {
-		System.out.println("\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of "
-				+ score.getTimeTaken());
+		System.out.println(
+				"\nAnd the FINAL winner is: " + score.getRocketId() + " with a time of " + score.getTimeTaken());
 	}
 
 }

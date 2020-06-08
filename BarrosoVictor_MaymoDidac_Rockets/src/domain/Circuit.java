@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import application.dto.CircuitDTO;
+import application.dto.RocketDTO;
+import persistance.ScoresRepository;
 import utilities.ConstantUtilities;
 import utilities.InvalidParamException;
 
@@ -14,7 +16,7 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private double length;
-	private Set<Rocket> rockets = new HashSet<Rocket>();
+	private List<Rocket> rockets = new ArrayList<Rocket>();
 	private Score bestScore;
 
 	public Circuit(CircuitDTO circuitDTO) throws InvalidParamException {
@@ -24,7 +26,17 @@ public class Circuit {
 		this.id = circuitDTO.getId();
 		this.maxTime = circuitDTO.getMaxTime();
 		this.length = circuitDTO.getLength();
+		rockets = rocketsDTOTorockets(circuitDTO.getRocketsDTO());
+		bestScore = getBestScoreFromDB();
+	}
 
+	private Score getBestScoreFromDB() {
+		try {
+			return ScoresRepository.getPicture();
+		}
+		catch (Exception e){
+			return null;
+		}
 	}
 
 	public Circuit(String id, int maxTime, int length) throws InvalidParamException {
@@ -38,6 +50,23 @@ public class Circuit {
 		this.id = id;
 		this.maxTime = maxTime;
 		this.length = length;
+	}
+
+	private Score generateBestScoreFromDTO(CircuitDTO circuitDTO) {
+		try {
+			return new Score(circuitDTO.getScoreRocketId(), circuitDTO.getScoreTimeTaken(),
+					circuitDTO.getScoreMetersTravelled());
+		} catch (InvalidParamException e) {
+			return null;
+		}
+	}
+
+	private List<Rocket> rocketsDTOTorockets(ArrayList<RocketDTO> rocketsDTO) throws InvalidParamException {
+		List<Rocket> rockets = new ArrayList<Rocket>();
+		for (RocketDTO rocketDTO : rocketsDTO) {
+			rockets.add(new Rocket(rocketDTO));
+		}
+		return rockets;
 	}
 
 	public double getCurrentTime() {
@@ -76,7 +105,7 @@ public class Circuit {
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
 		if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
-			if (isBestWinner(new Score(rocket, this.getCurrentTime(), rocket.getMetersTravelled()))) {
+			if (isBestWinner(new Score(rocket.getId(), this.getCurrentTime(), rocket.getMetersTravelled()))) {
 				return true;
 			}
 		return false;
