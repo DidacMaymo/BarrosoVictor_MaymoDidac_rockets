@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
+import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
 import com.rockets.app.utilities.InvalidParamException;
 
@@ -13,14 +14,14 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
-	private List<Rocket> rocket = new ArrayList<Rocket>();
+	private List<RocketDTO> rocket = new ArrayList<RocketDTO>();
 	private Score bestScore;
 	
 	public  Circuit (){
 
 	}
 	
-	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
+	public Circuit(String id, int maxTime, int length, List<RocketDTO> rocket) throws Exception {
 		validateAttributes(id, maxTime, length, rocket);
 		this.id = id;
 		this.maxTime = maxTime;
@@ -28,7 +29,7 @@ public class Circuit {
 		this.rocket = rocket;
 	}
 
-	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
+	private void validateAttributes(String id, int maxtime, double length, List<RocketDTO> rockets) throws Exception {
 		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
 			throw new Exception("Wrong attributes set!");
 	}
@@ -56,7 +57,7 @@ public class Circuit {
 	public int getLength() {
 		return this.length;
 	}
-	public List<Rocket> getRocket() {
+	public List<RocketDTO> getRocket() {
 		return rocket;
 	}
 	public Score getScore() {
