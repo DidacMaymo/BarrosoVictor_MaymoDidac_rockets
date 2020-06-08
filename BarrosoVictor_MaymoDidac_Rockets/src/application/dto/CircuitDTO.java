@@ -1,10 +1,12 @@
 package application.dto;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import domain.Circuit;
 import domain.Rocket;
+import domain.Score;
 import utilities.InvalidParamException;
 
 public class CircuitDTO {
@@ -16,6 +18,7 @@ public class CircuitDTO {
 	private String scoreRocketId;
 	private double scoreTimeTaken;
 	private double scoreMetersTravelled;
+	private ScoreDTO bestScore;
 
 	public CircuitDTO(String id, int maxTime, double length, ArrayList<RocketDTO> rocketsDTO, String scoreRocketId,
 			double scoreTimeTaken, double scoreMetersTravelled) throws InvalidParamException {
@@ -88,5 +91,11 @@ public class CircuitDTO {
 		if (scoreMetersTravelled < length)
 			throw new InvalidParamException();
 		return scoreMetersTravelled;
+	}
+
+	public ScoreDTO getBestScore() throws InvalidParamException {
+		if (bestScore == null)
+			throw new InvalidParamException();
+		return bestScore;
 	}
 }

@@ -7,10 +7,10 @@ public class PropellantDTO {
 	private double maxAcceleration;
 	private double actualAcceleration;
 
-	public PropellantDTO(double maxAcceleration, double actualAcceleration) throws InvalidParamException {
+	public PropellantDTO(double maxAcceleration) throws InvalidParamException {
 
 		this.maxAcceleration = maxAcceleration;
-		this.actualAcceleration = actualAcceleration;
+		this.actualAcceleration = 0;
 
 	}
 
