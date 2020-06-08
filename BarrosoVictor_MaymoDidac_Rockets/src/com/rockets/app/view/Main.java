@@ -3,6 +3,7 @@ package com.rockets.app.view;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import com.rockets.app.aplication.CircuitController;
@@ -11,11 +12,13 @@ import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.FuelTankDTO;
 import com.rockets.app.application.dto.PropellantDTO;
 import com.rockets.app.application.dto.RocketDTO;
+import com.rockets.app.application.dto.ScoreDTO;
 import com.rockets.app.domain.Circuit;
 import com.rockets.app.domain.FuelTank;
 import com.rockets.app.domain.Propellant;
 import com.rockets.app.domain.Rocket;
 import com.rockets.app.domain.Score;
+import com.rockets.app.utilities.InvalidParamException;
 
 public class Main {
 	
@@ -83,7 +86,7 @@ public class Main {
 		System.out.println("The rocket: " + rocket.getId() + " is not a winner\n");
 	}
 
-	private static void printBestScore(Score score) {
+	private static void printBestScore(ScoreDTO score) throws InvalidParamException {
 		System.out.println("\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of "
 				+ score.getTimeTaken());
 	}

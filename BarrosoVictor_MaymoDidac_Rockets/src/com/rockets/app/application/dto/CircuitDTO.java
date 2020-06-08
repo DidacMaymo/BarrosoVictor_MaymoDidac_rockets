@@ -14,7 +14,7 @@ public class CircuitDTO {
 	private int maxTime;
 	private int length;
 	private List<RocketDTO> rocket = new ArrayList<RocketDTO>();
-	private Score bestScore;
+	private ScoreDTO bestScore;
 
 	public CircuitDTO(String id,int maxTime, int length, List<RocketDTO> rocket) throws InvalidParamException {
 		this.id=id;
@@ -65,7 +65,7 @@ public class CircuitDTO {
 		return new ArrayList<>(rocket);
 	}
 
-	public Score getBestScore() throws InvalidParamException {
+	public ScoreDTO getBestScore() throws InvalidParamException {
 		if (bestScore == null)
 			throw new InvalidParamException();
 		return bestScore;
