@@ -11,7 +11,7 @@ import com.rockets.app.utilities.InvalidParamException;
 public class RocketDTO {
 	
 	private String id;
-	private List<Propellant> propellants = new ArrayList<Propellant>();
+	private List<PropellantDTO> propellants = new ArrayList<PropellantDTO>();
 	private FuelTank fueltank;
 	
 	
@@ -19,9 +19,8 @@ public class RocketDTO {
 		validateAttributes(propellants, fuelTankdto);
 		this.id=id;
 		for(PropellantDTO p: propellants) {
-			this.propellants.add(new Propellant(p));
+			this.propellants.add(p);
 		}
-		
 		this.fueltank = new FuelTank(fuelTankdto);
 	}
 
@@ -40,7 +39,7 @@ public class RocketDTO {
 		return id;
 	}
 
-	public List<Propellant> getPropellants() throws InvalidParamException {
+	public List<PropellantDTO> getPropellants() throws InvalidParamException {
 		if(propellants==null) throw new InvalidParamException();
 		return propellants;
 	}
@@ -49,6 +48,5 @@ public class RocketDTO {
 		if(fueltank==null) throw new InvalidParamException();
 		return fueltank;
 	}
-	
 	
 }

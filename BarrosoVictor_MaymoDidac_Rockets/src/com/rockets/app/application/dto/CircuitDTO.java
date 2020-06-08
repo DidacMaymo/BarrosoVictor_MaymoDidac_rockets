@@ -29,8 +29,17 @@ public class CircuitDTO {
 		this.id = circuit.getId();
 		this.maxTime = circuit.getMaxTime();
 		this.length = circuit.getLength();
-		this.rocket = circuit.getRocket();
+		this.rocket = rocketsToRocketsDTO(circuit.getRocket());
 	}
+	
+	private List<RocketDTO> rocketsToRocketsDTO(List<Rocket> list) throws InvalidParamException {
+        List<RocketDTO> rocketsDTO = new ArrayList<RocketDTO>();
+        for (Rocket rocket : list) {
+            rocketsDTO.add(new RocketDTO(rocket));
+        }
+        return rocketsDTO;
+    }
+	  
 
 	public String getId() throws InvalidParamException {
 		if (id == null || id.equals(""))
@@ -53,7 +62,7 @@ public class CircuitDTO {
 	public List<RocketDTO> getRocket() throws InvalidParamException {
 		if (rocket == null)
 			throw new InvalidParamException();
-		return rocket;
+		return new ArrayList<>(rocket);
 	}
 
 	public Score getBestScore() throws InvalidParamException {

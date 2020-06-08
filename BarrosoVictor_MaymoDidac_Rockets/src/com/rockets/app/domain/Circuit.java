@@ -14,14 +14,14 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
-	private List<RocketDTO> rocket = new ArrayList<RocketDTO>();
+	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
 	
 	public  Circuit (){
 
 	}
 	
-	public Circuit(String id, int maxTime, int length, List<RocketDTO> rocket) throws Exception {
+	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
 		validateAttributes(id, maxTime, length, rocket);
 		this.id = id;
 		this.maxTime = maxTime;
@@ -29,7 +29,7 @@ public class Circuit {
 		this.rocket = rocket;
 	}
 
-	private void validateAttributes(String id, int maxtime, double length, List<RocketDTO> rockets) throws Exception {
+	private void validateAttributes(String id, int maxtime, double length, List<Rocket> rockets) throws Exception {
 		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
 			throw new Exception("Wrong attributes set!");
 	}
@@ -39,8 +39,16 @@ public class Circuit {
 		this.id=circuit.getId();
 		this.maxTime=circuit.getMaxTime();
 		this.length=circuit.getLength();
-		this.rocket=circuit.getRocket();
+		this.rocket=rocketsDTOTorockets(circuit.getRocket());
 	}
+	
+	private List<Rocket> rocketsDTOTorockets(List<RocketDTO> rocketsDTO) throws InvalidParamException {
+        List<Rocket> rockets = new ArrayList<Rocket>();
+        for (RocketDTO rocketDTO : rocketsDTO) {
+            rockets.add(new Rocket(rocketDTO));
+        }
+        return rockets;
+    }
 
 	public double getCurrentTime() {
 		return this.currentTime;
@@ -57,23 +65,17 @@ public class Circuit {
 	public int getLength() {
 		return this.length;
 	}
-	public List<RocketDTO> getRocket() {
-		return rocket;
+	public List<Rocket> getRocket() {
+		return new ArrayList<>(rocket);
 	}
 	public Score getScore() {
-		// TODO Auto-generated method stub
 		return bestScore;
 	}
 
 	public void increaseTime(double time) {
 		this.currentTime += time;
 	}
-	public void setScore(Score score) throws Exception {
-		if (score == null)
-			throw new Exception();
-		bestScore = score;
-	}
-
+	
 	public void doingRace(Rocket rocket) throws Exception {
 		rocket.setDesiredAcceleration(rocket.decideAction(currentTime, length, maxTime));
 		currentTime += ConstantUtilities.DELAY;
