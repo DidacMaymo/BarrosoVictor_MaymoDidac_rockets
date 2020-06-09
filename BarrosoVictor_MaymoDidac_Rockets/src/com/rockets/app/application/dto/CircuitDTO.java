@@ -29,9 +29,6 @@ public class CircuitDTO {
 		this.length = circuit.getLength();
 	}
 	
-	
-	  
-
 	public String getId() throws InvalidParamException {
 		if (id == null || id.equals(""))
 			throw new InvalidParamException();
