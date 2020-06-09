@@ -16,6 +16,8 @@ public class CircuitController implements ISubject {
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
+
+	static List<Rocket> rocket = new ArrayList<Rocket>();
 	
 	String info;
 
@@ -38,7 +40,6 @@ public class CircuitController implements ISubject {
 		throw new InvalidParamException();
 	}
 
-	static List<Rocket> rocket = new ArrayList<Rocket>();
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
 		Rocket rocket = new Rocket(rocketdto);
