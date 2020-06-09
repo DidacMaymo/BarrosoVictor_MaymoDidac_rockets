@@ -2,12 +2,17 @@ package com.rockets.app.domain;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
+import java.util.Observer;
 
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
+import com.rockets.app.utilities.IObserver;
+import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
+
 
 public class Circuit {
 
@@ -16,7 +21,7 @@ public class Circuit {
 	private int length;
 	private List<Rocket> rocket = new ArrayList<Rocket>();
 	private Score bestScore;
-	
+		
 	public  Circuit (){
 
 	}
@@ -76,6 +81,7 @@ public class Circuit {
 		this.currentTime += time;
 	}
 	
+	
 	public void doingRace(Rocket rocket) throws Exception {
 		rocket.setDesiredAcceleration(rocket.decideAction(currentTime, length, maxTime));
 		currentTime += ConstantUtilities.DELAY;
@@ -105,6 +111,5 @@ public class Circuit {
 		currentTime = 0;
 
 	}
-	
-	//seria necessari un update circuit¿?
+
 }

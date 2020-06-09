@@ -4,27 +4,84 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
+import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.domain.Circuit;
+import com.rockets.app.domain.Rocket;
+import com.rockets.app.utilities.IObserver;
+import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
-public class CircuitController {
-	
-	List<Circuit> circuit =  new ArrayList<Circuit>();
-	
+public class CircuitController implements ISubject {
+	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
+
+	static List<Circuit> circuit = new ArrayList<Circuit>();
+
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		Circuit circuit = new Circuit(circuitdto);
 		this.circuit.add(circuit);
 		return new CircuitDTO(circuit);
 	}
+
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
-		for(Circuit c: this.circuit) {
-			if(circuit.getId().equals(c.getId())) {
+		for (Circuit c : this.circuit) {
+			if (circuit.getId().equals(c.getId())) {
 				return c;
 			}
-		} 
+		}
 		throw new InvalidParamException();
+	}
+
+	List<Rocket> rocket = new ArrayList<Rocket>();
+
+	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
+		Rocket rocket = new Rocket(rocketdto);
+		this.rocket.add(rocket);
+		return new RocketDTO(rocket);
+	}
+
+	public Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
+		for (Rocket c : this.rocket) {
+			if (rocketdto.getId().equals(c.getId())) {
+				return c;
+			}
+		}
+		throw new InvalidParamException();
+	}
+
+	public String startRace(CircuitDTO circuitdto) {
+		for (Rocket rocket : rocket) {
+			notiffy();
+			Circuit circuit = getCircuit(circuitdto);
+			while (circuit.raceIsGoing(rocket)) {
+				circuit.doingRace(rocket);
+				String info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
+						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
+						+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
+				circuitInfo(info);
+			}
+			printResult(circuit, rocket);
+			circuit.resetTime();
+		}
+		printBestScore(circuitdto.getBestScore());
+	}
+
+	public static void printResult(Circuit circuit, Rocket rocket) throws Exception {
+		if (circuit.isAWinner(rocket))
+			win(rocket, circuit.getCurrentTime());
+		else
+			lose(rocket);
+	}
+
+	public void mixObserver(IObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void notiffy() {
+		for (IObserver o : observers) {
+			o.update();
+		}
 
 	}
-	
-
 }
