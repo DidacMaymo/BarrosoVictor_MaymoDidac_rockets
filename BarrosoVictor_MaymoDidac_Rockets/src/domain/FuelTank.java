@@ -20,7 +20,7 @@ public class FuelTank {
 
 	public FuelTank(FuelTankDTO fuelTankDTO) throws InvalidParamException {
 		this.capacity = fuelTankDTO.getCapacity();
-		this.actualFuel = fuelTankDTO.getActualFuel();
+		this.actualFuel = fuelTankDTO.getCapacity();
 	}
 
 	public double getFuelConsumption(double speed) {

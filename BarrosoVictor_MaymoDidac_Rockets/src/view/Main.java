@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.CircuitController;
-import application.RocketController;
 import application.dto.CircuitDTO;
 import application.dto.FuelTankDTO;
 import application.dto.PropellantDTO;
@@ -15,19 +14,18 @@ import utilities.InvalidParamException;
 
 public class Main {
 
-	public static CircuitController circuitController = new CircuitController();
-	public static RocketController controllerRoquet = new RocketController();
+	public static CircuitController controller = new CircuitController();
 
 	public static void main(String[] args) throws Exception {
 		createCircuits(createRockets());
-		circuitController.startRace();
+		controller.startRace();
 	}
 
 	private static void createCircuits(ArrayList<RocketDTO> rocketsDTO) throws InvalidParamException {
-		circuitController.addCircuit(new CircuitDTO("MadMax", 22, 1300, rocketsDTO));
-		circuitController.addCircuit(new CircuitDTO("SpeedTrack", 10, 800, rocketsDTO));
-		circuitController.addCircuit(new CircuitDTO("RisingLap", 15, 900, rocketsDTO));
-		circuitController.addCircuit(new CircuitDTO("FreeWorld", 18, 1200, rocketsDTO));
+		controller.createCircuit(new CircuitDTO("MadMax", 22, 1300));
+		controller.createCircuit(new CircuitDTO("SpeedTrack", 10, 800));
+		controller.createCircuit(new CircuitDTO("RisingLap", 15, 900));
+		controller.createCircuit(new CircuitDTO("FreeWorld", 18, 1200));
 	}
 
 	private static ArrayList<RocketDTO> createRockets() throws InvalidParamException, Exception {
@@ -65,7 +63,7 @@ public class Main {
 	}
 
 	private static ArrayList<PropellantDTO> initialisePropellants(double[] maxAccProplellant)
-			throws InvalidParamException { 
+			throws InvalidParamException {
 		ArrayList<PropellantDTO> propellants = new ArrayList<PropellantDTO>();
 		for (double d : maxAccProplellant) {
 			propellants.add(new PropellantDTO(d));
@@ -77,7 +75,7 @@ public class Main {
 		for (RocketDTO rocketdto : circuitdto.getRocketsDTO()) {
 			System.out.println("Starting competition. Circuit: " + circuitdto.getId() + ". Length: "
 					+ circuitdto.getLength() + " . Max time: " + circuitdto.getMaxTime());
-			Circuit circuit = circuitController.getCircuit(circuitdto);
+			Circuit circuit = controller.getCircuit(circuitdto);
 			Rocket rocket = controllerRoquet.getRocket(rocketdto);
 			while (circuit.raceIsGoing(rocket)) {
 				circuit.doingRace(rocket);

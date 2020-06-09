@@ -37,9 +37,6 @@ public class Rocket {
 
 	public Rocket(RocketDTO rocketDTO) throws InvalidParamException {
 		id = rocketDTO.getId();
-		speed = rocketDTO.getSpeed();
-		acceleration = rocketDTO.getAcceleration();
-		metersTravelled = rocketDTO.getMetersTravelled();
 		propellants = DTOToPropellants(rocketDTO.getPropellants());
 		fuelTank = new FuelTank(rocketDTO.getFuelTank());
 	}

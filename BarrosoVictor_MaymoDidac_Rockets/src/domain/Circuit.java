@@ -16,7 +16,6 @@ public class Circuit {
 	private String id;
 	private int maxTime, currentTime = 0;
 	private double length;
-	private List<Rocket> rockets = new ArrayList<Rocket>();
 	private Score bestScore;
 
 	public Circuit(CircuitDTO circuitDTO) throws InvalidParamException {
@@ -26,7 +25,6 @@ public class Circuit {
 		this.id = circuitDTO.getId();
 		this.maxTime = circuitDTO.getMaxTime();
 		this.length = circuitDTO.getLength();
-		rockets = rocketsDTOTorockets(circuitDTO.getRocketsDTO());
 		bestScore = getBestScoreFromDB();
 	}
 
@@ -51,14 +49,6 @@ public class Circuit {
 		this.length = length;
 	}
 
-	private List<Rocket> rocketsDTOTorockets(ArrayList<RocketDTO> rocketsDTO) throws InvalidParamException {
-		List<Rocket> rockets = new ArrayList<Rocket>();
-		for (RocketDTO rocketDTO : rocketsDTO) {
-			rockets.add(new Rocket(rocketDTO));
-		}
-		return rockets;
-	}
-
 	public int getCurrentTime() {
 		return this.currentTime;
 	}
@@ -79,10 +69,7 @@ public class Circuit {
 		this.currentTime += time;
 	}
 
-	public void addRockets(ArrayList<Rocket> rockets) {
-		this.rockets.addAll(rockets);
-
-	}
+	
 
 	public void doingRace(Rocket rocket) throws Exception {
 		rocket.setDesiredAcceleration(rocket.decideAction(currentTime, length, maxTime));
@@ -107,10 +94,6 @@ public class Circuit {
 			return true;
 		}
 		return false;
-	}
-
-	public List<Rocket> getRockets() {
-		return new ArrayList<>(rockets);
 	}
 
 	public void resetTime() {

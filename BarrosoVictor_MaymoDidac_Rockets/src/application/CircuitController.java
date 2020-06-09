@@ -3,18 +3,19 @@ package application;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import application.dto.CircuitDTO;
 import application.dto.RocketDTO;
 import domain.Circuit;
+import domain.Rocket;
 import utilities.InvalidParamException;
 
 public class CircuitController {
 
-	private static List<Circuit> circuitList;
+	public static List<Circuit> circuitList;
+	public static List<Rocket> rocketList;
 
-	public CircuitDTO addCircuit(CircuitDTO circuitdto) throws InvalidParamException {
+	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		if (circuitList == null) {
 			circuitList = new ArrayList<Circuit>();
 		}
@@ -48,7 +49,7 @@ public class CircuitController {
 	}
 
 	public void startRace() {
-		
+
 	}
 
 	public ArrayList<RocketDTO> getRockets() {
