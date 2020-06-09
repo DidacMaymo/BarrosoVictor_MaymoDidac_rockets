@@ -1,6 +1,7 @@
 package com.rockets.app.aplication;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
@@ -24,12 +25,25 @@ public class CircuitController implements ISubject {
 	 public CircuitDTO getRandomCircuit() throws InvalidParamException {
 	        return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
 	 }
-	
+	 
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
-		Circuit circuit = new Circuit(circuitdto);
-		this.circuitList.add(circuit);
-		return new CircuitDTO(circuit);
-	}
+        if (circuitList == null) {
+            circuitList = new ArrayList<Circuit>();
+        }
+        Circuit circuit = new Circuit(circuitdto);
+        if (repeated(circuit))
+            throw new InvalidParamException();
+        circuitList.add(new Circuit(circuitdto));
+        return new CircuitDTO(circuit);
+    }
+	private boolean repeated(Circuit circuit) {
+        Iterator<Circuit> it = circuitList.iterator();
+        while (it.hasNext()) {
+            if (circuit.equals(it.next()))
+                return true;
+        }
+        return false;
+    }
 
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
 		for (Circuit c : this.circuitList) {
