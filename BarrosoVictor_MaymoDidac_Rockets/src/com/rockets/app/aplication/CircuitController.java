@@ -12,6 +12,7 @@ import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
 public class CircuitController implements ISubject {
+	
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
@@ -37,7 +38,7 @@ public class CircuitController implements ISubject {
 		throw new InvalidParamException();
 	}
 
-	List<Rocket> rocket = new ArrayList<Rocket>();
+	static List<Rocket> rocket = new ArrayList<Rocket>();
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
 		Rocket rocket = new Rocket(rocketdto);
@@ -78,6 +79,8 @@ public class CircuitController implements ISubject {
 		else
 			lose(rocket);
 	}
+	
+
 
 	public void mixObserver(IObserver o) {
 		observers.add(o);
