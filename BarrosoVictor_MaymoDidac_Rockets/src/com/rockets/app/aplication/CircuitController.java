@@ -14,16 +14,22 @@ import com.rockets.app.utilities.InvalidParamException;
 public class CircuitController implements ISubject {
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
-	static List<Circuit> circuit = new ArrayList<Circuit>();
+	static List<Circuit> circuitList = new ArrayList<Circuit>();
+	
+	String info;
 
+	 public CircuitDTO getRandomCircuit() throws InvalidParamException {
+	        return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
+	 }
+	
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		Circuit circuit = new Circuit(circuitdto);
-		this.circuit.add(circuit);
+		this.circuitList.add(circuit);
 		return new CircuitDTO(circuit);
 	}
 
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
-		for (Circuit c : this.circuit) {
+		for (Circuit c : this.circuitList) {
 			if (circuit.getId().equals(c.getId())) {
 				return c;
 			}
@@ -48,13 +54,13 @@ public class CircuitController implements ISubject {
 		throw new InvalidParamException();
 	}
 
-	public String startRace(CircuitDTO circuitdto) {
+	public String startRace() {
+		Circuit circuit = getCircuit(getRandomCircuit());
 		for (Rocket rocket : rocket) {
 			notiffy();
-			Circuit circuit = getCircuit(circuitdto);
 			while (circuit.raceIsGoing(rocket)) {
 				circuit.doingRace(rocket);
-				String info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
+				info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
 						+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
 						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
@@ -82,6 +88,5 @@ public class CircuitController implements ISubject {
 		for (IObserver o : observers) {
 			o.update();
 		}
-
 	}
 }
