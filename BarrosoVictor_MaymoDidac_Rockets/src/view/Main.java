@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import application.CircuitController;
@@ -10,9 +11,6 @@ import application.dto.FuelTankDTO;
 import application.dto.PropellantDTO;
 import application.dto.RocketDTO;
 import application.dto.ScoreDTO;
-import domain.Circuit;
-import domain.Rocket;
-import domain.Score;
 import utilities.InvalidParamException;
 
 public class Main {
@@ -20,6 +18,7 @@ public class Main {
 	public static CircuitController controllerCricuit = new CircuitController();
 	public static RocketController controllerRoquet = new RocketController();
 
+	
 	public static void main(String[] args) throws Exception {
 		ArrayList<RocketDTO> rockets = initialiseRockets();
 		CircuitDTO circuit = new CircuitDTO("tutorialCircuit", 10, 800, rockets);
@@ -72,12 +71,12 @@ public class Main {
 			lose(rocket, circuit);
 	}
 
-	private static void win(Rocket rocket, Circuit circuit) throws Exception {
+	private static void win(RocketDTO rocket, CircuitDTO circuit) throws Exception {
 		System.out.println("The rocket: " + rocket.getId() + " with a time of " + circuit.getCurrentTime()
 				+ " is winning the race!\n");
 	}
 
-	private static void lose(Rocket rocket, Circuit circuit) {
+	private static void lose(RocketDTO rocket, CircuitDTO circuit) {
 		System.out.println("The rocket: " + rocket.getId() + " is not a winner\n");
 	}
 

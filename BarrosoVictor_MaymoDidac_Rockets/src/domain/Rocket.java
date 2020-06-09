@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import application.dto.PropellantDTO;
 import application.dto.RocketDTO;
 import utilities.ConstantUtilities;
 import utilities.InvalidParamException;
@@ -39,17 +40,15 @@ public class Rocket {
 		speed = rocketDTO.getSpeed();
 		acceleration = rocketDTO.getAcceleration();
 		metersTravelled = rocketDTO.getMetersTravelled();
-		propellants = createPropellants(rocketDTO.getMaxAcceleration(), rocketDTO.getActualAcceleration());
-		fuelTank = new FuelTank(rocketDTO.getCapacity(), rocketDTO.getActualFuel());
+		propellants = DTOToPropellants(rocketDTO.getPropellants());
+		fuelTank = new FuelTank(rocketDTO.getFuelTank());
 	}
 
-	private List<Propellant> createPropellants(List<Double> maxAcceleration, List<Double> actualAcceleration)
-			throws InvalidParamException {
-		Iterator<Double> maxAccIt = maxAcceleration.iterator();
-		Iterator<Double> actualAccIt = actualAcceleration.iterator();
+	private List<Propellant> DTOToPropellants(List<PropellantDTO> propellantsDTO) throws InvalidParamException {
+		Iterator<PropellantDTO> it = propellantsDTO.iterator();
 		List<Propellant> propellants = new ArrayList<>();
-		while (maxAccIt.hasNext() && actualAccIt.hasNext()) {
-			propellants.add(new Propellant(maxAccIt.next(), actualAccIt.next()));
+		while (it.hasNext()) {
+			propellants.add(new Propellant(it.next()));
 		}
 		return propellants;
 	}

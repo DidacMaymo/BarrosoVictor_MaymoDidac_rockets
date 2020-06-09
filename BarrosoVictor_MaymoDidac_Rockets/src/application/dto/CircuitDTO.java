@@ -6,29 +6,25 @@ import java.util.List;
 
 import domain.Circuit;
 import domain.Rocket;
-import domain.Score;
 import utilities.InvalidParamException;
 
 public class CircuitDTO {
 
 	private String id;
 	private int maxTime;
+	private int currentTime;
 	private double length;
 	private List<RocketDTO> rocketsDTO = new ArrayList<RocketDTO>();
-	private String scoreRocketId;
-	private double scoreTimeTaken;
-	private double scoreMetersTravelled;
 	private ScoreDTO bestScore;
 
-	public CircuitDTO(String id, int maxTime, double length, ArrayList<RocketDTO> rocketsDTO, String scoreRocketId,
-			double scoreTimeTaken, double scoreMetersTravelled) throws InvalidParamException {
+	public CircuitDTO(String id, int maxTime, int currentTime, double length, ArrayList<RocketDTO> rocketsDTO,
+			ScoreDTO bestScore) throws InvalidParamException {
 		this.id = id;
 		this.maxTime = maxTime;
+		this.currentTime = currentTime;
 		this.length = length;
 		this.rocketsDTO = rocketsDTO;
-		this.scoreRocketId = scoreRocketId;
-		this.scoreTimeTaken = scoreTimeTaken;
-		this.scoreMetersTravelled = scoreMetersTravelled;
+		this.bestScore = bestScore;
 
 	}
 
@@ -38,6 +34,7 @@ public class CircuitDTO {
 		}
 		this.id = circuit.getId();
 		this.maxTime = circuit.getMaxTime();
+		this.currentTime = circuit.getCurrentTime();
 		this.length = circuit.getLength();
 		this.rocketsDTO = rocketsToRocketsDTO(circuit.getRockets());
 
@@ -69,33 +66,19 @@ public class CircuitDTO {
 		return length;
 	}
 
+	public int getCurrentTime() throws InvalidParamException {
+		if (currentTime < 0 || currentTime > maxTime)
+			throw new InvalidParamException();
+		return currentTime;
+	}
+
 	public ArrayList<RocketDTO> getRocketsDTO() throws InvalidParamException {
 		if (rocketsDTO == null || rocketsDTO.isEmpty())
 			throw new InvalidParamException();
 		return new ArrayList<>(rocketsDTO);
 	}
 
-	public String getScoreRocketId() throws InvalidParamException {
-		if (scoreRocketId == null || scoreRocketId.equals(""))
-			throw new InvalidParamException();
-		return scoreRocketId;
-	}
-
-	public double getScoreTimeTaken() throws InvalidParamException {
-		if (scoreTimeTaken <= 0)
-			throw new InvalidParamException();
-		return scoreTimeTaken;
-	}
-
-	public double getScoreMetersTravelled() throws InvalidParamException {
-		if (scoreMetersTravelled < length)
-			throw new InvalidParamException();
-		return scoreMetersTravelled;
-	}
-
 	public ScoreDTO getBestScore() throws InvalidParamException {
-		if (bestScore == null)
-			throw new InvalidParamException();
 		return bestScore;
 	}
 }

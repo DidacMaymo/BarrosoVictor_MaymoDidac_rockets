@@ -8,7 +8,6 @@ import domain.Rocket;
 import utilities.InvalidParamException;
 
 public class RocketController {
-
 	List<Rocket> rocket = new ArrayList<Rocket>();
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {

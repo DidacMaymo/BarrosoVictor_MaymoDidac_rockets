@@ -1,28 +1,26 @@
 package application.dto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import domain.Propellant;
 import domain.Rocket;
 import utilities.InvalidParamException;
 
 public class RocketDTO {
 
 	private String id;
-	private double speed = 0; // at start here counts as v0
+	private double speed = 0;
 	private double acceleration = 0;
 	private int metersTravelled = 0;
-	private List<Double> maxAcceleration = new ArrayList<Double>();
-	private List<Double> actualAcceleration = new ArrayList<Double>();
-	private double capacity;
-	private double actualFuel;
+	private List<PropellantDTO> propellants = new ArrayList<>();
+	private FuelTankDTO fuelTank;
 
-	public RocketDTO(String id, List<Double> maxAcceleration, List<Double> actualAcceleration, double capacity,
-			double actualFuel) throws Exception {
+	public RocketDTO(String id, ArrayList<PropellantDTO> propellants, FuelTankDTO fuelTank) throws Exception {
 		this.id = id;
-		this.maxAcceleration = maxAcceleration;
-		this.actualAcceleration = actualAcceleration;
-		this.capacity = capacity;
-		this.actualFuel = actualFuel;
+		this.propellants = propellants;
+		this.fuelTank = fuelTank;
 	}
 
 	public RocketDTO(Rocket rocket) {
@@ -30,11 +28,18 @@ public class RocketDTO {
 		speed = rocket.getSpeed();
 		acceleration = rocket.getAcceleration();
 		metersTravelled = rocket.getMetersTravelled();
-		// maxAcceleration = rocket.getMaxAcceleration();
-		// actualAcceleration = rocket.getActualAcceleration();
-		capacity = rocket.getFuelCapacity();
-		actualFuel = rocket.getActualFuel();
+		propellants = propellantsToDTO(rocket.getPropellants());
+		fuelTank = new FuelTankDTO(rocket.getFuelTank());
 
+	}
+
+	private List<PropellantDTO> propellantsToDTO(List<Propellant> propellants) {
+		Iterator<Propellant> it = propellants.iterator();
+		List<PropellantDTO> propellantsDTO = new ArrayList<>();
+		while (it.hasNext()) {
+			propellantsDTO.add(new PropellantDTO(it.next()));
+		}
+		return propellantsDTO;
 	}
 
 	public String getId() throws InvalidParamException {
@@ -43,36 +48,24 @@ public class RocketDTO {
 		return id;
 	}
 
-	public List<Double> getMaxAcceleration() throws InvalidParamException {
-		if (maxAcceleration == null || maxAcceleration.isEmpty())
+	public FuelTankDTO getFuelTank() throws InvalidParamException {
+		if (fuelTank == null) {
 			throw new InvalidParamException();
-		return maxAcceleration;
-	}
-
-	public List<Double> getActualAcceleration() throws InvalidParamException {
-		if (actualAcceleration == null || actualAcceleration.isEmpty())
-			throw new InvalidParamException();
-		return actualAcceleration;
-	}
-
-	public double getCapacity() throws InvalidParamException {
-		if (capacity <= 0)
-			throw new InvalidParamException();
-		return capacity;
-	}
-
-	public double getActualFuel() throws InvalidParamException {
-		if (actualFuel > capacity || actualFuel < 0)
-			throw new InvalidParamException();
-		return actualFuel;
+		}
+		return fuelTank;
 	}
 
 	public double getSpeed() throws InvalidParamException {
 		if (speed < 0) {
 			throw new InvalidParamException();
 		}
-
 		return speed;
+	}
+
+	public ArrayList<PropellantDTO> getPropellants() throws InvalidParamException {
+		if (propellants == null || propellants.isEmpty())
+			throw new InvalidParamException();
+		return new ArrayList<>(propellants);
 	}
 
 	public double getAcceleration() throws InvalidParamException {

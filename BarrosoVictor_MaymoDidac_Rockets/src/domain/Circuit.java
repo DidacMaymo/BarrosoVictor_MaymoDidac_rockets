@@ -32,9 +32,8 @@ public class Circuit {
 
 	private Score getBestScoreFromDB() {
 		try {
-			return ScoresRepository.getPicture();
-		}
-		catch (Exception e){
+			return ScoresRepository.getScore(id);
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -52,15 +51,6 @@ public class Circuit {
 		this.length = length;
 	}
 
-	private Score generateBestScoreFromDTO(CircuitDTO circuitDTO) {
-		try {
-			return new Score(circuitDTO.getScoreRocketId(), circuitDTO.getScoreTimeTaken(),
-					circuitDTO.getScoreMetersTravelled());
-		} catch (InvalidParamException e) {
-			return null;
-		}
-	}
-
 	private List<Rocket> rocketsDTOTorockets(ArrayList<RocketDTO> rocketsDTO) throws InvalidParamException {
 		List<Rocket> rockets = new ArrayList<Rocket>();
 		for (RocketDTO rocketDTO : rocketsDTO) {
@@ -69,7 +59,7 @@ public class Circuit {
 		return rockets;
 	}
 
-	public double getCurrentTime() {
+	public int getCurrentTime() {
 		return this.currentTime;
 	}
 
@@ -133,7 +123,6 @@ public class Circuit {
 	}
 
 	public Score getScore() {
-		// TODO Auto-generated method stub
 		return bestScore;
 	}
 
