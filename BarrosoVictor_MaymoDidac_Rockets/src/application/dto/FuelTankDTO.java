@@ -7,9 +7,9 @@ public class FuelTankDTO {
 	private double capacity;
 	private double actualFuel;
 
-	public FuelTankDTO(double capacity, double actualFuel) throws Exception {
+	public FuelTankDTO(double capacity) throws Exception {
 		this.capacity = capacity;
-		this.actualFuel = actualFuel;
+		this.actualFuel = 0;
 	}
 
 	public FuelTankDTO(FuelTank fueltank) {
