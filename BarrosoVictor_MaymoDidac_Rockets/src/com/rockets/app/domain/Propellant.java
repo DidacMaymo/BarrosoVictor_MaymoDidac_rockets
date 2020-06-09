@@ -18,7 +18,7 @@ public class Propellant {
 	
 	public Propellant(PropellantDTO propellantdto) throws InvalidParamException {
 		if(propellantdto==null)throw new InvalidParamException();
-		this.actualAcceleration=propellantdto.getActualAcceleration();
+		this.actualAcceleration=0;
 		this.maxAcceleration=propellantdto.getMaxAcceleration();
 	}
 
