@@ -85,6 +85,11 @@ public class CircuitController {
 			lose(rocket);
 	}
 
+	public void addObserver(IObserver iObserver) throws InvalidParamException {
+		currentCircuit.addObserver(iObserver);
+		
+	}
+
 	
 
 	
