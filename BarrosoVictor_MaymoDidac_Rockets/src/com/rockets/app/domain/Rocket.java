@@ -17,6 +17,10 @@ public class Rocket {
 	private FuelTank fueltank;
 
 	
+	public List<Propellant> getPropellants() {
+		return propellants;
+	}
+
 	public Rocket() {
 		
 	}
@@ -33,6 +37,13 @@ public class Rocket {
 		this.id=rocket.getId();
 		this.fueltank=rocket.getFueltank();
 	}
+	public Rocket(Rocket rocket) {
+        speed = rocket.getSpeed();
+        acceleration = rocket.getAcceleration();
+        metersTravelled = rocket.getMetersTravelled();
+        propellants = rocket.getPropellants();
+        fueltank = rocket.getFuelTank();
+    }
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)

@@ -94,7 +94,7 @@ public class Main implements IObserver {
 
 	private static void printBestScore(ScoreDTO score) throws InvalidParamException {
 		System.out.println(
-				"\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of " + score.getTimeTaken());
+				"\nAnd the FINAL winner is: " + score.getRocketId() + " with a time of " + score.getTimeTaken());
 	}
 	
 	public static void printResult(double currentTime, RocketDTO rocket) throws Exception {
