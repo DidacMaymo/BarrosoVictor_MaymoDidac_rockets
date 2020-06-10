@@ -108,7 +108,7 @@ public class Circuit implements ISubject {
 				circuitInfo(("Current time: " + (getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
 						+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()););
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()));
 			}
 			printResult(this, rocket);
 			resetTime();

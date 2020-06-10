@@ -54,7 +54,7 @@ public class CircuitController {
 		return new RocketDTO(rocket);
 	}
 
-	public Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
+	public  Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
 		for (Rocket c : this.rocket) {
 			if (rocketdto.getId().equals(c.getId())) {
 				return c;
@@ -63,20 +63,19 @@ public class CircuitController {
 		throw new InvalidParamException();
 	}
 
-	public static void printResult(Circuit circuit, Rocket rocket) throws Exception {
-		if (circuit.isAWinner(rocket))
-			win(rocket, circuit.getCurrentTime());
-		else
-			lose(rocket);
+	public  boolean printResult(RocketDTO rocket) throws Exception {
+		if (currentCircuit.isAWinner(getRocket(rocket))) 
+			return true;
+		 else 
+			return false;
 	}
-	
-	
+
 	public void startRace() {
 		for (Rocket rockett : rocket) {
 			currentCircuit.startRace(rockett);
 		}
 	}
-	
+
 	private boolean repeated(Circuit circuit) {
 		Iterator<Circuit> it = circuitList.iterator();
 		while (it.hasNext()) {

@@ -96,6 +96,13 @@ public class Main implements IObserver {
 		System.out.println(
 				"\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of " + score.getTimeTaken());
 	}
+	
+	public static void printResult(double currentTime, RocketDTO rocket) throws Exception {
+		if(controller.printResult(rocket))
+			win(rocket, currentTime);
+		else
+			lose(rocket);
+	}
 
 	
 	
