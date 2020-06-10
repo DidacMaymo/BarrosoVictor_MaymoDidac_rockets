@@ -26,6 +26,7 @@ public class Main implements IObserver {
 				System.out.println(str);
 			}
 		});
+		
 		controller.startRace();
 	}
 

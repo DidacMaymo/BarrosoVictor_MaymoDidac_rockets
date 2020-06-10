@@ -2,7 +2,6 @@ package com.rockets.app.domain;
 
 import java.util.ArrayList;
 
-
 import java.util.List;
 import java.util.Observer;
 
@@ -13,20 +12,19 @@ import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
-
 public class Circuit implements ISubject {
-	
+
 	private List<IObserver> observers = new ArrayList<>();
 
 	private String id;
 	private int maxTime, currentTime = 0;
 	private int length;
 	private Score bestScore;
-		
-	public  Circuit (){
+
+	public Circuit() {
 
 	}
-	
+
 	public Circuit(String id, int maxTime, int length, List<Rocket> rocket) throws Exception {
 		validateAttributes(id, maxTime, length, rocket);
 		this.id = id;
@@ -38,14 +36,15 @@ public class Circuit implements ISubject {
 		if (id.isEmpty() || maxtime <= 0 || length <= 0 || rockets == null)
 			throw new Exception("Wrong attributes set!");
 	}
-	
+
 	public Circuit(CircuitDTO circuit) throws InvalidParamException {
-		if(circuit == null) throw new InvalidParamException();
-		this.id=circuit.getId();
-		this.maxTime=circuit.getMaxTime();
-		this.length=circuit.getLength();;
+		if (circuit == null)
+			throw new InvalidParamException();
+		this.id = circuit.getId();
+		this.maxTime = circuit.getMaxTime();
+		this.length = circuit.getLength();
+		;
 	}
-	
 
 	public double getCurrentTime() {
 		return this.currentTime;
@@ -62,7 +61,7 @@ public class Circuit implements ISubject {
 	public int getLength() {
 		return this.length;
 	}
-	
+
 	public Score getScore() {
 		return bestScore;
 	}
@@ -70,8 +69,7 @@ public class Circuit implements ISubject {
 	public void increaseTime(double time) {
 		this.currentTime += time;
 	}
-	
-	
+
 	public void doingRace(Rocket rocket) throws Exception {
 		rocket.setDesiredAcceleration(rocket.decideAction(currentTime, length, maxTime));
 		currentTime += ConstantUtilities.DELAY;
@@ -96,45 +94,40 @@ public class Circuit implements ISubject {
 		}
 		return false;
 	}
-	
+
 	public void resetTime() {
 		currentTime = 0;
-
 	}
-	
-	public String startRace() {
-		for (Rocket rocket : rocket) {
+
+	public String startRace(Rocket rocket) {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
-					+ getLength() + " . Max time: " + circuit.getMaxTime();
+					+ getLength() + " . Max time: " + getMaxTime();
 			notifyallObservers(s);
-			while (circuit.raceIsGoing(rocket)) {
-				circuit.doingRace(rocket);
-				info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
+			while (raceIsGoing(rocket)) {
+				doingRace(rocket);
+				circuitInfo(("Current time: " + (getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
-						+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
-				circuitInfo(info);
+						+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()););
 			}
-			printResult(circuit, rocket);
-			circuit.resetTime();
-		}
+			printResult(this, rocket);
+			resetTime();
 		printBestScore(circuitdto.getBestScore());
 	}
 
 	@Override
 	public void addObserver(IObserver observer) throws InvalidParamException {
-		if(observer == null) 
+		if (observer == null)
 			throw new InvalidParamException();
-			this.observers.add(observer);
-	}
-	
-	@Override
-	public void notifyallObservers(String s) {
-		for(IObserver observer : observers) {
-			observer.update(s);
-		} //aixo notificarà
-		
+		this.observers.add(observer);
 	}
 
+	@Override
+	public void notifyallObservers(String s) {
+		for (IObserver observer : observers) {
+			observer.update(s);
+		} // aixo notificarà
+
+	}
 
 }
