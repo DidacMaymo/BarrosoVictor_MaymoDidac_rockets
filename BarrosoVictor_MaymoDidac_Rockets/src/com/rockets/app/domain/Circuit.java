@@ -127,7 +127,6 @@ public class Circuit implements ISubject {
 		for (IObserver observer : observers) {
 			observer.update(s);
 		} // aixo notificarà
-
 	}
 
 }

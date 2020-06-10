@@ -104,9 +104,6 @@ public class Main implements IObserver {
 			lose(rocket);
 	}
 
-	
-	
-	
 	@Override
 	public void update(String s) {
 		System.out.println(s);
