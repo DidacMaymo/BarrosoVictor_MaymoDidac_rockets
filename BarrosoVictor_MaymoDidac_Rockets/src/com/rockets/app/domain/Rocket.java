@@ -102,8 +102,8 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	public double decideAction(int currentTime, double length, double maxTime) {
-		return Strategy.decideAction(currentTime, length, maxTime);
+	public double decideAction(int currentTime, double length, double maxTime) throws Exception {
+		return Strategy.decideAction(this, currentTime, length, maxTime);
 	}
 
 	public void setDesiredAcceleration(double acceleration) throws Exception {
