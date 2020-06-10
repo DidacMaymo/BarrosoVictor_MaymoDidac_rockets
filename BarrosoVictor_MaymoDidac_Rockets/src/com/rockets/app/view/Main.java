@@ -10,6 +10,8 @@ import com.rockets.app.application.dto.FuelTankDTO;
 import com.rockets.app.application.dto.PropellantDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.application.dto.ScoreDTO;
+import com.rockets.app.domain.Circuit;
+import com.rockets.app.domain.Rocket;
 import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.InvalidParamException;
 

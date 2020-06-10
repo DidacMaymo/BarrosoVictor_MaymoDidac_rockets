@@ -39,21 +39,6 @@ public class CircuitController {
 		return new CircuitDTO(currentCircuit);
 	}
 
-	private boolean repeated(Circuit circuit) {
-		Iterator<Circuit> it = circuitList.iterator();
-		while (it.hasNext()) {
-			if (circuit.equals(it.next()))
-				return true;
-		}
-		return false;
-	}
-
-	public void startRace() {
-		for (Rocket rockett : rocket) {
-			currentCircuit.startRace(rockett);
-		}
-	}
-
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
 		for (Circuit c : this.circuitList) {
 			if (circuit.getId().equals(c.getId())) {
@@ -83,6 +68,22 @@ public class CircuitController {
 			win(rocket, circuit.getCurrentTime());
 		else
 			lose(rocket);
+	}
+	
+	
+	public void startRace() {
+		for (Rocket rockett : rocket) {
+			currentCircuit.startRace(rockett);
+		}
+	}
+	
+	private boolean repeated(Circuit circuit) {
+		Iterator<Circuit> it = circuitList.iterator();
+		while (it.hasNext()) {
+			if (circuit.equals(it.next()))
+				return true;
+		}
+		return false;
 	}
 
 	public void addObserver(IObserver iObserver) throws InvalidParamException {
