@@ -12,11 +12,13 @@ import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
-public class CircuitController implements ISubject {
+public class CircuitController {
 	
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
+	
+	static Circuit currentCircuit;
 
 	static List<Rocket> rocket = new ArrayList<Rocket>();
 	
@@ -30,11 +32,11 @@ public class CircuitController implements ISubject {
         if (circuitList == null) {
             circuitList = new ArrayList<Circuit>();
         }
-        Circuit circuit = new Circuit(circuitdto);
-        if (repeated(circuit))
+        currentCircuit = new Circuit(circuitdto);
+        if (repeated(currentCircuit))
             throw new InvalidParamException();
         circuitList.add(new Circuit(circuitdto));
-        return new CircuitDTO(circuit);
+        return new CircuitDTO(currentCircuit);
     }
 	private boolean repeated(Circuit circuit) {
         Iterator<Circuit> it = circuitList.iterator();
@@ -44,6 +46,10 @@ public class CircuitController implements ISubject {
         }
         return false;
     }
+	
+	public void startRace() {
+		currentCircuit.startRace();
+	}
 
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
 		for (Circuit c : this.circuitList) {
@@ -70,23 +76,7 @@ public class CircuitController implements ISubject {
 		throw new InvalidParamException();
 	}
 
-	public String startRace() {
-		Circuit circuit = getCircuit(getRandomCircuit());
-		for (Rocket rocket : rocket) {
-			notiffy();
-			while (circuit.raceIsGoing(rocket)) {
-				circuit.doingRace(rocket);
-				info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
-						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
-						+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
-				circuitInfo(info);
-			}
-			printResult(circuit, rocket);
-			circuit.resetTime();
-		}
-		printBestScore(circuitdto.getBestScore());
-	}
+	
 
 	public static void printResult(Circuit circuit, Rocket rocket) throws Exception {
 		if (circuit.isAWinner(rocket))
@@ -94,17 +84,14 @@ public class CircuitController implements ISubject {
 		else
 			lose(rocket);
 	}
+
+	
+
+	
+
+	
 	
 
 
-	public void mixObserver(IObserver o) {
-		observers.add(o);
-	}
-
-	@Override
-	public void notiffy() {
-		for (IObserver o : observers) {
-			o.update();
-		}
-	}
+	
 }

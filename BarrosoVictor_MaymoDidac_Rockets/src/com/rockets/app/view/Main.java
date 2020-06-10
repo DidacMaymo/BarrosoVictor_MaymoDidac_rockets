@@ -16,9 +16,16 @@ import com.rockets.app.utilities.InvalidParamException;
 public class Main implements IObserver {
 
 	public static CircuitController controller = new CircuitController();
+	
+	
 
 	public static void main(String[] args) throws Exception {
 		createCircuits(createRockets());
+		controller.addObserver(new IObserver() {
+			public void update(String str) {
+				System.out.println(str);
+			}
+		});
 		controller.startRace();
 	}
 
@@ -87,9 +94,11 @@ public class Main implements IObserver {
 				"\nAnd the FINAL winner is: " + score.getRocket().getId() + " with a time of " + score.getTimeTaken());
 	}
 
+	
+	
+	
 	@Override
-	public void update() {
-		System.out.println("Starting competition. Circuit: " + circuitdto.getId() + ". Length: "
-				+ circuitdto.getLength() + " . Max time: " + circuit.getMaxTime());
+	public void update(String s) {
+		System.out.println(s);
 	}
 }

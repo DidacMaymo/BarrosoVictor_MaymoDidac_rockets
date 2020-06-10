@@ -14,7 +14,9 @@ import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
 
-public class Circuit {
+public class Circuit implements ISubject {
+	
+	private List<IObserver> observers = new ArrayList<>();
 
 	private String id;
 	private int maxTime, currentTime = 0;
@@ -99,5 +101,40 @@ public class Circuit {
 		currentTime = 0;
 
 	}
+	
+	public String startRace() {
+		for (Rocket rocket : rocket) {
+			String s = "Starting competition. Circuit: " + getId() + ". Length: "
+					+ getLength() + " . Max time: " + circuit.getMaxTime();
+			notifyallObservers(s);
+			while (circuit.raceIsGoing(rocket)) {
+				circuit.doingRace(rocket);
+				info = ("Current time: " + (circuit.getCurrentTime()) + " Acceleration: "
+						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
+						+ rocket.getMetersTravelled() + " Circuit: " + circuit.getLength() + " Fuel: "
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
+				circuitInfo(info);
+			}
+			printResult(circuit, rocket);
+			circuit.resetTime();
+		}
+		printBestScore(circuitdto.getBestScore());
+	}
+
+	@Override
+	public void addObserver(IObserver observer) throws InvalidParamException {
+		if(observer == null) 
+			throw new InvalidParamException();
+			this.observers.add(observer);
+	}
+	
+	@Override
+	public void notifyallObservers(String s) {
+		for(IObserver observer : observers) {
+			observer.update(s);
+		} //aixo notificarà
+		
+	}
+
 
 }

@@ -1,7 +1,10 @@
 package com.rockets.app.utilities;
 
+
 public interface ISubject {
 	
-	public void notiffy();//avisar que s'ha de actualitzar
+	public void addObserver(IObserver observer) throws InvalidParamException;
+	
+	public void notifyallObservers(String str);
 
 }
