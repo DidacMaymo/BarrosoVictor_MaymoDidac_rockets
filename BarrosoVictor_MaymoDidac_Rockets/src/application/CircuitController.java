@@ -46,15 +46,6 @@ public class CircuitController {
 		}
 	}
 
-	public void startRace() {
-
-	}
-
-	public ArrayList<RocketDTO> getRockets() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
 		if (rocketList == null) {
 			rocketList = new ArrayList<Rocket>();
@@ -74,10 +65,10 @@ public class CircuitController {
 	}
 
 	public Circuit getCircuit() {
-		return circuitList.get(0);
+		return circuitList.get(3);
 	}
 
 	public Rocket getRocket() {
-		return rocketList.get(1);
+		return rocketList.get(3);
 	}
 }

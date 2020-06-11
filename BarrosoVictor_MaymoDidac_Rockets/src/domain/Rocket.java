@@ -24,10 +24,7 @@ public class Rocket {
 		if (propellants == null || propellants.isEmpty()) {
 			throw new InvalidParamException();
 		}
-		if (speed < 0) {
-			throw new InvalidParamException();
-		}
-		if (acceleration < 0) {
+		if (propellants == null || propellants.isEmpty()) {
 			throw new InvalidParamException();
 		}
 		this.id = id;
@@ -86,8 +83,8 @@ public class Rocket {
 		return fuelTank;
 	}
 
-	public double getAcceleration() {
-		double acceleration = 0;
+	public int getAcceleration() {
+		int acceleration = 0;
 		for (Propellant p : propellants) {
 			acceleration += p.getActualAcceleration();
 		}
@@ -102,7 +99,7 @@ public class Rocket {
 		return this.id;
 	}
 
-	public void acceleratePropellants(double acceleration) {
+	public void acceleratePropellants(int acceleration) {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
@@ -117,11 +114,11 @@ public class Rocket {
 
 	}
 
-	public double decideAction(int currentTime, double length, double maxTime) {
+	public int decideAction(int currentTime, double length, double maxTime) {
 		return Strategy.decideAction(currentTime, length, maxTime);
 	}
 
-	public void setDesiredAcceleration(double acceleration) throws InvalidParamException {
+	public void setDesiredAcceleration(int acceleration) throws InvalidParamException {
 		acceleratePropellants(0);
 		while (getAcceleration() < acceleration) {
 			acceleratePropellants(getAcceleration() + 1);
@@ -132,18 +129,7 @@ public class Rocket {
 		updateMetersTravelled();
 	}
 
-	public void revertChanges(int acceleration) throws InvalidParamException {
-		fuelTank.updateFuel(speed);
-		updateMetersTravelled();
-		revertSpeed(acceleration);
-	}
-
-	private void revertSpeed(int acceleration) {
-		this.speed -= acceleration * ConstantUtilities.DELAY;
-	}
-
 	public double getFuelCapacity() {
-		// TODO Auto-generated method stub
 		return fuelTank.getCapacity();
 	}
 

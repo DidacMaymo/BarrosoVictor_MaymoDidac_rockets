@@ -5,9 +5,9 @@ import utilities.InvalidParamException;
 
 public class Propellant {
 
-	private double maxAcceleration, actualAcceleration;
+	private int maxAcceleration, actualAcceleration;
 
-	public Propellant(double maxAcceleration, double actualAcceleration) throws InvalidParamException {
+	public Propellant(int maxAcceleration, int actualAcceleration) throws InvalidParamException {
 		if (maxAcceleration <= 0) {
 			throw new InvalidParamException();
 		}
@@ -24,7 +24,7 @@ public class Propellant {
 		this.actualAcceleration = propellant.actualAcceleration;
 	}
 
-	public double getMaxAcceleration() {
+	public int getMaxAcceleration() {
 		return maxAcceleration;
 	}
 
@@ -32,7 +32,7 @@ public class Propellant {
 		return actualAcceleration;
 	}
 
-	public void setActualAcceleration(double newAcceleration) {
+	public void setActualAcceleration(int newAcceleration) {
 		if (newAcceleration < 0)
 			newAcceleration = 0;
 		else if (newAcceleration > maxAcceleration)

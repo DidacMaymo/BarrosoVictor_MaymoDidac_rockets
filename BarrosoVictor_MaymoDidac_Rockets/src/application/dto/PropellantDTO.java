@@ -4,10 +4,9 @@ import domain.Propellant;
 import utilities.InvalidParamException;
 
 public class PropellantDTO {
-	private double maxAcceleration;
+	private int maxAcceleration;
 
-	public PropellantDTO(double maxAcceleration) throws InvalidParamException {
-
+	public PropellantDTO(int maxAcceleration) throws InvalidParamException {
 		this.maxAcceleration = maxAcceleration;
 
 	}
@@ -16,7 +15,7 @@ public class PropellantDTO {
 		this.maxAcceleration = propellant.getMaxAcceleration();
 	}
 
-	public double getMaxAcceleration() throws InvalidParamException {
+	public int getMaxAcceleration() throws InvalidParamException {
 		if (maxAcceleration <= 0) {
 			throw new InvalidParamException();
 		}
