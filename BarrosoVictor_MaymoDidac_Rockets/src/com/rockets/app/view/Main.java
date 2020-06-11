@@ -2,20 +2,19 @@ package com.rockets.app.view;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
-import com.rockets.app.aplication.CircuitController;
+import com.rockets.app.application.CircuitController;
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.FuelTankDTO;
 import com.rockets.app.application.dto.PropellantDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.application.dto.ScoreDTO;
-import com.rockets.app.domain.Circuit;
-import com.rockets.app.domain.Rocket;
 import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.InvalidParamException;
 
-public class Main implements IObserver {
+public class Main {
 
 	public static CircuitController controller = new CircuitController();
 	
@@ -24,7 +23,7 @@ public class Main implements IObserver {
 	public static void main(String[] args) throws Exception {
 		createCircuits(createRockets());
 		controller.addObserver(new IObserver() {
-			public void update(String str) {
+			public void update(String str, int i) {
 				System.out.println(str);
 			}
 		});
@@ -42,32 +41,33 @@ public class Main implements IObserver {
 	private static ArrayList<RocketDTO> createRockets() throws InvalidParamException, Exception {
 		ArrayList<RocketDTO> rocketsDTO = new ArrayList<>();
 		rocketsDTO.add(
-				new RocketDTO("Viper X", initialisePropellants(getPropellantAcceleration(0)), new FuelTankDTO(2500)));
+				new RocketDTO("Viper X", initialisePropellants(propellantViper()), new FuelTankDTO(2500)));
 		rocketsDTO.add(
-				new RocketDTO("Star V", initialisePropellants(getPropellantAcceleration(1)), new FuelTankDTO(2800)));
+				new RocketDTO("Star V", initialisePropellants(propellantStarV()), new FuelTankDTO(2800)));
 		rocketsDTO.add(
-				new RocketDTO("Falcon IX", initialisePropellants(getPropellantAcceleration(2)), new FuelTankDTO(1900)));
+				new RocketDTO("Falcon IX", initialisePropellants(propellantFalconIX()), new FuelTankDTO(1900)));
 		rocketsDTO.add(
-				new RocketDTO("Speedy X", initialisePropellants(getPropellantAcceleration(3)), new FuelTankDTO(2200)));
+				new RocketDTO("Speedy X", initialisePropellants(propellantSpeedyX()), new FuelTankDTO(2200)));
 		return rocketsDTO;
 	}
-
-	private static double[] getPropellantAcceleration(int numberOfRocket) {
-		switch (numberOfRocket) {
-		case 0:
-			double[] rocketOnePropellants = { 40, 50, 20, 38 };
-			return rocketOnePropellants;
-		case 1:
-			double[] rocketTwoPropellants = { 30, 18, 24, 38 };
-			return rocketTwoPropellants;
-		case 2:
-			double[] rocketThreePropellants = { 40, 29, 60 };
-			return rocketThreePropellants;
-		default:
-			double[] rocketFourPropellants = { 10, 3, 20, 82 };
-			return rocketFourPropellants;
-		}
+	
+	private static double[] propellantViper() {
+		 double[] rocketOnePropellants = { 40, 50, 20, 38 };
+		 return rocketOnePropellants;
 	}
+	private static double[] propellantStarV() {
+		 double[] rocketOnePropellants = { 30, 18, 24, 38 };
+		 return rocketOnePropellants;
+	}
+	private static double [] propellantFalconIX() {
+		double[] rocketThreePropellants = { 40, 29, 60 };
+		return rocketThreePropellants;
+	}
+	private static double [] propellantSpeedyX() {
+		double[] rocketFourPropellants = { 10, 3, 20, 82 };
+		return rocketFourPropellants;
+	}
+	
 
 	private static ArrayList<PropellantDTO> initialisePropellants(double[] maxAccProplellant)
 			throws Exception {
@@ -82,7 +82,7 @@ public class Main implements IObserver {
 		System.out.println(info);
 	}
 
-	// en els prints hem de usar els dtos
+	
 	private static void win(RocketDTO rocket, double currentTime) throws Exception {
 		System.out.println(
 				"The rocket: " + rocket.getId() + " with a time of " + currentTime + " is winning the race!\n");
@@ -97,15 +97,4 @@ public class Main implements IObserver {
 				"\nAnd the FINAL winner is: " + score.getRocketId() + " with a time of " + score.getTimeTaken());
 	}
 	
-	public static void printResult(double currentTime, RocketDTO rocket) throws Exception {
-		if(controller.printResult(rocket))
-			win(rocket, currentTime);
-		else
-			lose(rocket);
-	}
-
-	@Override
-	public void update(String s) {
-		System.out.println(s);
-	}
 }

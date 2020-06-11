@@ -5,6 +5,6 @@ public interface ISubject {
 	
 	public void addObserver(IObserver observer) throws InvalidParamException;
 	
-	public void notifyallObservers(String str);
+	void notifyallObservers(String s, int i);
 
 }

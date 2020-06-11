@@ -99,20 +99,29 @@ public class Circuit implements ISubject {
 		currentTime = 0;
 	}
 
-	public String startRace(Rocket rocket) {
+	public void startRace(Rocket rocket) throws Exception {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
 					+ getLength() + " . Max time: " + getMaxTime();
-			notifyallObservers(s);
+			notifyallObservers(s, 1);
 			while (raceIsGoing(rocket)) {
 				doingRace(rocket);
-				circuitInfo(("Current time: " + (getCurrentTime()) + " Acceleration: "
+				notifyallObservers(("Current time: " + (getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
 						+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()));
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()), 2);
 			}
-			printResult(this, rocket);
+			notifyallObservers(printResult(rocket),3);
 			resetTime();
-		printBestScore(circuitdto.getBestScore());
+			notifyallObservers("\nAnd the FINAL winner is: " + this.getScore().getRocketId() + " with a time of " + this.getScore().getTimeTaken(),4);
+	}
+	
+	public  String printResult(Rocket rocket) throws Exception {
+		String s;
+		if (isAWinner(rocket))
+			s= "The rocket: " + rocket.getId() + " with a time of " + currentTime + " is winning the race!\n";
+		 else 
+			s= "The rocket: " + rocket.getId() + " is not a winner\n";
+		return s;
 	}
 
 	@Override
@@ -123,9 +132,9 @@ public class Circuit implements ISubject {
 	}
 
 	@Override
-	public void notifyallObservers(String s) {
+	public void notifyallObservers(String s, int i) {
 		for (IObserver observer : observers) {
-			observer.update(s);
+			observer.update(s, i);
 		} // aixo notificarà
 	}
 

@@ -1,4 +1,4 @@
-package com.rockets.app.aplication;
+package com.rockets.app.application;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -63,14 +63,9 @@ public class CircuitController {
 		throw new InvalidParamException();
 	}
 
-	public  boolean printResult(RocketDTO rocket) throws Exception {
-		if (currentCircuit.isAWinner(getRocket(rocket))) 
-			return true;
-		 else 
-			return false;
-	}
+	
 
-	public void startRace() {
+	public void startRace() throws Exception {
 		for (Rocket rockett : rocket) {
 			currentCircuit.startRace(rockett);
 		}
