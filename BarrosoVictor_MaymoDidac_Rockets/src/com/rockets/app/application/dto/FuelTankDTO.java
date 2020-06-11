@@ -9,8 +9,6 @@ public class FuelTankDTO {
     
     
     public FuelTankDTO(double capacity) throws InvalidParamException {
-    	if (capacity <= 0)
-            throw new InvalidParamException();
         this.capacity = capacity;
     }
     
@@ -19,7 +17,7 @@ public class FuelTankDTO {
     }
 
 	public double getCapacity() throws InvalidParamException {
-		if(capacity==0) throw new InvalidParamException();
+		if(capacity<=0) throw new InvalidParamException();
 		return capacity;
 	}
 }
