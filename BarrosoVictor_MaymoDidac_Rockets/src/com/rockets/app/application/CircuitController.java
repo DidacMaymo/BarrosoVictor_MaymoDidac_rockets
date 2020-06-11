@@ -16,13 +16,12 @@ public class CircuitController {
 
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
-	static Circuit currentCircuit;
 	static List<Rocket> rocketList = new ArrayList<Rocket>();
+	static Circuit currentCircuit;
+	static Rocket rocket;
 	String info;
 
-	public CircuitDTO getRandomCircuit() throws InvalidParamException {
-		return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
-	}
+	
 
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		if (circuitList == null) {
@@ -43,12 +42,26 @@ public class CircuitController {
 		}
 		throw new InvalidParamException();
 	}
+	
+	public CircuitDTO getRandomCircuit() throws InvalidParamException {
+		return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
+	}
+	
+	private boolean repeated(Circuit circuit) {
+		Iterator<Circuit> it = circuitList.iterator();
+		while (it.hasNext()) {
+			if (circuit.equals(it.next()))
+				return true;
+		}
+		return false;
+	}	
+	
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
         if (rocketList == null) {
             rocketList = new ArrayList<Rocket>();
         }
-        Rocket rocket = new Rocket(rocketdto);
+        rocket = new Rocket(rocketdto);
         repeated(rocket);
         rocketList.add(rocket);
         System.out.println(rocket.getMaxAcceleration());
@@ -63,12 +76,6 @@ public class CircuitController {
 		}
 		throw new InvalidParamException();
 	}
-
-	public void startRace() throws Exception {
-		for (Rocket rockett : rocketList) {
-			currentCircuit.startRace(rockett);
-		}
-	}
 	
 	private void repeated(Rocket rocket) throws InvalidParamException {
         Iterator<Rocket> it = rocketList.iterator();
@@ -78,14 +85,12 @@ public class CircuitController {
         }
     }
 
-	private boolean repeated(Circuit circuit) {
-		Iterator<Circuit> it = circuitList.iterator();
-		while (it.hasNext()) {
-			if (circuit.equals(it.next()))
-				return true;
+	public void startRace() throws Exception {
+		for (Rocket rockett : rocketList) {
+			currentCircuit.startRace(rockett);
 		}
-		return false;
 	}
+	
 
 	public void addObserver(IObserver iObserver) throws InvalidParamException {
 		currentCircuit.addObserver(iObserver);
