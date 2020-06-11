@@ -144,7 +144,7 @@ public class Rocket {
 
 	public void decideAction(Circuit circuit) throws Exception {
 		strategy = new Strategy();
-		strategy.backtracking(new ArrayList<Integer>(), circuit, 0, this);
+		strategy.backtracking(new ArrayList<Integer>(),  0, this, circuit.getLength(), circuit.getMaxTime());
 	}
 
 	public int getAccelerationAtCurrentTime(int currentTime) {

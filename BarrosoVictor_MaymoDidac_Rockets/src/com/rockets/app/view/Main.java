@@ -28,16 +28,16 @@ public class Main {
 
 	private static void createCircuits() throws InvalidParamException {
 		//controller.createCircuit(new CircuitDTO("MadMax", 22, 1300));
-		//controller.createCircuit(new CircuitDTO("SpeedTrack", 10, 800));
-		//controller.createCircuit(new CircuitDTO("RisingLap", 15, 900));
-		controller.createCircuit(new CircuitDTO("FreeWorld", 18, 1200));
+		controller.createCircuit(new CircuitDTO("SpeedTrack", 10, 800));
+		controller.createCircuit(new CircuitDTO("RisingLap", 15, 900));
+		//controller.createCircuit(new CircuitDTO("FreeWorld", 18, 1200));
 	}
 
 	private static void createRockets() throws InvalidParamException, Exception  {
 		//controller.createRocket(new RocketDTO("Viper X", initialisePropellants(propellantViper()), new FuelTankDTO(2500)));
 		controller.createRocket(new RocketDTO("Star V", initialisePropellants(propellantStarV()), new FuelTankDTO(2800)));
 		//controller.createRocket(new RocketDTO("Falcon IX", initialisePropellants(propellantFalconIX()), new FuelTankDTO(1900)));
-		//controller.createRocket(new RocketDTO("Speedy X", initialisePropellants(propellantSpeedyX()), new FuelTankDTO(3800)));
+		controller.createRocket(new RocketDTO("Speedy X", initialisePropellants(propellantSpeedyX()), new FuelTankDTO(3800)));
 	}
 	
 	private static double[] propellantViper() {
