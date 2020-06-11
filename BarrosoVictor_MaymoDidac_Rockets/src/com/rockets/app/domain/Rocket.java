@@ -118,17 +118,19 @@ public class Rocket {
 
 	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.DELAY;
-		fuelTank.updateFuel(speed);
+		updateFuel();
 		updateMetersTravelled();
 	}
+	
 	private void updateFuel() throws Exception {
-		try {
-			fuelTank.updateFuel(speed);
-		} catch (InvalidParamException e) {
-			speed = 0;
-			acceleration = 0;
-		}
-	}
+        try {
+            fuelTank.updateFuel(speed);
+        } catch (Exception e) {
+            speed = 0;
+            acceleration = 0;
+        }
+    }
+	
 
 	private void updateMetersTravelled() {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);

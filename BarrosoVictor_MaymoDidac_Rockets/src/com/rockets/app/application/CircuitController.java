@@ -64,7 +64,7 @@ public class CircuitController {
         rocket = new Rocket(rocketdto);
         repeated(rocket);
         rocketList.add(rocket);
-        System.out.println(rocket.getMaxAcceleration());
+        //System.out.println(rocket.getMaxAcceleration());
         return new RocketDTO(rocket);
     }
 

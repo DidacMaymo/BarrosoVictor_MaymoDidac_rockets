@@ -21,12 +21,12 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		createCircuits();
 		createRockets();
-		controller.startRace();
 		controller.addObserver(new IObserver() {
 			public void update(String str) {
 				System.out.println(str);
 			}
 		});		
+		controller.startRace();
 	}
 
 	private static void createCircuits() throws InvalidParamException {

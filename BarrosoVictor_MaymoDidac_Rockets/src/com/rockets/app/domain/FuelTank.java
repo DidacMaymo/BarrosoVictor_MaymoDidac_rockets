@@ -33,8 +33,7 @@ public class FuelTank {
         this.actualFuel = this.capacity;
     }
     
-    public double getFuelConsumption(double speed) throws Exception {
-    	if(speed==0)throw new InvalidParamException();
+    public double getFuelConsumption(double speed){
         return 0.02 * Math.pow(speed, 2);
     }
 
@@ -48,8 +47,10 @@ public class FuelTank {
 
     public void updateFuel(double speed) throws Exception {
         actualFuel -= getFuelConsumption(speed);
-        if (actualFuel < 0)
-            throw new Exception("No fuel remainng!");
+        if (actualFuel <= 0) {
+            actualFuel=0;
+            throw new Exception();
+        }
     }
 
 }

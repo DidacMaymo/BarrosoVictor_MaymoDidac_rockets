@@ -102,9 +102,10 @@ public class Circuit implements ISubject {
 	public void startRace(Rocket rocket) throws Exception {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
 					+ getLength() + " . Max time: " + getMaxTime();
-			System.out.println(s);
+			//System.out.println(s);
 			notifyallObservers(s);
 			while (raceIsGoing(rocket)) {
+				//System.out.println("as");
 				doingRace(rocket);
 				notifyallObservers(("Current time: " + (getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
