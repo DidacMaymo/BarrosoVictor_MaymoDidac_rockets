@@ -136,10 +136,7 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	/*public double decideAction(int currentTime, double length, double maxTime) throws Exception {
-		return Strategy.decideAction(this, currentTime, length, maxTime);
-	}*/
-
+	
 	public void setDesiredAcceleration(double acceleration) throws Exception {
 		setAcceleration(0);
 		while (getAcceleration() < acceleration) {
@@ -153,7 +150,7 @@ public class Rocket {
         strategy.backtracking(new ArrayList<Integer>(), circuit, 0, this);  
     }
     
-    public int getAccelerationAt(int currentTime){
+    public int getAccelerationAtCurrentTime(int currentTime){
         return strategy.getSolution().get(currentTime);
     }
 

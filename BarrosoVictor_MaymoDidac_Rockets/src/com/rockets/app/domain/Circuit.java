@@ -116,15 +116,14 @@ public class Circuit implements ISubject {
 	}
 
 	public void startRace(ArrayList<Rocket> rockets) throws Exception {
-		generateSolutions(rockets);
-		String s = "Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
-				+ getMaxTime();
-		notifyallObservers(s);
-		while (raceIsGoing(rockets)) {
-			doingRace(rockets);
-		}
-		printResult(rockets);
-	}
+        generateSolutions(rockets);
+        notifyallObservers("Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
+                + getMaxTime());
+        while (raceIsGoing(rockets)) {
+            doingRace(rockets);
+        }
+        printResult(rockets);
+    }
 
 	public String circuitInfo(Rocket rocket) {
 		return ("Current time: " + (getCurrentTime()) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
@@ -133,13 +132,12 @@ public class Circuit implements ISubject {
 	}
 	
 	public void  printResult(ArrayList<Rocket> rockets) throws Exception {
-        String s;
         Rocket winner = whichRocketWon(rockets);
         if (winner != null)
-            s = "The rocket: " + winner.getId() + " with a time of " + currentTime + " won the race!\n";
+        	 notifyallObservers("The rocket: " + winner.getId() + " with a time of " + currentTime + " won the race!\n");
         else
-            s = "There is no winner!";
-        notifyallObservers(s);
+        	 notifyallObservers("There is no winner!");
+       
     }
 	private Rocket whichRocketWon(ArrayList<Rocket> rockets) {
         Rocket winner = null;
