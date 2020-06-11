@@ -1,8 +1,10 @@
 package com.rockets.app.domain;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import com.rockets.app.application.dto.PropellantDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
 import com.rockets.app.utilities.InvalidParamException;
@@ -14,36 +16,48 @@ public class Rocket {
 	private double acceleration = 0;
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
-	private FuelTank fueltank;
+	private FuelTank fuelTank;
 
 	
-	public List<Propellant> getPropellants() {
-		return propellants;
-	}
-
-	public Rocket() {
+	
 		
-	}
-	
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
-		this.fueltank = fuelTank;
+		this.fuelTank = fuelTank;
 	}
 	
-	public Rocket(RocketDTO rocket) throws InvalidParamException {
-		if(rocket==null)throw new InvalidParamException();
-		this.id=rocket.getId();
-		this.fueltank=rocket.getFueltank();
+	public Rocket(RocketDTO rocketDTO) throws InvalidParamException {
+		id = rocketDTO.getId();
+		propellants = DTOToPropellants(rocketDTO.getPropellants());
+		fuelTank = new FuelTank(rocketDTO.getFuelTank());
 	}
-	public Rocket(Rocket rocket) {
-        speed = rocket.getSpeed();
-        acceleration = rocket.getAcceleration();
-        metersTravelled = rocket.getMetersTravelled();
-        propellants = rocket.getPropellants();
-        fueltank = rocket.getFuelTank();
-    }
+
+	public Rocket(Rocket rocket) throws InvalidParamException {
+		speed = rocket.speed;
+		acceleration = rocket.acceleration;
+		metersTravelled = rocket.metersTravelled;
+		propellants = clonePropellants(rocket.propellants);
+		fuelTank = new FuelTank(rocket.fuelTank);
+	}
+	
+	private ArrayList<Propellant> clonePropellants(List<Propellant> propellants) {
+		ArrayList<Propellant> ret = new ArrayList<>();
+		for (Propellant propellant : propellants) {
+			ret.add(new Propellant(propellant));
+		}
+		return ret;
+	}
+	private List<Propellant> DTOToPropellants(List<PropellantDTO> propellantsDTO) throws InvalidParamException {
+		Iterator<PropellantDTO> it = propellantsDTO.iterator();
+		List<Propellant> propellants = new ArrayList<>();
+		while (it.hasNext()) {
+			propellants.add(new Propellant(it.next()));
+		}
+		return propellants;
+	}
+
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)
@@ -67,7 +81,7 @@ public class Rocket {
 	}
 
 	public FuelTank getFuelTank() {
-		return fueltank;
+		return fuelTank;
 	}
 
 	public double getAcceleration() {
@@ -79,7 +93,7 @@ public class Rocket {
 	}
 
 	public double getActualFuel() {
-		return fueltank.getActualFuel();
+		return fuelTank.getActualFuel();
 	}
 
 	public String getId() {
@@ -91,11 +105,29 @@ public class Rocket {
 			p.setActualAcceleration(acceleration);
 		}
 	}
+	
+	public List<Propellant> getPropellants() {
+		return propellants;
+	}
+	
+	public void acceleratePropellants(int acceleration) {
+		for (Propellant p : propellants) {
+			p.setActualAcceleration(acceleration);
+		}
+	}
 
 	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.DELAY;
-		fueltank.updateFuel(speed);
+		fuelTank.updateFuel(speed);
 		updateMetersTravelled();
+	}
+	private void updateFuel() throws Exception {
+		try {
+			fuelTank.updateFuel(speed);
+		} catch (InvalidParamException e) {
+			speed = 0;
+			acceleration = 0;
+		}
 	}
 
 	private void updateMetersTravelled() {
@@ -117,6 +149,6 @@ public class Rocket {
 
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
-		return fueltank.getCapacity();
+		return fuelTank.getCapacity();
 	}
 }

@@ -21,6 +21,11 @@ public class Propellant {
 		this.actualAcceleration=0;
 		this.maxAcceleration=propellantdto.getMaxAcceleration();
 	}
+	
+	public Propellant(Propellant propellant) {
+        this.maxAcceleration = propellant.maxAcceleration;
+        this.actualAcceleration = propellant.actualAcceleration;
+    }
 
     private void validateAttributes(double maxAcceleration) throws Exception {
         if (maxAcceleration <= 0) {

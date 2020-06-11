@@ -8,26 +8,31 @@ public class FuelTank {
     private double capacity;
     private double actualFuel;
     
-    public FuelTank() {
-    	
-    }
-
-    public FuelTank(double capacity) throws Exception {
-        validateAttributes(capacity);
+    public FuelTank(double capacity, double actualFuel) throws Exception {
+    	validateAttributes(capacity,actualFuel);
         this.capacity = capacity;
-        this.actualFuel = capacity;
+        this.actualFuel = actualFuel;
     }
-    private void validateAttributes(double capacity) throws Exception {
-        if (capacity <= 0)
-            throw new Exception("Invalid attribute!");
+    
+    private void validateAttributes(double capacity, double actualFuel) throws Exception {
+    	 if (capacity <= 0) {
+             throw new InvalidParamException();
+         }
+         if (actualFuel <= 0 || actualFuel > capacity)
+             throw new InvalidParamException();
 
+    }
+    public FuelTank(FuelTank fuelTank) throws InvalidParamException {
+        this.capacity = fuelTank.capacity;
+        this.actualFuel = fuelTank.actualFuel;
+        if (actualFuel <= 0)
+            throw new InvalidParamException();
     }
     public FuelTank(FuelTankDTO fuelTankDTO) throws InvalidParamException {
-    	if(fuelTankDTO==null)throw new InvalidParamException();
     	this.capacity = fuelTankDTO.getCapacity();
         this.actualFuel = this.capacity;
     }
-
+    
     public double getFuelConsumption(double speed) throws Exception {
     	if(speed==0)throw new InvalidParamException();
         return 0.02 * Math.pow(speed, 2);
