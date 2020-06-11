@@ -1,9 +1,6 @@
 package com.rockets.app.domain;
 
-import java.util.ArrayList;
-
 import com.rockets.app.utilities.ConstantUtilities;
-import com.rockets.app.utilities.InvalidParamException;
 
 public class Strategy {
 

@@ -1,10 +1,10 @@
 package com.rockets.app.application.dto;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
-import com.rockets.app.domain.FuelTank;
 import com.rockets.app.domain.Propellant;
 import com.rockets.app.domain.Rocket;
 import com.rockets.app.utilities.InvalidParamException;
