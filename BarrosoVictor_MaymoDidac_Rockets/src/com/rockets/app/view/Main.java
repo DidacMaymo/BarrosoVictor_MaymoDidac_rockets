@@ -38,7 +38,7 @@ public class Main {
 		controller.createRocket(new RocketDTO("Viper X", initialisePropellants(propellantViper()), new FuelTankDTO(2500)));
 		controller.createRocket(new RocketDTO("Star V", initialisePropellants(propellantStarV()), new FuelTankDTO(2800)));
 		controller.createRocket(new RocketDTO("Falcon IX", initialisePropellants(propellantFalconIX()), new FuelTankDTO(1900)));
-		controller.createRocket(new RocketDTO("Speedy X", initialisePropellants(propellantSpeedyX()), new FuelTankDTO(2200)));
+		controller.createRocket(new RocketDTO("Speedy X", initialisePropellants(propellantSpeedyX()), new FuelTankDTO(3800)));
 	}
 	
 	private static double[] propellantViper() {

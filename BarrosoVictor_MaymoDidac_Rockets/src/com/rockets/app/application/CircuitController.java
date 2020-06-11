@@ -90,19 +90,17 @@ public class CircuitController {
 	public void startRace() throws Exception {
 		for (Rocket rockett : rocketList) {
 			currentCircuit.startRace(rockett);
-			createScore(new ScoreDTO(currentCircuit.getScore()));
 		}
 		currentCircuit.bestScore();
-		
+		createScore(new ScoreDTO(currentCircuit.getScore()));
 	}
+	
 	public ScoreDTO createScore(ScoreDTO scoreDTO) throws Exception {
 		Score score= new Score(scoreDTO);
 		ScoreRepository.storeScore(score);
 		return new ScoreDTO(score);
 	}
 	
-	
-
 	public void addObserver(IObserver iObserver) throws InvalidParamException {
 		currentCircuit.addObserver(iObserver);
 
