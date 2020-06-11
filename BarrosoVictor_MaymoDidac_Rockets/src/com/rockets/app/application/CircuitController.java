@@ -17,19 +17,16 @@ import com.rockets.app.utilities.InvalidParamException;
 
 public class CircuitController {
 
-	static List<Circuit> circuitList = new ArrayList<Circuit>();
-	static List<Rocket> rocketList = new ArrayList<Rocket>();
-	static Circuit currentCircuit;
-	static Rocket rocket;
-	String info;
+	static ArrayList<Circuit> circuitList = new ArrayList<Circuit>();
+	static ArrayList<Rocket> rocketList = new ArrayList<Rocket>();
+	Circuit currentCircuit;
 
 	
-
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		if (circuitList == null) {
 			circuitList = new ArrayList<Circuit>();
 		}
-		currentCircuit = new Circuit(circuitdto);
+		Circuit currentCircuit = new Circuit(circuitdto);
 		if (repeated(currentCircuit))
 			throw new InvalidParamException();
 		circuitList.add(currentCircuit);
@@ -45,8 +42,8 @@ public class CircuitController {
 		throw new InvalidParamException();
 	}
 	
-	public CircuitDTO getRandomCircuit() throws InvalidParamException {
-		return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
+	public Circuit getRandomCircuit(){
+		return (circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
 	}
 	
 	private boolean repeated(Circuit circuit) {
@@ -63,7 +60,7 @@ public class CircuitController {
         if (rocketList == null) {
             rocketList = new ArrayList<Rocket>();
         }
-        rocket = new Rocket(rocketdto);
+        Rocket rocket = new Rocket(rocketdto);
         repeated(rocket);
         rocketList.add(rocket);
         //System.out.println(rocket.getMaxAcceleration());
@@ -88,9 +85,7 @@ public class CircuitController {
     }
 
 	public void startRace() throws Exception {
-		for (Rocket rockett : rocketList) {
-			currentCircuit.startRace(rockett);
-		}
+		currentCircuit.startRace(rocketList);
 		currentCircuit.bestScore();
 		createScore(new ScoreDTO(currentCircuit.getScore()));
 	}
@@ -102,8 +97,8 @@ public class CircuitController {
 	}
 	
 	public void addObserver(IObserver iObserver) throws InvalidParamException {
+		currentCircuit = getRandomCircuit();
 		currentCircuit.addObserver(iObserver);
-
 	}
 
 }

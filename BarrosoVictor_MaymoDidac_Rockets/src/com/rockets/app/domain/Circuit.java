@@ -69,10 +69,19 @@ public class Circuit implements ISubject {
 		this.currentTime += time;
 	}
 
-	public void doingRace(Rocket rocket) throws Exception {
-		rocket.setDesiredAcceleration(rocket.decideAction(currentTime, length, maxTime));
-		currentTime += ConstantUtilities.DELAY;
-	}
+	
+	public void generateSolutions(ArrayList<Rocket> rockets) throws Exception {
+        for (Rocket r : rockets) {
+            r.decideAction(this);
+        }
+    }
+
+    public void doingRace(ArrayList<Rocket> rockets) throws Exception {
+        for (Rocket r : rockets) {
+            r.setDesiredAcceleration(r.getAccelerationAt(currentTime));
+        }
+        currentTime++;
+    }
 
 	public boolean raceIsGoing(Rocket rocket) {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
@@ -98,7 +107,7 @@ public class Circuit implements ISubject {
 		currentTime = 0;
 	}
 
-	public void startRace(Rocket rocket) throws Exception {
+	public void startRace(ArrayList<Rocket> rocket) throws Exception {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
 					+ getLength() + " . Max time: " + getMaxTime();
 			notifyallObservers(s);

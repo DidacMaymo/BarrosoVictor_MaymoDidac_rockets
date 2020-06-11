@@ -17,7 +17,7 @@ public class Rocket {
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fuelTank;
-
+	private Strategy strategy;
 	
 	
 		
@@ -136,9 +136,9 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	public double decideAction(int currentTime, double length, double maxTime) throws Exception {
+	/*public double decideAction(int currentTime, double length, double maxTime) throws Exception {
 		return Strategy.decideAction(this, currentTime, length, maxTime);
-	}
+	}*/
 
 	public void setDesiredAcceleration(double acceleration) throws Exception {
 		setAcceleration(0);
@@ -148,6 +148,14 @@ public class Rocket {
 		this.acceleration = this.getAcceleration();
 		updateSpeed();
 	}
+	public void decideAction(Circuit circuit) throws Exception {
+        strategy = new Strategy(2);
+        strategy.backtracking(new ArrayList<Integer>(), circuit, 0, this);  
+    }
+    
+    public int getAccelerationAt(int currentTime){
+        return strategy.getSolution().get(currentTime);
+    }
 
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub
