@@ -3,8 +3,6 @@ package com.rockets.app.view;
 import java.util.ArrayList;
 
 
-import java.util.List;
-
 import com.rockets.app.application.CircuitController;
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.FuelTankDTO;

@@ -1,20 +1,22 @@
 package com.rockets.app.application;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.RocketDTO;
+import com.rockets.app.application.dto.ScoreDTO;
 import com.rockets.app.domain.Circuit;
 import com.rockets.app.domain.Rocket;
+import com.rockets.app.domain.Score;
+import com.rockets.app.persistance.ScoreRepository;
 import com.rockets.app.utilities.IObserver;
-import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
 
 public class CircuitController {
 
-	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
 	static List<Rocket> rocketList = new ArrayList<Rocket>();
 	static Circuit currentCircuit;
@@ -88,8 +90,17 @@ public class CircuitController {
 	public void startRace() throws Exception {
 		for (Rocket rockett : rocketList) {
 			currentCircuit.startRace(rockett);
+			createScore(new ScoreDTO(currentCircuit.getScore()));
 		}
+		currentCircuit.bestScore();
+		
 	}
+	public ScoreDTO createScore(ScoreDTO scoreDTO) throws Exception {
+		Score score= new Score(scoreDTO);
+		ScoreRepository.storeScore(score);
+		return new ScoreDTO(score);
+	}
+	
 	
 
 	public void addObserver(IObserver iObserver) throws InvalidParamException {

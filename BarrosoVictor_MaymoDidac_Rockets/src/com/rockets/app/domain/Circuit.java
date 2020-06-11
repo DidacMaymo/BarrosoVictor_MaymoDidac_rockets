@@ -2,11 +2,10 @@ package com.rockets.app.domain;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
-import java.util.Observer;
 
 import com.rockets.app.application.dto.CircuitDTO;
-import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
 import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.ISubject;
@@ -102,19 +101,20 @@ public class Circuit implements ISubject {
 	public void startRace(Rocket rocket) throws Exception {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
 					+ getLength() + " . Max time: " + getMaxTime();
-			//System.out.println(s);
 			notifyallObservers(s);
 			while (raceIsGoing(rocket)) {
-				//System.out.println("as");
 				doingRace(rocket);
-				notifyallObservers(("Current time: " + (getCurrentTime()) + " Acceleration: "
-						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
-						+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()));
+				notifyallObservers(circuitInfo(rocket));
 			}
 			notifyallObservers(printResult(rocket));
 			resetTime();
-			notifyallObservers("\nAnd the FINAL winner is: " + this.getScore().getRocketId() + " with a time of " + this.getScore().getTimeTaken());
+	}
+	
+	public String circuitInfo(Rocket rocket) {
+		return ("Current time: " + (getCurrentTime()) + " Acceleration: "
+				+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
+				+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
+				+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
 	
 	public  String printResult(Rocket rocket) throws Exception {
@@ -138,6 +138,10 @@ public class Circuit implements ISubject {
 		for (IObserver observer : observers) {
 			observer.update(s);
 		} 
+	}
+
+	public void bestScore() {
+		notifyallObservers("\nAnd the FINAL winner is: " + getScore().getRocketId() + " with a time of " + getScore().getTimeTaken());
 	}
 
 }

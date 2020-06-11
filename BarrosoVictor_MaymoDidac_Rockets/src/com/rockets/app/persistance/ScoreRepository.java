@@ -12,7 +12,7 @@ public class ScoreRepository {
 	public static void storeScore(Score score) throws Exception {
 		try{
 			ConnectionBBDD connection = ConnectionRepository.getConection();    
-			String sql = "Insert into SCORE (ID,IMAGE_URL,NAME) values (?,?,?)";  
+			String sql = "Insert into SCORES (CIRCUIT_ID,ROCKET_ID,TIME_TAKEN,METERS_TRAVELLED) values (?,?,?,?)";
 			
 			PreparedStatement pst = connection.prepareStatement(sql); 
 			pst.clearParameters();
