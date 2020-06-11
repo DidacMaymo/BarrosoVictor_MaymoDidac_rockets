@@ -82,7 +82,7 @@ public class Circuit {
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
 		if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
-			if (isBestWinner(new Score(rocket.getId(), this.getCurrentTime(), rocket.getMetersTravelled()))) {
+			if (isBestWinner(new Score(rocket.getId(), rocket.getId(), this.getCurrentTime(), rocket.getMetersTravelled()))) {
 				return true;
 			}
 		return false;

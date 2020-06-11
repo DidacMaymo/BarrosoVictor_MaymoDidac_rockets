@@ -20,8 +20,7 @@ public class CircuitController {
 			circuitList = new ArrayList<Circuit>();
 		}
 		Circuit circuit = new Circuit(circuitdto);
-		if (repeated(circuit))
-			throw new InvalidParamException();
+		repeated(circuit);
 		circuitList.add(new Circuit(circuitdto));
 		return new CircuitDTO(circuit);
 	}
@@ -39,13 +38,12 @@ public class CircuitController {
 		return new CircuitDTO(circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
 	}
 
-	private boolean repeated(Circuit circuit) {
+	private void repeated(Circuit circuit) throws InvalidParamException {
 		Iterator<Circuit> it = circuitList.iterator();
 		while (it.hasNext()) {
 			if (circuit.equals(it.next()))
-				return true;
+				throw new InvalidParamException();
 		}
-		return false;
 	}
 
 	public void startRace() {
@@ -55,5 +53,31 @@ public class CircuitController {
 	public ArrayList<RocketDTO> getRockets() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
+		if (rocketList == null) {
+			rocketList = new ArrayList<Rocket>();
+		}
+		Rocket rocket = new Rocket(rocketdto);
+		repeated(rocket);
+		rocketList.add(rocket);
+		return new RocketDTO(rocket);
+	}
+
+	private void repeated(Rocket rocket) throws InvalidParamException {
+		Iterator<Rocket> it = rocketList.iterator();
+		while (it.hasNext()) {
+			if (rocket.equals(it.next()))
+				throw new InvalidParamException();
+		}
+	}
+
+	public Circuit getCircuit() {
+		return circuitList.get(0);
+	}
+
+	public Rocket getRocket() {
+		return rocketList.get(1);
 	}
 }

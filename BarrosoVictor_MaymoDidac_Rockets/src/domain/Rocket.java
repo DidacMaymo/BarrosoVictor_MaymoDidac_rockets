@@ -41,6 +41,22 @@ public class Rocket {
 		fuelTank = new FuelTank(rocketDTO.getFuelTank());
 	}
 
+	public Rocket(Rocket rocket) throws InvalidParamException {
+		speed = rocket.speed;
+		acceleration = rocket.acceleration;
+		metersTravelled = rocket.metersTravelled;
+		propellants = clonePropellants(rocket.propellants);
+		fuelTank = new FuelTank(rocket.fuelTank);
+	}
+
+	private ArrayList<Propellant> clonePropellants(List<Propellant> propellants) {
+		ArrayList<Propellant> ret = new ArrayList<>();
+		for (Propellant propellant : propellants) {
+			ret.add(new Propellant(propellant));
+		}
+		return ret;
+	}
+
 	private List<Propellant> DTOToPropellants(List<PropellantDTO> propellantsDTO) throws InvalidParamException {
 		Iterator<PropellantDTO> it = propellantsDTO.iterator();
 		List<Propellant> propellants = new ArrayList<>();
@@ -54,8 +70,8 @@ public class Rocket {
 		return metersTravelled;
 	}
 
-	public double getMaxAcceleration() {
-		double maxAcc = 0;
+	public int getMaxAcceleration() {
+		int maxAcc = 0;
 		for (Propellant p : propellants) {
 			maxAcc += p.getMaxAcceleration();
 		}
@@ -86,33 +102,44 @@ public class Rocket {
 		return this.id;
 	}
 
-	public void setAcceleration(double acceleration) {
+	public void acceleratePropellants(double acceleration) {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
 	}
 
-	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() { // speed of rocket right now. v = v0 + at
 		this.speed += acceleration * ConstantUtilities.DELAY;
-		fuelTank.updateFuel(speed);
-		updateMetersTravelled();
 	}
 
 	private void updateMetersTravelled() {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
+
 	}
 
 	public double decideAction(int currentTime, double length, double maxTime) {
 		return Strategy.decideAction(currentTime, length, maxTime);
 	}
 
-	public void setDesiredAcceleration(double acceleration) throws Exception {
-		setAcceleration(0);
+	public void setDesiredAcceleration(double acceleration) throws InvalidParamException {
+		acceleratePropellants(0);
 		while (getAcceleration() < acceleration) {
-			setAcceleration(getAcceleration() + 1);
+			acceleratePropellants(getAcceleration() + 1);
 		}
 		this.acceleration = this.getAcceleration();
 		updateSpeed();
+		updateFuel();
+		updateMetersTravelled();
+	}
+
+	public void revertChanges(int acceleration) throws InvalidParamException {
+		fuelTank.updateFuel(speed);
+		updateMetersTravelled();
+		revertSpeed(acceleration);
+	}
+
+	private void revertSpeed(int acceleration) {
+		this.speed -= acceleration * ConstantUtilities.DELAY;
 	}
 
 	public double getFuelCapacity() {
@@ -122,6 +149,15 @@ public class Rocket {
 
 	public List<Propellant> getPropellants() {
 		return propellants;
+	}
+
+	private void updateFuel() throws InvalidParamException {
+		try {
+			fuelTank.updateFuel(speed);
+		} catch (InvalidParamException e) {
+			speed = 0;
+			acceleration = 0;
+		}
 	}
 
 }

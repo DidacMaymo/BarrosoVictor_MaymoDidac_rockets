@@ -64,9 +64,9 @@ public class ScoresRepository {
 		ConnectionBBDD connection = ConnectionRepository.getConnection();
 
 		try {
-			String sql = "UPDATE PICTURES SET ROCKET_ID=?, TIME_TAKEN=?, METERS_TRAVELLED=? WHERE CIRCUIT_ID=?";
+			String sql = "UPDATE SCORES SET ROCKET_ID=?, TIME_TAKEN=?, METERS_TRAVELLED=? WHERE CIRCUIT_ID=?";
 			PreparedStatement pst = connection.prepareStatement(sql);
-
+			pst.clearParameters();
 			pst.setString(1, id);
 			pst.setString(2, scoreDTO.getRocketId());
 			pst.setString(3, String.valueOf(scoreDTO.getTimeTaken()));

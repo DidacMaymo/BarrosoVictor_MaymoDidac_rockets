@@ -23,6 +23,13 @@ public class FuelTank {
 		this.actualFuel = fuelTankDTO.getCapacity();
 	}
 
+	public FuelTank(FuelTank fuelTank) throws InvalidParamException {
+		this.capacity = fuelTank.capacity;
+		this.actualFuel = fuelTank.actualFuel;
+		if (actualFuel <= 0)
+			throw new InvalidParamException();
+	}
+
 	public double getFuelConsumption(double speed) {
 		return 0.02 * Math.pow(speed, 2);
 	}
@@ -35,10 +42,10 @@ public class FuelTank {
 		return actualFuel;
 	}
 
-	public void updateFuel(double speed) throws Exception {
+	public void updateFuel(double speed) throws InvalidParamException {
 		actualFuel -= getFuelConsumption(speed);
-		if (actualFuel < 0)
-			throw new Exception("No fuel remainng!");
+		if (actualFuel <= 0)
+			throw new InvalidParamException();
 	}
 
 }

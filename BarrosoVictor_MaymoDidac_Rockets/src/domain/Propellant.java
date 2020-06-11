@@ -19,6 +19,11 @@ public class Propellant {
 		this.maxAcceleration = propellantDTO.getMaxAcceleration();
 	}
 
+	public Propellant(Propellant propellant) {
+		this.maxAcceleration = propellant.maxAcceleration;
+		this.actualAcceleration = propellant.actualAcceleration;
+	}
+
 	public double getMaxAcceleration() {
 		return maxAcceleration;
 	}
