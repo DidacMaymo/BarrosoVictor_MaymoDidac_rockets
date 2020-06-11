@@ -1,11 +1,7 @@
 package com.rockets.app.application.dto;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.rockets.app.domain.Circuit;
-import com.rockets.app.domain.Rocket;
-import com.rockets.app.domain.Score;
 import com.rockets.app.utilities.InvalidParamException;
 
 public class CircuitDTO {

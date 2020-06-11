@@ -18,16 +18,14 @@ public class Rocket {
 	private List<Propellant> propellants = new ArrayList<Propellant>();
 	private FuelTank fuelTank;
 	private Strategy strategy;
-	
-	
-		
+
 	public Rocket(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		validateAttributes(id, propellants, fuelTank);
 		this.id = id;
 		this.propellants = propellants;
 		this.fuelTank = fuelTank;
 	}
-	
+
 	public Rocket(RocketDTO rocketDTO) throws InvalidParamException {
 		id = rocketDTO.getId();
 		propellants = DTOToPropellants(rocketDTO.getPropellants());
@@ -41,7 +39,7 @@ public class Rocket {
 		propellants = clonePropellants(rocket.propellants);
 		fuelTank = new FuelTank(rocket.fuelTank);
 	}
-	
+
 	private ArrayList<Propellant> clonePropellants(List<Propellant> propellants) {
 		ArrayList<Propellant> ret = new ArrayList<>();
 		for (Propellant propellant : propellants) {
@@ -49,6 +47,7 @@ public class Rocket {
 		}
 		return ret;
 	}
+
 	private List<Propellant> DTOToPropellants(List<PropellantDTO> propellantsDTO) throws InvalidParamException {
 		Iterator<PropellantDTO> it = propellantsDTO.iterator();
 		List<Propellant> propellants = new ArrayList<>();
@@ -57,7 +56,6 @@ public class Rocket {
 		}
 		return propellants;
 	}
-
 
 	private void validateAttributes(String id, List<Propellant> propellants, FuelTank fuelTank) throws Exception {
 		if (id.isEmpty() || propellants.isEmpty() || fuelTank == null)
@@ -105,11 +103,11 @@ public class Rocket {
 			p.setActualAcceleration(acceleration);
 		}
 	}
-	
+
 	public List<Propellant> getPropellants() {
 		return propellants;
 	}
-	
+
 	public void acceleratePropellants(int acceleration) {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
@@ -121,22 +119,20 @@ public class Rocket {
 		updateFuel();
 		updateMetersTravelled();
 	}
-	
+
 	private void updateFuel() throws Exception {
-        try {
-            fuelTank.updateFuel(speed);
-        } catch (Exception e) {
-            speed = 0;
-            acceleration = 0;
-        }
-    }
-	
+		try {
+			fuelTank.updateFuel(speed);
+		} catch (Exception e) {
+			speed = 0;
+			acceleration = 0;
+		}
+	}
 
 	private void updateMetersTravelled() {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	
 	public void setDesiredAcceleration(double acceleration) throws Exception {
 		setAcceleration(0);
 		while (getAcceleration() < acceleration) {
@@ -145,14 +141,16 @@ public class Rocket {
 		this.acceleration = this.getAcceleration();
 		updateSpeed();
 	}
+
 	public void decideAction(Circuit circuit) throws Exception {
-        strategy = new Strategy(2);
-        strategy.backtracking(new ArrayList<Integer>(), circuit, 0, this);  
-    }
-    
-    public int getAccelerationAtCurrentTime(int currentTime){
-        return strategy.getSolution().get(currentTime);
-    }
+		strategy = new Strategy();
+		strategy.backtracking(new ArrayList<Integer>(), circuit, 0, this);
+	}
+
+	public int getAccelerationAtCurrentTime(int currentTime) {
+//		return strategy.getSolution().get(currentTime);
+		return strategy.getAccelerationAtCurrentTime(currentTime);
+	}
 
 	public double getFuelCapacity() {
 		// TODO Auto-generated method stub

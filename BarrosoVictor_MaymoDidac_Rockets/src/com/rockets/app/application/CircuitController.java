@@ -2,8 +2,8 @@ package com.rockets.app.application;
 
 import java.util.ArrayList;
 
+
 import java.util.Iterator;
-import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.RocketDTO;
@@ -21,7 +21,6 @@ public class CircuitController {
 	static ArrayList<Rocket> rocketList = new ArrayList<Rocket>();
 	Circuit currentCircuit;
 
-	
 	public CircuitDTO createCircuit(CircuitDTO circuitdto) throws InvalidParamException {
 		if (circuitList == null) {
 			circuitList = new ArrayList<Circuit>();
@@ -41,11 +40,11 @@ public class CircuitController {
 		}
 		throw new InvalidParamException();
 	}
-	
-	public Circuit getRandomCircuit(){
+
+	public Circuit getRandomCircuit() {
 		return (circuitList.get((int) Math.floor(Math.random() * circuitList.size())));
 	}
-	
+
 	private boolean repeated(Circuit circuit) {
 		Iterator<Circuit> it = circuitList.iterator();
 		while (it.hasNext()) {
@@ -53,21 +52,20 @@ public class CircuitController {
 				return true;
 		}
 		return false;
-	}	
-	
+	}
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
-        if (rocketList == null) {
-            rocketList = new ArrayList<Rocket>();
-        }
-        Rocket rocket = new Rocket(rocketdto);
-        repeated(rocket);
-        rocketList.add(rocket);
-        //System.out.println(rocket.getMaxAcceleration());
-        return new RocketDTO(rocket);
-    }
+		if (rocketList == null) {
+			rocketList = new ArrayList<Rocket>();
+		}
+		Rocket rocket = new Rocket(rocketdto);
+		repeated(rocket);
+		rocketList.add(rocket);
+		// System.out.println(rocket.getMaxAcceleration());
+		return new RocketDTO(rocket);
+	}
 
-	public  Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
+	public Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
 		for (Rocket c : CircuitController.rocketList) {
 			if (rocketdto.getId().equals(c.getId())) {
 				return c;
@@ -75,28 +73,27 @@ public class CircuitController {
 		}
 		throw new InvalidParamException();
 	}
-	
+
 	private void repeated(Rocket rocket) throws InvalidParamException {
-        Iterator<Rocket> it = rocketList.iterator();
-        while (it.hasNext()) {
-            if (rocket.equals(it.next()))
-                throw new InvalidParamException();
-        }
-    }
+		Iterator<Rocket> it = rocketList.iterator();
+		while (it.hasNext()) {
+			if (rocket.equals(it.next()))
+				throw new InvalidParamException();
+		}
+	}
 
 	public void startRace() throws Exception {
-        currentCircuit.generateSolutions(rocketList);
-        currentCircuit.startRace(rocketList);
-        currentCircuit.bestScore();
-        createScore(new ScoreDTO(currentCircuit.getScore()));
-    }
-	
+		currentCircuit.generateSolutions(rocketList);
+		currentCircuit.startRace(rocketList);
+		createScore(new ScoreDTO(currentCircuit.getScore()));
+	}
+
 	public ScoreDTO createScore(ScoreDTO scoreDTO) throws Exception {
-		Score score= new Score(scoreDTO);
+		Score score = new Score(scoreDTO);
 		ScoreRepository.storeScore(score);
 		return new ScoreDTO(score);
 	}
-	
+
 	public void addObserver(IObserver iObserver) throws InvalidParamException {
 		currentCircuit = getRandomCircuit();
 		currentCircuit.addObserver(iObserver);

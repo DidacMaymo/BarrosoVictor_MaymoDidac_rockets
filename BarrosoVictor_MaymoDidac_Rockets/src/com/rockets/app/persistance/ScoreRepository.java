@@ -3,7 +3,6 @@ package com.rockets.app.persistance;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.rockets.app.application.dto.ScoreDTO;
 import com.rockets.app.domain.Score;
 import com.rockets.app.utilities.InvalidParamException;

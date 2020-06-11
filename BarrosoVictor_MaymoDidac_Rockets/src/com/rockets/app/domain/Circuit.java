@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
-import com.rockets.app.utilities.ConstantUtilities;
 import com.rockets.app.utilities.IObserver;
 import com.rockets.app.utilities.ISubject;
 import com.rockets.app.utilities.InvalidParamException;
@@ -75,6 +74,7 @@ public class Circuit implements ISubject {
 	}
 
 	public void doingRace(ArrayList<Rocket> rockets) throws Exception {
+		notifyallObservers("Current time: " + (getCurrentTime()+1));
 		for (Rocket r : rockets) {
 			r.setDesiredAcceleration(r.getAccelerationAtCurrentTime(currentTime));
 			notifyallObservers(circuitInfo(r));
@@ -116,41 +116,43 @@ public class Circuit implements ISubject {
 	}
 
 	public void startRace(ArrayList<Rocket> rockets) throws Exception {
-        generateSolutions(rockets);
-        notifyallObservers("Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
-                + getMaxTime());
-        while (raceIsGoing(rockets)) {
-            doingRace(rockets);
-        }
-        printResult(rockets);
-    }
+		generateSolutions(rockets);
+		notifyallObservers("Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
+				+ getMaxTime());
+		while (raceIsGoing(rockets)) {
+			doingRace(rockets);
+		}
+		printResult(rockets);
+	}
 
 	public String circuitInfo(Rocket rocket) {
-		return ("Current time: " + (getCurrentTime()) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
-				+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + getLength()
-				+ " Fuel: " + rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
+		return ("\t" + rocket.getId() + " Acceleration: " + rocket.getAcceleration() + " Speed: " + rocket.getSpeed()
+				+ " Distance: " + rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
+				+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
-	
-	public void  printResult(ArrayList<Rocket> rockets) throws Exception {
-        Rocket winner = whichRocketWon(rockets);
-        if (winner != null)
-        	 notifyallObservers("The rocket: " + winner.getId() + " with a time of " + currentTime + " won the race!\n");
-        else
-        	 notifyallObservers("There is no winner!");
-       
-    }
+
+	public void printResult(ArrayList<Rocket> rockets) throws Exception {
+		Rocket winner = whichRocketWon(rockets);
+		if (winner != null) {
+			notifyallObservers("The rocket: " + winner.getId() + " with a time of " + currentTime + " won the race!\n");
+			bestScore(winner);
+		} else
+			notifyallObservers("There is no winner!");
+
+	}
+
 	private Rocket whichRocketWon(ArrayList<Rocket> rockets) {
-        Rocket winner = null;
-        for (Rocket rocket : rockets) {
-            if (rocket.getMetersTravelled() >= length) {
-                if (winner == null)
-                    winner = rocket;
-                else if (rocket.getMetersTravelled() > winner.getMetersTravelled())
-                    winner = rocket;
-            }
-        }
-        return winner;
-    }
+		Rocket winner = null;
+		for (Rocket rocket : rockets) {
+			if (rocket.getMetersTravelled() >= length) {
+				if (winner == null)
+					winner = rocket;
+				else if (rocket.getMetersTravelled() > winner.getMetersTravelled())
+					winner = rocket;
+			}
+		}
+		return winner;
+	}
 
 	@Override
 	public void addObserver(IObserver observer) throws InvalidParamException {
@@ -166,7 +168,8 @@ public class Circuit implements ISubject {
 		}
 	}
 
-	public void bestScore() {
+	public void bestScore(Rocket rocket) throws Exception {
+		isBestWinner(new Score(this.id, rocket.getId(), currentTime, rocket.getMetersTravelled()));
 		notifyallObservers("\nAnd the FINAL winner is: " + getScore().getRocketId() + " with a time of "
 				+ getScore().getTimeTaken());
 	}
