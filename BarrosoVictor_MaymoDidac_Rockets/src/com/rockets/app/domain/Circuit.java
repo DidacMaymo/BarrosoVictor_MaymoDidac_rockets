@@ -102,17 +102,18 @@ public class Circuit implements ISubject {
 	public void startRace(Rocket rocket) throws Exception {
 			String s = "Starting competition. Circuit: " + getId() + ". Length: "
 					+ getLength() + " . Max time: " + getMaxTime();
-			notifyallObservers(s, 1);
+			System.out.println(s);
+			notifyallObservers(s);
 			while (raceIsGoing(rocket)) {
 				doingRace(rocket);
 				notifyallObservers(("Current time: " + (getCurrentTime()) + " Acceleration: "
 						+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
 						+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
-						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()), 2);
+						+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity()));
 			}
-			notifyallObservers(printResult(rocket),3);
+			notifyallObservers(printResult(rocket));
 			resetTime();
-			notifyallObservers("\nAnd the FINAL winner is: " + this.getScore().getRocketId() + " with a time of " + this.getScore().getTimeTaken(),4);
+			notifyallObservers("\nAnd the FINAL winner is: " + this.getScore().getRocketId() + " with a time of " + this.getScore().getTimeTaken());
 	}
 	
 	public  String printResult(Rocket rocket) throws Exception {
@@ -132,10 +133,10 @@ public class Circuit implements ISubject {
 	}
 
 	@Override
-	public void notifyallObservers(String s, int i) {
+	public void notifyallObservers(String s) {
 		for (IObserver observer : observers) {
-			observer.update(s, i);
-		} // aixo notificarà
+			observer.update(s);
+		} 
 	}
 
 }

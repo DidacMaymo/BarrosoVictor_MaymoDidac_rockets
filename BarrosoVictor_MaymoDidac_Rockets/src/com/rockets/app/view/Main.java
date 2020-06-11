@@ -23,7 +23,7 @@ public class Main {
 		createRockets();
 		controller.startRace();
 		controller.addObserver(new IObserver() {
-			public void update(String str, int i) {
+			public void update(String str) {
 				System.out.println(str);
 			}
 		});		
