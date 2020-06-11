@@ -14,8 +14,7 @@ public class FuelTankDTO {
         this.capacity = capacity;
     }
     
-    public FuelTankDTO(FuelTank fuelTank) throws InvalidParamException {
-    	if(fuelTank==null) throw new InvalidParamException();
+    public FuelTankDTO(FuelTank fuelTank) {
     	this.capacity = fuelTank.getCapacity();
     }
 

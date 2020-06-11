@@ -36,13 +36,13 @@ public class CircuitDTO {
 	}
 
 	public int getMaxTime() throws InvalidParamException {
-		if (maxTime == 0)
+		if (maxTime <= 0)
 			throw new InvalidParamException();
 		return maxTime;
 	}
 
 	public int getLength() throws InvalidParamException {
-		if (length == 0)
+		if (length <= 0)
 			throw new InvalidParamException();
 		return length;
 	}

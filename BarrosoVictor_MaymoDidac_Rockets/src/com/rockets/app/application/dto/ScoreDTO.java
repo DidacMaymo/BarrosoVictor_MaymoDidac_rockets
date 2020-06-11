@@ -11,7 +11,6 @@ public class ScoreDTO {
 
     public ScoreDTO(String circuitId, String rocketId, double timeTaken, double metersTravelled)
             throws InvalidParamException {
-
         this.circuitId = circuitId;
         this.rocketId = rocketId;
         this.timeTaken = timeTaken;
