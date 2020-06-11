@@ -85,10 +85,11 @@ public class CircuitController {
     }
 
 	public void startRace() throws Exception {
-		currentCircuit.startRace(rocketList);
-		currentCircuit.bestScore();
-		createScore(new ScoreDTO(currentCircuit.getScore()));
-	}
+        currentCircuit.generateSolutions(rocketList);
+        currentCircuit.startRace(rocketList);
+        currentCircuit.bestScore();
+        createScore(new ScoreDTO(currentCircuit.getScore()));
+    }
 	
 	public ScoreDTO createScore(ScoreDTO scoreDTO) throws Exception {
 		Score score= new Score(scoreDTO);

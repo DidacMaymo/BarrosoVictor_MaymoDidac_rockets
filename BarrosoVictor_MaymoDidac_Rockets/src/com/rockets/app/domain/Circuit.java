@@ -2,7 +2,6 @@ package com.rockets.app.domain;
 
 import java.util.ArrayList;
 
-
 import java.util.List;
 
 import com.rockets.app.application.dto.CircuitDTO;
@@ -69,19 +68,28 @@ public class Circuit implements ISubject {
 		this.currentTime += time;
 	}
 
-	
 	public void generateSolutions(ArrayList<Rocket> rockets) throws Exception {
-        for (Rocket r : rockets) {
-            r.decideAction(this);
-        }
-    }
+		for (Rocket r : rockets) {
+			r.decideAction(this);
+		}
+	}
 
-    public void doingRace(ArrayList<Rocket> rockets) throws Exception {
-        for (Rocket r : rockets) {
-            r.setDesiredAcceleration(r.getAccelerationAt(currentTime));
-        }
-        currentTime++;
-    }
+	public void doingRace(ArrayList<Rocket> rockets) throws Exception {
+		for (Rocket r : rockets) {
+			r.setDesiredAcceleration(r.getAccelerationAtCurrentTime(currentTime));
+			notifyallObservers(circuitInfo(r));
+		}
+		currentTime++;
+	}
+
+	public boolean raceIsGoing(ArrayList<Rocket> rockets) {
+		for (Rocket rocket : rockets) {
+			if (!(currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public boolean raceIsGoing(Rocket rocket) {
 		return (currentTime < getMaxTime() && rocket.getMetersTravelled() < length && rocket.getActualFuel() != 0);
@@ -89,7 +97,7 @@ public class Circuit implements ISubject {
 
 	public boolean isAWinner(Rocket rocket) throws Exception {
 		if (rocket.getMetersTravelled() >= this.length && this.currentTime <= this.maxTime)
-			if (isBestWinner(new Score(id,rocket.getId(), this.getCurrentTime(), rocket.getMetersTravelled()))) {
+			if (isBestWinner(new Score(id, rocket.getId(), this.getCurrentTime(), rocket.getMetersTravelled()))) {
 				return true;
 			}
 		return false;
@@ -107,33 +115,44 @@ public class Circuit implements ISubject {
 		currentTime = 0;
 	}
 
-	public void startRace(ArrayList<Rocket> rocket) throws Exception {
-			String s = "Starting competition. Circuit: " + getId() + ". Length: "
-					+ getLength() + " . Max time: " + getMaxTime();
-			notifyallObservers(s);
-			while (raceIsGoing(rocket)) {
-				doingRace(rocket);
-				notifyallObservers(circuitInfo(rocket));
-			}
-			notifyallObservers(printResult(rocket));
-			resetTime();
+	public void startRace(ArrayList<Rocket> rockets) throws Exception {
+		generateSolutions(rockets);
+		String s = "Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
+				+ getMaxTime();
+		notifyallObservers(s);
+		while (raceIsGoing(rockets)) {
+			doingRace(rockets);
+		}
+		printResult(rockets);
 	}
-	
+
 	public String circuitInfo(Rocket rocket) {
-		return ("Current time: " + (getCurrentTime()) + " Acceleration: "
-				+ rocket.getAcceleration() + " Speed: " + rocket.getSpeed() + " Distance: "
-				+ rocket.getMetersTravelled() + " Circuit: " + getLength() + " Fuel: "
-				+ rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
+		return ("Current time: " + (getCurrentTime()) + " Acceleration: " + rocket.getAcceleration() + " Speed: "
+				+ rocket.getSpeed() + " Distance: " + rocket.getMetersTravelled() + " Circuit: " + getLength()
+				+ " Fuel: " + rocket.getActualFuel() + "/" + rocket.getFuelCapacity());
 	}
 	
-	public  String printResult(Rocket rocket) throws Exception {
-		String s;
-		if (isAWinner(rocket))
-			s= "The rocket: " + rocket.getId() + " with a time of " + currentTime + " is winning the race!\n";
-		 else 
-			s= "The rocket: " + rocket.getId() + " is not a winner\n";
-		return s;
-	}
+	public void  printResult(ArrayList<Rocket> rockets) throws Exception {
+        String s;
+        Rocket winner = whichRocketWon(rockets);
+        if (winner != null)
+            s = "The rocket: " + winner.getId() + " with a time of " + currentTime + " won the race!\n";
+        else
+            s = "There is no winner!";
+        notifyallObservers(s);
+    }
+	private Rocket whichRocketWon(ArrayList<Rocket> rockets) {
+        Rocket winner = null;
+        for (Rocket rocket : rockets) {
+            if (rocket.getMetersTravelled() >= length) {
+                if (winner == null)
+                    winner = rocket;
+                else if (rocket.getMetersTravelled() > winner.getMetersTravelled())
+                    winner = rocket;
+            }
+        }
+        return winner;
+    }
 
 	@Override
 	public void addObserver(IObserver observer) throws InvalidParamException {
@@ -146,11 +165,12 @@ public class Circuit implements ISubject {
 	public void notifyallObservers(String s) {
 		for (IObserver observer : observers) {
 			observer.update(s);
-		} 
+		}
 	}
 
 	public void bestScore() {
-		notifyallObservers("\nAnd the FINAL winner is: " + getScore().getRocketId() + " with a time of " + getScore().getTimeTaken());
+		notifyallObservers("\nAnd the FINAL winner is: " + getScore().getRocketId() + " with a time of "
+				+ getScore().getTimeTaken());
 	}
 
 }
