@@ -59,7 +59,6 @@ public class Main {
 		double[] rocketFourPropellants = { 10, 3, 20, 82 };
 		return rocketFourPropellants;
 	}
-	
 
 	private static ArrayList<PropellantDTO> initialisePropellants(double[] maxAccProplellant)
 			throws Exception {

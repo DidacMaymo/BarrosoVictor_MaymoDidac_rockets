@@ -15,13 +15,9 @@ import com.rockets.app.utilities.InvalidParamException;
 public class CircuitController {
 
 	private ArrayList<IObserver> observers = new ArrayList<IObserver>();
-
 	static List<Circuit> circuitList = new ArrayList<Circuit>();
-
 	static Circuit currentCircuit;
-
-	static List<Rocket> rocket = new ArrayList<Rocket>();
-
+	static List<Rocket> rocketList = new ArrayList<Rocket>();
 	String info;
 
 	public CircuitDTO getRandomCircuit() throws InvalidParamException {
@@ -40,7 +36,7 @@ public class CircuitController {
 	}
 
 	public Circuit getCircuit(CircuitDTO circuit) throws InvalidParamException {
-		for (Circuit c : this.circuitList) {
+		for (Circuit c : CircuitController.circuitList) {
 			if (circuit.getId().equals(c.getId())) {
 				return c;
 			}
@@ -49,13 +45,18 @@ public class CircuitController {
 	}
 
 	public RocketDTO createRocket(RocketDTO rocketdto) throws InvalidParamException {
-		Rocket rocket = new Rocket(rocketdto);
-		this.rocket.add(rocket);
-		return new RocketDTO(rocket);
-	}
+        if (rocketList == null) {
+            rocketList = new ArrayList<Rocket>();
+        }
+        Rocket rocket = new Rocket(rocketdto);
+        repeated(rocket);
+        rocketList.add(rocket);
+        System.out.println(rocket.getMaxAcceleration());
+        return new RocketDTO(rocket);
+    }
 
 	public  Rocket getRocket(RocketDTO rocketdto) throws InvalidParamException {
-		for (Rocket c : this.rocket) {
+		for (Rocket c : CircuitController.rocketList) {
 			if (rocketdto.getId().equals(c.getId())) {
 				return c;
 			}
@@ -63,13 +64,19 @@ public class CircuitController {
 		throw new InvalidParamException();
 	}
 
-	
-
 	public void startRace() throws Exception {
-		for (Rocket rockett : rocket) {
+		for (Rocket rockett : rocketList) {
 			currentCircuit.startRace(rockett);
 		}
 	}
+	
+	private void repeated(Rocket rocket) throws InvalidParamException {
+        Iterator<Rocket> it = rocketList.iterator();
+        while (it.hasNext()) {
+            if (rocket.equals(it.next()))
+                throw new InvalidParamException();
+        }
+    }
 
 	private boolean repeated(Circuit circuit) {
 		Iterator<Circuit> it = circuitList.iterator();
