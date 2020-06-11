@@ -9,7 +9,7 @@ import com.rockets.app.domain.Score;
 import com.rockets.app.utilities.InvalidParamException;
 
 public class ScoreRepository {
-	public static void storePicture(Score score) throws Exception {
+	public static void storeScore(Score score) throws Exception {
 		try{
 			ConnectionBBDD connection = ConnectionRepository.getConection();    
 			String sql = "Insert into SCORE (ID,IMAGE_URL,NAME) values (?,?,?)";  
