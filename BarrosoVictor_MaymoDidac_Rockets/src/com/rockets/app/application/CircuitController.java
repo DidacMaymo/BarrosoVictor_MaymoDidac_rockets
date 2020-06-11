@@ -35,7 +35,7 @@ public class CircuitController {
 		currentCircuit = new Circuit(circuitdto);
 		if (repeated(currentCircuit))
 			throw new InvalidParamException();
-		circuitList.add(new Circuit(circuitdto));
+		circuitList.add(currentCircuit);
 		return new CircuitDTO(currentCircuit);
 	}
 
