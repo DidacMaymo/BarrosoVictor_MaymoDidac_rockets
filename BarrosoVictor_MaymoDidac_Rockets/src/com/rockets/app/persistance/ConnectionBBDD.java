@@ -24,10 +24,10 @@ import oracle.jdbc.OracleDriver;
 
 public class ConnectionBBDD implements Connection {
 
-	private Connection connection;// guardem de fomra encapçulada la connecio
+	private Connection connection;
 
 	public ConnectionBBDD(String userName, String password) throws Exception {
-		// aqui hem de registrar el driver(mira de tenir la llibreria) i crear la connexio
+		
 		
 		try {
 			DriverManager.registerDriver(new OracleDriver());
@@ -37,7 +37,19 @@ public class ConnectionBBDD implements Connection {
 			throw new Exception("Error al connectar a la base de dades", e);
 		}
 		
-	}// no cal entendre aquest codi, sempre usarem el mateix i punt
+	}
+	
+	@Override
+	public Statement createStatement() throws SQLException {
+		return connection.createStatement();
+	}
+	
+	
+	@Override
+	public PreparedStatement prepareStatement(String sql) throws SQLException {
+		return connection.prepareStatement(sql);
+	}
+	//---	
 	
 	@Override
 	public boolean isWrapperFor(Class<?> arg0) throws SQLException {
@@ -105,11 +117,7 @@ public class ConnectionBBDD implements Connection {
 		return null;
 	}
 
-	@Override
-	public Statement createStatement() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public Statement createStatement(int arg0, int arg1) throws SQLException {
@@ -234,12 +242,6 @@ public class ConnectionBBDD implements Connection {
 	@Override
 	public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency,
 			int resultSetHoldability) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PreparedStatement prepareStatement(String sql) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
