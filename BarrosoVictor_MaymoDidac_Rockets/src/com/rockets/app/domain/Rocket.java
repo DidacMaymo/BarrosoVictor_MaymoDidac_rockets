@@ -65,8 +65,8 @@ public class Rocket {
 		return metersTravelled;
 	}
 
-	public double getMaxAcceleration() {
-		double maxAcc = 0;
+	public int getMaxAcceleration() {
+		int maxAcc = 0;
 		for (Propellant p : propellants) {
 			maxAcc += p.getMaxAcceleration();
 		}
@@ -81,8 +81,8 @@ public class Rocket {
 		return fuelTank;
 	}
 
-	public double getAcceleration() {
-		double acceleration = 0;
+	public int getAcceleration() {
+		int acceleration = 0;
 		for (Propellant p : propellants) {
 			acceleration += p.getActualAcceleration();
 		}
@@ -97,7 +97,7 @@ public class Rocket {
 		return this.id;
 	}
 
-	public void setAcceleration(double acceleration) {
+	public void setAcceleration(int acceleration) {
 		for (Propellant p : propellants) {
 			p.setActualAcceleration(acceleration);
 		}
@@ -132,7 +132,7 @@ public class Rocket {
 		metersTravelled += speed * ConstantUtilities.DELAY + 0.5 * acceleration * Math.pow(ConstantUtilities.DELAY, 2);
 	}
 
-	public void setDesiredAcceleration(double acceleration) throws Exception {
+	public void setDesiredAcceleration(int acceleration) throws Exception {
 		setAcceleration(0);
 		while (getAcceleration() < acceleration) {
 			setAcceleration(getAcceleration() + 1);
@@ -154,4 +154,12 @@ public class Rocket {
 		// TODO Auto-generated method stub
 		return fuelTank.getCapacity();
 	}
+
+
+	
+	
+	
+
+	
+
 }

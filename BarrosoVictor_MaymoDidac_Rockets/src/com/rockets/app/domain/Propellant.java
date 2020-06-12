@@ -5,13 +5,13 @@ import com.rockets.app.utilities.InvalidParamException;
 
 public class Propellant {
 
-	private double maxAcceleration, actualAcceleration = 0;
+	private int maxAcceleration, actualAcceleration = 0;
 	
 	public Propellant() {
 		
 	}
 
-	public Propellant(double maxAcceleration) throws Exception {
+	public Propellant(int maxAcceleration) throws Exception {
         validateAttributes(maxAcceleration);
         this.maxAcceleration = maxAcceleration;
     }
@@ -27,20 +27,20 @@ public class Propellant {
         this.actualAcceleration = propellant.actualAcceleration;
     }
 
-    private void validateAttributes(double maxAcceleration) throws Exception {
+    private void validateAttributes(int maxAcceleration) throws Exception {
         if (maxAcceleration <= 0) {
         	throw new Exception("Invalid attribute!");
         }
     }
-	public Double getMaxAcceleration() {
+	public int getMaxAcceleration() {
 		return maxAcceleration;
 	}
 
-	public Double getActualAcceleration() {
+	public int getActualAcceleration() {
 		return actualAcceleration;
 	}
 
-	public void setActualAcceleration(double newAcceleration) {
+	public void setActualAcceleration(int newAcceleration) {
 		if (newAcceleration < 0)
 			newAcceleration = 0;
 		else if (newAcceleration > maxAcceleration)

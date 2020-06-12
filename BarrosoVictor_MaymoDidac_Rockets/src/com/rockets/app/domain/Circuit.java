@@ -116,7 +116,6 @@ public class Circuit implements ISubject {
 	}
 
 	public void startRace(ArrayList<Rocket> rockets) throws Exception {
-		generateSolutions(rockets);
 		notifyallObservers("Starting competition. Circuit: " + getId() + ". Length: " + getLength() + " . Max time: "
 				+ getMaxTime());
 		while (raceIsGoing(rockets)) {

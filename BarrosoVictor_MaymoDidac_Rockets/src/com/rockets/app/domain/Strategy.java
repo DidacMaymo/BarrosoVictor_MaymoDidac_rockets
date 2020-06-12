@@ -17,7 +17,7 @@ public class Strategy {
 	}
 
 	public void backtracking(ArrayList<Integer> accelerationArray, int currentTime, Rocket rocket, double length,int maxTime) throws Exception {
-		for (int acceleration = (int) rocket.getMaxAcceleration(); acceleration >= 0 && actualSolution < maxSolutions
+		for (int acceleration = rocket.getMaxAcceleration(); acceleration >= 0 && actualSolution < maxSolutions
 				&& currentTime < maxTime; acceleration--) {
 			Rocket iterable = new Rocket(rocket);
 			iterable.setDesiredAcceleration(acceleration);
@@ -47,5 +47,5 @@ public class Strategy {
 		ret = it.next();
 		return ret;
 	}
-
+	
 }
