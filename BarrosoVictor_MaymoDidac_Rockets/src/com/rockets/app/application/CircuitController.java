@@ -1,10 +1,7 @@
 package com.rockets.app.application;
 
 import java.util.ArrayList;
-
-
 import java.util.Iterator;
-
 import com.rockets.app.application.dto.CircuitDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.application.dto.ScoreDTO;
@@ -61,7 +58,6 @@ public class CircuitController {
 		Rocket rocket = new Rocket(rocketdto);
 		repeated(rocket);
 		rocketList.add(rocket);
-		// System.out.println(rocket.getMaxAcceleration());
 		return new RocketDTO(rocket);
 	}
 

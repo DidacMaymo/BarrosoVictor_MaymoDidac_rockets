@@ -16,18 +16,17 @@ public class Strategy {
 		return solution;
 	}
 
-	public void backtracking(ArrayList<Integer> accelerationArray,int currentTime, Rocket rocket, double length, int maxTime)
-			throws Exception {
+	public void backtracking(ArrayList<Integer> accelerationArray, int currentTime, Rocket rocket, double length,int maxTime) throws Exception {
 		for (int acceleration = (int) rocket.getMaxAcceleration(); acceleration >= 0 && actualSolution < maxSolutions
 				&& currentTime < maxTime; acceleration--) {
-			 Rocket iterable = new Rocket(rocket);
+			Rocket iterable = new Rocket(rocket);
 			iterable.setDesiredAcceleration(acceleration);
 			accelerationArray.add(acceleration);
 			if ((iterable.getMetersTravelled() >= length && iterable.getActualFuel() > 0)) {
 				updateBestSolution(accelerationArray);
 				actualSolution++;
 			} else if (iterable.getActualFuel() > 0) {
-				backtracking(accelerationArray,  currentTime + 1, iterable ,length, maxTime);
+				backtracking(accelerationArray, currentTime + 1, iterable, length, maxTime);
 			}
 			accelerationArray.remove(accelerationArray.size() - 1);
 		}

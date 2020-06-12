@@ -74,7 +74,7 @@ public class Circuit implements ISubject {
 	}
 
 	public void doingRace(ArrayList<Rocket> rockets) throws Exception {
-		notifyallObservers("Current time: " + (getCurrentTime()+1));
+		notifyallObservers("Current time: " + (getCurrentTime() + 1));
 		for (Rocket r : rockets) {
 			r.setDesiredAcceleration(r.getAccelerationAtCurrentTime(currentTime));
 			notifyallObservers(circuitInfo(r));

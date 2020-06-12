@@ -3,7 +3,6 @@ package com.rockets.app.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import com.rockets.app.application.dto.PropellantDTO;
 import com.rockets.app.application.dto.RocketDTO;
 import com.rockets.app.utilities.ConstantUtilities;
@@ -12,7 +11,7 @@ import com.rockets.app.utilities.InvalidParamException;
 public class Rocket {
 
 	private String id;
-	private double speed = 0; // at start here counts as v0
+	private double speed = 0;
 	private double acceleration = 0;
 	private int metersTravelled = 0;
 	private List<Propellant> propellants = new ArrayList<Propellant>();
@@ -114,7 +113,7 @@ public class Rocket {
 		}
 	}
 
-	public void updateSpeed() throws Exception { // speed of rocket right now. v = v0 + at
+	public void updateSpeed() throws Exception {
 		this.speed += acceleration * ConstantUtilities.DELAY;
 		updateFuel();
 		updateMetersTravelled();
@@ -144,11 +143,10 @@ public class Rocket {
 
 	public void decideAction(Circuit circuit) throws Exception {
 		strategy = new Strategy();
-		strategy.backtracking(new ArrayList<Integer>(),  0, this, circuit.getLength(), circuit.getMaxTime());
+		strategy.backtracking(new ArrayList<Integer>(), 0, this, circuit.getLength(), circuit.getMaxTime());
 	}
 
 	public int getAccelerationAtCurrentTime(int currentTime) {
-//		return strategy.getSolution().get(currentTime);
 		return strategy.getAccelerationAtCurrentTime(currentTime);
 	}
 

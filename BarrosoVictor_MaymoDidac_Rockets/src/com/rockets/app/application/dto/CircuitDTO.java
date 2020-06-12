@@ -1,6 +1,5 @@
 package com.rockets.app.application.dto;
 
-
 import com.rockets.app.domain.Circuit;
 import com.rockets.app.utilities.InvalidParamException;
 
@@ -11,8 +10,8 @@ public class CircuitDTO {
 	private int length;
 	private ScoreDTO bestScore;
 
-	public CircuitDTO(String id,int maxTime, int length) throws InvalidParamException {
-		this.id=id;
+	public CircuitDTO(String id, int maxTime, int length) throws InvalidParamException {
+		this.id = id;
 		this.maxTime = maxTime;
 		this.length = length;
 	}
@@ -24,7 +23,7 @@ public class CircuitDTO {
 		this.maxTime = circuit.getMaxTime();
 		this.length = circuit.getLength();
 	}
-	
+
 	public String getId() throws InvalidParamException {
 		if (id == null || id.equals(""))
 			throw new InvalidParamException();
@@ -43,13 +42,10 @@ public class CircuitDTO {
 		return length;
 	}
 
-	
 	public ScoreDTO getBestScore() throws InvalidParamException {
 		if (bestScore == null)
 			throw new InvalidParamException();
 		return bestScore;
 	}
-
-	
 
 }
