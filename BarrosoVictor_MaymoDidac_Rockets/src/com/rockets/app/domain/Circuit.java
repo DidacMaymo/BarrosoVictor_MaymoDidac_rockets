@@ -40,7 +40,6 @@ public class Circuit implements ISubject {
 		this.id = circuit.getId();
 		this.maxTime = circuit.getMaxTime();
 		this.length = circuit.getLength();
-		;
 	}
 
 	public double getCurrentTime() {

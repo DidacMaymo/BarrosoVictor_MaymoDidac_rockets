@@ -151,15 +151,7 @@ public class Rocket {
 	}
 
 	public double getFuelCapacity() {
-		// TODO Auto-generated method stub
 		return fuelTank.getCapacity();
 	}
-
-
-	
-	
-	
-
-	
 
 }

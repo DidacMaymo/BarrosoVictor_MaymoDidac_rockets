@@ -26,10 +26,10 @@ public class Main {
 	}
 
 	private static void createCircuits() throws InvalidParamException {
-		// controller.createCircuit(new CircuitDTO("MadMax", 22, 1300));
+		controller.createCircuit(new CircuitDTO("MadMax", 22, 1300));
 		controller.createCircuit(new CircuitDTO("SpeedTrack", 10, 800));
-		//controller.createCircuit(new CircuitDTO("RisingLap", 15, 900));
-		//controller.createCircuit(new CircuitDTO("FreeWorld", 18, 1200));
+		controller.createCircuit(new CircuitDTO("RisingLap", 15, 900));
+		controller.createCircuit(new CircuitDTO("FreeWorld", 18, 1200));
 	}
 
 	private static void createRockets() throws InvalidParamException, Exception {
